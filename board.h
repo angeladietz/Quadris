@@ -4,6 +4,7 @@
 #include <iostream>
 #include "quadris.h"
 #include "subject.h"
+#include "tile.h"
 
 class Board: public Subject{
 	public:
@@ -20,7 +21,7 @@ class Board: public Subject{
         Tile operator[](int);
         void reset();
 
-        friend ostream& operator<<(ostream&, Board&);     
+        friend std::ostream& operator<<(std::ostream&, Board&);     
 };
 
 #endif

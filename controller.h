@@ -3,12 +3,13 @@
 
 #include <string>
 #include "quadris.h"
+#include "commandInterpreter.h"
 
 class Controller {
 	public:
 		Controller();
         ~Controller();
-		void handleCommand(string);
+		void handleCommand(std::string);
     
     private:
         CommandInterpreter commandIneterpreter_;
