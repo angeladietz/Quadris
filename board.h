@@ -1,9 +1,11 @@
 #ifndef _BOARD_
 #define _BOARD_
 
+#include <iostream>
 #include "quadris.h"
+#include "subject.h"
 
-class Board{
+class Board: public Subject{
 	public:
 		Board();
         ~Board();
