@@ -7,12 +7,12 @@
 
 class Controller {
 	public:
-		Controller();
+		Controller(Quadris*);
         ~Controller();
 		void handleCommand(std::string);
     
     private:
-        CommandInterpreter commandIneterpreter_;
+        CommandInterpreter* commandInterpreter_;
 };
 
 #endif

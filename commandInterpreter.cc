@@ -5,13 +5,16 @@
 
 using namespace std;
 
-CommandInterpreter::CommandInterpreter(){
+CommandInterpreter::CommandInterpreter(Quadris* q){
     commandInterpreter_ = new PImpl_CI;
     initCmdActions();
     initCmdStrings();
+    commandInterpreter_->quadris_ = q;
 }
 
-CommandInterpreter::~CommandInterpreter(){}
+CommandInterpreter::~CommandInterpreter(){
+    delete commandInterpreter_;
+}
 
 void CommandInterpreter::initCmdActions(){
     if (nullptr == commandInterpreter_){

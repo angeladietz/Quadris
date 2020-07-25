@@ -10,7 +10,7 @@ class Level1: public BlockSelectionStrategy{
     public:
         Level1();
         ~Level1();
-        Block getNextBlock();
+        Block* getNextBlock();
 };
 
 #endif

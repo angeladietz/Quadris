@@ -13,11 +13,12 @@ enum Action {LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP,
 struct PImpl_CI{
 	std::map<std::string, vector<Action> > cmdActions_;
 	std::map<std::string, std::string> cmdStrings_;
+	Quadris* quadris_;
 };
 
 class CommandInterpreter {
 	public:
-		CommandInterpreter();
+		CommandInterpreter(Quadris*);
         ~CommandInterpreter();
 		void handleCommand(string);
 	
