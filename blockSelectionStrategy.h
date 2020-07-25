@@ -9,7 +9,7 @@ class BlockSelectionStrategy {
 	public:
 		BlockSelectionStrategy();
         ~BlockSelectionStrategy();
-		virtual Block getNextBlock()=0;
+		virtual Block* getNextBlock()=0;
 };
 
 #endif

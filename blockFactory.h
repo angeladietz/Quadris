@@ -7,7 +7,7 @@ class BlockFactory{
     public:
         BlockFactory();
         ~BlockFactory();
-        Block createBlock(char);
+        Block* createBlock(char);
 };
 
 #endif
