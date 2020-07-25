@@ -25,7 +25,7 @@ class CommandInterpreter {
 		void initCmdActions();
 		void initCmdStrings();
 		vector<Action> getCommandAction(string);
-		void executeCommand();
+		void executeCommand(Action);
 
 		PImpl_CI* commandInterpreter_;
 };

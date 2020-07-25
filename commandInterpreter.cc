@@ -98,7 +98,7 @@ vector<Action> CommandInterpreter::getCommandAction(string command){
     return vector<Action>(BAD_COMMAND);
 }
 
-void executeCommand(Action action){
+void CommandInterpreter::executeCommand(Action action){
     switch(action){
         case LEFT:
             break;
