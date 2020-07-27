@@ -5,7 +5,7 @@
 #include <vector>
 #include "tile.h"
 
-enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID};
+enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
 
 class Block {
     public:
