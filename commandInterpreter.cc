@@ -5,11 +5,10 @@
 
 using namespace std;
 
-CommandInterpreter::CommandInterpreter(Quadris* q){
+CommandInterpreter::CommandInterpreter(){
     commandInterpreter_ = new PImpl_CI;
     initCmdActions();
     initCmdStrings();
-    commandInterpreter_->quadris_ = q;
 }
 
 CommandInterpreter::~CommandInterpreter(){
@@ -76,16 +75,9 @@ void CommandInterpreter::initCmdStrings(){
     commandInterpreter_->cmdStrings_["h"] = "hint";
 }
 
-void CommandInterpreter::handleCommand(string command){
-    vector<Action> actions = getCommandAction(command);
-    for (int i = 0; i < actions.size(); i++){
-        if (actions[i] != BAD_COMMAND){
-            executeCommand(actions[i]);
-        }
-    }
-}
+vector<Action> CommandInterpreter::getCommands(string command){
+    //first split command by whitespace incase we have more than one
 
-vector<Action> CommandInterpreter::getCommandAction(string command){
     if (commandInterpreter_->cmdActions_.count(command)>0){
         return commandInterpreter_->cmdActions_[command];
     }
@@ -101,47 +93,3 @@ vector<Action> CommandInterpreter::getCommandAction(string command){
     return vector<Action>(BAD_COMMAND);
 }
 
-void CommandInterpreter::executeCommand(Action action){
-    switch(action){
-        case LEFT:
-            break;
-        case RIGHT:
-            break;
-        case DOWN:
-            break;
-        case CLOCKWISE:
-            break;
-        case COUNTERCLOCKWISE:
-            break;
-        case DROP:
-            break;
-        case LEVELUP:
-            break;
-        case LEVELDOWN:
-            break;
-        case NORANDOM:
-            break;
-        case RANDOM:
-            break;
-        case SEQUENCE:
-            break;
-        case I:
-            break;
-        case J:
-            break;
-        case L:
-            break;
-        case S:
-            break;
-        case Z:
-            break;
-        case O:
-            break;
-        case T:
-            break;
-        case RESTART:
-            break;
-        case HINT:
-            break;
-    }
-}

@@ -3,10 +3,13 @@
 
 #include "board.h"
 #include "blockSelectionStrategy.h"
+#include "controller.h"
 
 struct PImpl_Q{
 	Board* board_;
 	BlockSelectionStrategy* blockSelectionStrategy_;
+	Controller* controller_;
+	std::vector<Observer*> views_;
 	int level_;
 	int score_;
 };
@@ -19,7 +22,6 @@ class Quadris{
 		int getScore() const;
 		void updateScore(int);
 		void restartGame();
-		void changeLevel(int);
 
 	private:
 		PImpl_Q* quadris_;

@@ -6,6 +6,9 @@
 #include "subject.h"
 #include "tile.h"
 
+#define MIN_LEVEL 0
+#define MAX_LEVEL 4
+
 class Board: public Subject{
 	public:
 		Board();
@@ -17,6 +20,10 @@ class Board: public Subject{
         void rotateCurBlockCounterClockwise();
         void rotateCurBlockClockwise();
         void dropCurBlock();
+        void levelUp();
+        void levelDown();
+        void setNoRand(std::string);
+        void setRand();
         void showHint();
         Tile operator[](int);
         void reset();
