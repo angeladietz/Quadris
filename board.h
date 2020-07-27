@@ -5,6 +5,7 @@
 #include "quadris.h"
 #include "subject.h"
 #include "tile.h"
+#include "block.h"
 
 #define MIN_LEVEL 0
 #define MAX_LEVEL 4
@@ -24,6 +25,7 @@ class Board: public Subject{
         void levelDown();
         void setNoRand(std::string);
         void setRand();
+        void setCurBlock(BlockType);
         void showHint();
         Tile operator[](int);
         void reset();

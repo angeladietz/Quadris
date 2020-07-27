@@ -1,6 +1,7 @@
 #include "controller.h"
 #include "commandInterpreter.h"
 #include "quadris.h"
+#include "block.h"
 #include <string>
 #include <iterator>
 #include <algorithm>
@@ -68,6 +69,8 @@ void Controller::handleCommand(string command){
 
 void Controller::HandleCommandSequenceFromFile(string filename){
     ifstream seqFile;
+
+    //TODO: ADD EXCEPTION HANDLING!
     seqFile.open(filename);
 
     if (seqFile.is_open()){
@@ -118,18 +121,25 @@ void Controller::executeCommand(Action action, string filename = ""){
             controller_->board_->setRand();
             break;
         case I:
+            controller_->board_->setCurBlock(IBlock);
             break;
         case J:
+            controller_->board_->setCurBlock(JBlock);
             break;
         case L:
+            controller_->board_->setCurBlock(LBlock);
             break;
         case S:
+            controller_->board_->setCurBlock(SBlock);
             break;
         case Z:
+            controller_->board_->setCurBlock(ZBlock);
             break;
         case O:
+            controller_->board_->setCurBlock(OBlock);
             break;
         case T:
+            controller_->board_->setCurBlock(TBlock);
             break;
         case RESTART:
             break;
