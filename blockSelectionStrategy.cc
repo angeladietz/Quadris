@@ -4,8 +4,9 @@
 using namespace std;
 
 // Constructor
-BlockSelectionStrategy::BlockSelectionStrategy(){
-
+BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
+    blockSelectionStrategy_ = new PImpl_BS;
+    blockSelectionStrategy_->blockFactory_ = bf;
 }
 
 // Destructor

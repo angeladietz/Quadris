@@ -12,7 +12,7 @@ struct PImpl_BS{
 
 class BlockSelectionStrategy {
 	public:
-		BlockSelectionStrategy();
+		BlockSelectionStrategy(BlockFactory*);
         ~BlockSelectionStrategy();
 		virtual Block* getNextBlock()=0;
 	protected:
