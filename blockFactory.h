@@ -1,6 +1,7 @@
 #ifndef _BLOCKFACTORY_
 #define _BLOCKFACTORY_
 
+#include <map>
 #include "block.h"
 
 class BlockFactory{
@@ -8,6 +9,9 @@ class BlockFactory{
         BlockFactory();
         ~BlockFactory();
         Block* createBlock(BlockType, bool);
+
+    private:
+        std::map<BlockType, BlockFactory*> factories_;
 };
 
 #endif
