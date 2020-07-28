@@ -15,7 +15,7 @@ class SBlock: public Block {
         void rotateClockwise();
         void rotateCounterClockwise();
         
-        class SBlockFactory: public BlockFactory;
+        class SBlockFactory: public BlockFactory{};
 };
 
 #endif

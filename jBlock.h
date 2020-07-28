@@ -14,7 +14,7 @@ class JBlock: public Block {
 
         void rotateClockwise();
         void rotateCounterClockwise();
-        class JBlockFactory: public BlockFactory;
+        class JBlockFactory: public BlockFactory{};
 };
 
 #endif

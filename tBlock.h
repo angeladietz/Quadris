@@ -14,7 +14,7 @@ class TBlock: public Block {
 
         void rotateClockwise();
         void rotateCounterClockwise();
-        class TBlockFactory: public BlockFactory;
+        class TBlockFactory: public BlockFactory{};
 };
 
 #endif
