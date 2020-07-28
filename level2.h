@@ -11,6 +11,10 @@ class Level2: public BlockSelectionStrategy{
         Level2();
         ~Level2();
         Block* getNextBlock();
+    private:
+        void setBlockProbabilities();
+        BlockType getNextBlockType();
+        PImpl_bs* level2_;
 };
 
 #endif
