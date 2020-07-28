@@ -6,6 +6,10 @@
 #include "block.h"
 #include "blockFactory.h"
 
+struct PImpl_bs{
+    std::map<BlockType, int> blockProbabilities_;
+};
+
 class BlockSelectionStrategy {
 	public:
 		//TODO: DECIDE WHAT TO DO WITH DEFAULT CONSTRUCTOR
