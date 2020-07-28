@@ -2,6 +2,7 @@
 #define _BLOCKSELECTIONSTRATEGY_
 
 #include <string>
+#include <map>
 #include "quadris.h"
 #include "block.h"
 #include "blockFactory.h"
