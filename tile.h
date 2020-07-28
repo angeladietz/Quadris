@@ -4,9 +4,11 @@
 #include <iostream>
 #include <ostream>
 
+#include "location.h"
+
 class Tile {
     public:
-        Tile(char);
+        Tile(int, int, char = ' ');
         ~Tile() {};
 
         bool isFilled() const;
@@ -16,6 +18,7 @@ class Tile {
 
     private:
         char tile_;
+        Location location_;
         bool isFilled_ = false;
 };
 
@@ -27,14 +30,8 @@ bool Tile::isFilled() const {
     return isFilled_;
 }
 
-Tile::Tile(char tile) {
+Tile::Tile(int x, int y, char tile) : location_(x, y) {
    tile_ = tile; 
-}
-
-friend std::ostream& operator<< (std::ostream& out, Tile& t) {
-
-    out << t.getTileValue();
-
 }
 
 #endif
