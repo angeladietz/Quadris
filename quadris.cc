@@ -12,9 +12,11 @@
 
 using namespace std;
 
-Quadris::Quadris(){
+Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
     quadris_ = new PImpl_Q;
-    quadris_->level_ = 0;
+    quadris_->textOnly_ = textOnly;
+    quadris_->level_ = startLevel;
+    quadris_->scriptFile_ = scriptFile;
     quadris_->score_ = 0;
     quadris_->blockSelectionStrategy_ = new Level0();
 }
@@ -25,11 +27,16 @@ Quadris::~Quadris(){
     }
 }
 
-void Quadris::startGame(){
+void Quadris::playGame(){
     quadris_->board_ = new Board();
     quadris_->controller_ = new Controller(quadris_->board_);
+
     quadris_->views_.push_back(new TextDisplay());
-    quadris_->views_.push_back(new Graphics());
+
+    if (!quadris_->textOnly_){
+        quadris_->views_.push_back(new Graphics());
+    }
+
     quadris_->board_->subscribe(quadris_->views_[0]);
     quadris_->board_->subscribe(quadris_->views_[1]);
 
