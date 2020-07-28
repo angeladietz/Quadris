@@ -7,6 +7,8 @@ using namespace std;
 // Constructor
 Level0::Level0(string filename = "sequence.txt"){
     level0_ = new PImpl_L0;
+    areBlocksHeavy_ = false;
+
     ifstream blockFile;
 
     //TODO: ADD EXCEPTION HANDLING!
@@ -32,7 +34,7 @@ Level0::~Level0(){
 
 Block* Level0::getNextBlock(){
     BlockType type = getNextBlockType();
-    return blockSelectionStrategy_->blockFactory_->createBlock(type);
+    return blockFactory_->createBlock(type, areBlocksHeavy_);
 }
 
 BlockType Level0::getNextBlockType(){

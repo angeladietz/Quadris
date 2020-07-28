@@ -7,7 +7,7 @@ class BlockFactory{
     public:
         BlockFactory();
         ~BlockFactory();
-        Block* createBlock(BlockType);
+        Block* createBlock(BlockType, bool);
 };
 
 #endif

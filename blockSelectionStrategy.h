@@ -6,18 +6,20 @@
 #include "block.h"
 #include "blockFactory.h"
 
-struct PImpl_BS{
-	BlockFactory* blockFactory_;
-};
-
 class BlockSelectionStrategy {
 	public:
+		//TODO: DECIDE WHAT TO DO WITH DEFAULT CONSTRUCTOR
+		BlockSelectionStrategy();
+		//////////////////////////
+
 		BlockSelectionStrategy(BlockFactory*);
         ~BlockSelectionStrategy();
 		virtual Block* getNextBlock()=0;
 	protected:
 		BlockType getBlockType(char);
-		PImpl_BS* blockSelectionStrategy_;
+
+		BlockFactory* blockFactory_;
+		bool areBlocksHeavy_;
 };
 
 #endif

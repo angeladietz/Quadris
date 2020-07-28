@@ -12,7 +12,7 @@ struct PImpl_L0{
 
 class Level0: public BlockSelectionStrategy{
     public:
-        Level0(std::string);
+        Level0(std::string="sequence.txt");
         ~Level0();
         Block* getNextBlock();
     private:
