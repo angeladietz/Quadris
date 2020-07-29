@@ -13,6 +13,9 @@ class Tile {
 
         bool isFilled() const;
         char getTileValue() const;
+        void setTileValue(const char);
+        int  getXCoordinate();
+        int  getYCoordinate();
 
         friend std::ostream& operator<< (std::ostream&, Tile&);
 
@@ -32,6 +35,10 @@ bool Tile::isFilled() const {
 
 Tile::Tile(int x, int y, char tile) : location_(x, y) {
    tile_ = tile; 
+}
+
+void Tile::setTileValue(const char tile) {
+    tile_ = tile;
 }
 
 #endif
