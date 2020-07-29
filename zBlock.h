@@ -14,7 +14,9 @@ class ZBlock: public Block {
 
         void rotateClockwise();
         void rotateCounterClockwise();
-        class ZBlockFactory: public BlockFactory{};
+        class ZBlockFactory: public BlockFactory{
+            Block* create(bool){};
+        };
 };
 
 #endif
