@@ -15,10 +15,9 @@ using namespace std;
 Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
     quadris_ = new PImpl_Q;
     quadris_->textOnly_ = textOnly;
-    quadris_->level_ = startLevel;
+    quadris_->level_ = startLevel <= 4 && startLevel >= 0 ? startLevel : 0;
     quadris_->scriptFile_ = scriptFile;
-    quadris_->score_ = 0;
-    quadris_->blockSelectionStrategy_ = new Level0();
+    //quadris_->score_ = 0;
 }
 
 Quadris::~Quadris(){
@@ -28,6 +27,7 @@ Quadris::~Quadris(){
 }
 
 void Quadris::playGame(){
+    //TODO: MOVE MOST OF THIS TO THE CONSTRUCTOR!!
     quadris_->board_ = new Board();
     quadris_->controller_ = new Controller(quadris_->board_);
 

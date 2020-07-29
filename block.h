@@ -28,6 +28,7 @@ class Block {
         void moveDown(Board*);
         // void dropBlock();
 
+        BlockType getBlockType() const;
         bool getTilePositions() const;
         bool isHeavy();
         char getType();
