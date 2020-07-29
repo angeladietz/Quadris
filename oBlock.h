@@ -9,7 +9,7 @@
 
 class OBlock: public Block {
     public:
-        OBlock();
+        OBlock(Board*);
         ~OBlock();
 
         void rotateClockwise();
