@@ -6,6 +6,7 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
+#include "blockFactory.h"
 #include <vector>
 
 using namespace std;
@@ -15,6 +16,7 @@ Board::Board(int startLevel, string l0ScriptFile){
     board_ = new PImpl_B;
     initGrid();
     board_->curScore_ = 0;
+    board_->blockFactory_ = new BlockFactory();
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
@@ -30,19 +32,19 @@ void Board::initGrid(){
 void Board::initBlockSelector(){
     switch (board_->curLevel_){
         case 0:
-            board_->blockSelectionStrategy_ = new Level0(board_->L0SeqFile_);
+            board_->blockSelectionStrategy_ = new Level0(board_->blockFactory_, board_->L0SeqFile_);
             break;
         case 1:
-            board_->blockSelectionStrategy_ = new Level1();
+            board_->blockSelectionStrategy_ = new Level1(board_->blockFactory_);
             break;
         case 2:
-            board_->blockSelectionStrategy_ = new Level2();
+            board_->blockSelectionStrategy_ = new Level2(board_->blockFactory_);
             break;
         case 3:
-            board_->blockSelectionStrategy_ = new Level3();
+            board_->blockSelectionStrategy_ = new Level3(board_->blockFactory_);
             break;
         case 4:
-            board_->blockSelectionStrategy_ = new Level4();
+            board_->blockSelectionStrategy_ = new Level4(board_->blockFactory_);
             break;
     }
 }
@@ -58,6 +60,7 @@ Board::~Board(){
         }
         deleteGrid();
         delete board_->blockSelectionStrategy_;
+        delete board_->blockFactory_;
     }
     delete board_;
 }
@@ -76,16 +79,20 @@ void Board::deleteGrid(){
     }
 }
 
-void Board::moveCurBlockLeft(){
+Tile* Board::getTileAt(int x, int y){
+    return board_->grid_[x][y];
+}
 
+void Board::moveCurBlockLeft(){
+    board_->curBlock_->moveLeft(this);
 }
 
 void Board::moveCurBlockRight(){
-
+    board_->curBlock_->moveRight(this);
 }
 
 void Board::moveCurBlockDown(){
-
+    board_->curBlock_->moveDown(this);
 }
 
 // Increases the level of the game by one
@@ -109,7 +116,8 @@ void Board::levelDown(){
 // Sets the current block to be of type bType
 void Board::setCurBlock(BlockType bType){
     if (board_->curBlock_->getBlockType() != bType){
-        //TODO
+        delete board_->curBlock_;
+        board_->curBlock_ = board_->blockSelectionStrategy_->getBlockOfType(bType);
     }
 }
 

@@ -1,5 +1,6 @@
 #include "level2.h"
 #include "blockSelectionStrategy.h"
+#include "blockFactory.h"
 #include <fstream>
 #include <time.h>
 #include <cstdlib>
@@ -7,11 +8,12 @@
 using namespace std;
 
 // Default constructor
-Level2::Level2(){
+Level2::Level2(BlockFactory* blockFactory){
     level2_ = new PImpl_bs;
     setBlockProbabilities();
     level2_->areBlocksHeavy_ = false;
     level2_->isRandom_ = true;
+    level2_->blockFactory_ = blockFactory;
 }
 
 void Level2::setBlockProbabilities(){
@@ -50,4 +52,8 @@ BlockType Level2::getNextBlockType(){
         }
         rand -= it.second;
     }
+}
+
+Block* Level2::getBlockOfType(BlockType bType){
+    return level2_->blockFactory_->createBlock(bType, level2_->areBlocksHeavy_);
 }

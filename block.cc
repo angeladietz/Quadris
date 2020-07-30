@@ -48,6 +48,12 @@ Block::~Block() {}
 // Private methods to check if block can move left
 
 // TODO: The xy mapping to ij is wrong
+// TODO: Change all places where char is used to BlcokType
+
+BlockType Block::getBlockType() const{
+
+    //return type;
+}
 
 bool Block::canMove(Board* board, std::vector<int> dir) {
 
@@ -81,7 +87,7 @@ void Block::moveLeft(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt_(tile->getXCoordinate() - 1, tile->getYCoordinate()));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate() - 1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
@@ -103,7 +109,7 @@ void Block::moveRight(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt_(tile->getXCoordinate() + 1, tile->getYCoordinate()));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate() + 1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
@@ -125,7 +131,7 @@ void Block::moveDown(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt_(tile->getXCoordinate(), tile->getYCoordinate() + 1));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate(), tile->getYCoordinate() + 1));
     }
 
     // Populate new locations for the block with the block type

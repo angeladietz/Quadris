@@ -5,12 +5,14 @@
 #include <vector>
 #include "blockSelectionStrategy.h"
 #include "block.h"
+#include "blockFactory.h"
 
 class Level3: public BlockSelectionStrategy{
     public:
-        Level3();
+        Level3(BlockFactory*);
         ~Level3();
         Block* getNextBlock();
+        Block* getBlockOfType(BlockType);
         void setRandom(bool);
         void setSequenceFile(std::string);
     private:

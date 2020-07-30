@@ -6,9 +6,10 @@
 using namespace std;
 
 // Constructor
-Level0::Level0(string filename = "sequence.txt"){
+Level0::Level0(BlockFactory* blockFactory, string filename = "sequence.txt"){
     level0_ = new PImpl_bs;
     level0_->areBlocksHeavy_ = false;
+    level0_->blockFactory_ = blockFactory;
 
     ifstream blockFile;
 
@@ -42,4 +43,8 @@ BlockType Level0::getNextBlockType(){
     BlockType bType = level0_->blockList_.front();
     level0_->blockList_.pop();
     return bType;
+}
+
+Block* Level0::getBlockOfType(BlockType bType){
+    return level0_->blockFactory_->createBlock(bType, level0_->areBlocksHeavy_);
 }

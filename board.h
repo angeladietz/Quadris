@@ -26,20 +26,15 @@ struct PImpl_B{
     int curScore_;
     int highScore_;
     bool isRandom_;
+    BlockFactory* blockFactory_;
 };
-
-// Forward declaration of Block class
-class Block;
-
-//Forward declaration of BlockType
-enum class BlockType: int;
 
 class Board: public Subject{
 	public:
 		Board(int, std::string);
         ~Board();
 		
-        Tile* getTileAt_(int, int);
+        Tile* getTileAt(int, int);
         void moveCurBlockLeft();
         void moveCurBlockRight();
         void moveCurBlockDown();

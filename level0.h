@@ -5,6 +5,7 @@
 #include <queue>
 #include "blockSelectionStrategy.h"
 #include "block.h"
+#include "blockFactory.h"
 
 struct PImpl_L0{
     std::queue<BlockType> blockList_;
@@ -14,9 +15,10 @@ struct PImpl_L0{
 
 class Level0: public BlockSelectionStrategy{
     public:
-        Level0(std::string="sequence.txt");
+        Level0(BlockFactory*, std::string="sequence.txt");
         ~Level0();
         Block* getNextBlock();
+        Block* getBlockOfType(BlockType);
         virtual void setRandom(){};
     private:
         BlockType getNextBlockType();

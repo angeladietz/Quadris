@@ -1,5 +1,6 @@
 #include "level3.h"
 #include "blockSelectionStrategy.h"
+#include "blockFactory.h"
 #include <fstream>
 #include <time.h>
 #include <cstdlib>
@@ -7,11 +8,12 @@
 using namespace std;
 
 // Default constructor
-Level3::Level3(){
+Level3::Level3(BlockFactory* blockFactory){
     level3_ = new PImpl_bs;
     setBlockProbabilities();
     level3_->areBlocksHeavy_ = false;
     level3_->isRandom_ = true;
+    level3_->blockFactory_ = blockFactory;
 }
 
 void Level3::setBlockProbabilities(){
@@ -72,4 +74,8 @@ void Level3::setRandom(bool isRandom){
 
 void Level3::setSequenceFile(string filename){
     level3_->sequenceFile_ = filename;
+}
+
+Block* Level3::getBlockOfType(BlockType bType){
+    return level3_->blockFactory_->createBlock(bType, level3_->areBlocksHeavy_);
 }

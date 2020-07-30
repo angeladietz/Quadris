@@ -1,18 +1,20 @@
 #include "level1.h"
 #include "blockSelectionStrategy.h"
 #include "block.h"
+#include "blockFactory.h"
 #include <fstream>
 #include <time.h>
 #include <cstdlib>
 
 using namespace std;
 
-// Default onstructor
-Level1::Level1(){
+// Default constructor
+Level1::Level1(BlockFactory* blockFactory){
     level1_ = new PImpl_bs;
     setBlockProbabilities();
     level1_->areBlocksHeavy_ = false;
     level1_->isRandom_ = true;
+    level1_->blockFactory_ = blockFactory;
 }
 
 void Level1::setBlockProbabilities(){
@@ -51,4 +53,8 @@ BlockType Level1::getNextBlockType(){
         }
         rand -= it.second;
     }
+}
+
+Block* Level1::getBlockOfType(BlockType bType){
+    return level1_->blockFactory_->createBlock(bType, level1_->areBlocksHeavy_);
 }
