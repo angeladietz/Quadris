@@ -44,7 +44,7 @@ class Block {
         virtual bool canRotateCounterClockwise(Board*) = 0;
 
         // Member variables
-        std::vector<Tile> tiles_;
+        std::vector<Tile*> tiles_;
         char type;
 
 };

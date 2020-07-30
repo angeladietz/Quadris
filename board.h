@@ -18,7 +18,7 @@ class Board: public Subject{
 		    Board();
         ~Board();
 		
-        Tile getTileAt_(int, int);
+        Tile* getTileAt_(int, int);
         void moveCurBlockLeft();
         void moveCurBlockRight();
         void moveCurBlockDown();

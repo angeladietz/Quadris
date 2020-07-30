@@ -11,7 +11,7 @@ OBlock::OBlock(Board *board) {
     // TODO: Do I need to check if there is a block already there or will that be handled by game controller?
 
     for (auto tile: tiles_) {
-        tile.setTileValue(type);
+        tile->setTileValue(type);
     }
 
 }
