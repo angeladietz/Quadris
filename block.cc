@@ -9,34 +9,27 @@ Block::~Block() {}
 
 // TODO: The xy mapping to ij is wrong
 
-bool Block::canMoveLeft(Board* board) {
+bool Block::canMove(Board* board, std::vector<int> dir) {
 
     for (auto tile: tiles_) {
-        if (tile->getXCoordinate() == 0 || !board->getTileAt_(tile->getXCoordinate() - 1, tile->getYCoordinate())->isFilled()) {
+        if (tile->getXCoordinate() + dir[0] < 0 || tile->getXCoordinate() + dir[0] > 10 || tile->getYCoordinate() + dir[1] == 17 || \
+                !board->getTileAt_(tile->getXCoordinate() + dir[0], tile->getYCoordinate() + dir[1])->isFilled()) {
             return false;
         }
     }
     return true;
+}
+
+bool Block::canMoveLeft(Board* board) {
+    return canMove(board, {-1, 0});
 }
 
 bool Block::canMoveRight(Board* board) {
-
-    for (auto tile: tiles_) {
-        if (tile->getXCoordinate() == 10 || !board->getTileAt_(tile->getXCoordinate() + 1, tile->getYCoordinate())->isFilled()) {
-            return false;
-        }
-    }
-    return true;
+    return canMove(board, {1, 0});
 }
 
 bool Block::canMoveDown(Board* board) {
-
-    for (auto tile: tiles_) {
-        if (tile->getYCoordinate() == 17 || !board->getTileAt_(tile->getXCoordinate(), tile->getYCoordinate() + 1)->isFilled()) {
-            return false;
-        }
-    }
-    return true;
+    return canMove(board, {0, 1});
 }
 
 void Block::moveLeft(Board* board) {

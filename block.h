@@ -33,6 +33,7 @@ class Block {
     protected:
 
         // Private helper methods - do not need to be exposed to the client (i.e. Board)
+        bool canMove(Board*, std::vector<int>);
         bool canMoveLeft(Board*);
         bool canMoveRight(Board*);
         bool canMoveDown(Board*);
