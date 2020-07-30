@@ -60,6 +60,12 @@ class Board: public Subject{
         void initGrid();
         void initBlockSelector();
         void deleteGrid();
+        void checkForFullRow();
+        void clearRow(int);
+        void moveRowsDownOneRow(int);
+        int getPointsFromClearedRows(int);
+        int getPointsFromClearedBlock();
+        void updateScore(int);
         PImpl_B* board_;
 };
 

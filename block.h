@@ -26,7 +26,7 @@ class Block {
         void moveLeft(Board*);
         void moveRight(Board*);
         void moveDown(Board*);
-        // void dropBlock();
+        void dropBlock();
 
         BlockType getBlockType() const;
         bool getTilePositions() const;

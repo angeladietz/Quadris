@@ -95,6 +95,72 @@ void Board::moveCurBlockDown(){
     board_->curBlock_->moveDown(this);
 }
 
+void Board::rotateCurBlockClockwise(){
+    board_->curBlock_->rotateClockwise(this);
+}
+
+void Board::rotateCurBlockCounterClockwise(){
+    board_->curBlock_->rotateCounterClockwise(this);
+}
+
+void Board::dropCurBlock(){
+    board_->curBlock_->dropBlock();
+    checkForFullRow();
+}
+
+void Board::checkForFullRow(){
+    int numRowsFilled = 0;
+
+    // Go through board and check for any full rows, and clear
+    // them if there are any
+    // Start at row 3 since the first 3 rows are extra space
+    for (int i = 3; i < BOARD_HEIGHT; i++){
+        for (int j = 0; j < BOARD_WIDTH; j++){
+            if (!board_->grid_[i][j]->isFilled()){
+                break;
+            }
+            else if (j == BOARD_WIDTH-1){
+                // Row is full
+                clearRow(i);
+                numRowsFilled++;
+            }
+        }
+    }
+    updateScore(getPointsFromClearedRows(numRowsFilled));
+}
+
+void Board::clearRow(int rowNum){
+    for (int i = 0; i < BOARD_WIDTH; i++){
+        if (board_->grid_[rowNum][i]->isLastTileFromBlock()){
+            updateScore(getPointsFromClearedBlock());
+        }
+        board_->grid_[rowNum][i]->deleteTileFromRow();
+    }
+    moveRowsDownOneRow(rowNum);
+}
+
+void Board::moveRowsDownOneRow(int rowNum){
+    for (int i = rowNum-1; i >=3; i++){
+        for (int j = 0; j < BOARD_WIDTH; j++){
+            board_->grid_[i][j]->moveDownOneRow(this);
+        }
+    }
+}
+
+int Board::getPointsFromClearedBlock(){
+    return (board_->curLevel_ + 1)*(board_->curLevel_ + 1);
+}
+
+int Board::getPointsFromClearedRows(int numRowsCleared){
+    int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
+    int scoredPoints = sqrtScoredPoints*sqrtScoredPoints;
+    return scoredPoints;
+}
+
+void Board::updateScore(int points){
+    board_->curScore_ += points;
+}
+
 // Increases the level of the game by one
 void Board::levelUp(){
     if (board_->curLevel_ < MAX_LEVEL){

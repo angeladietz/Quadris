@@ -48,7 +48,7 @@ Block::~Block() {}
 // Private methods to check if block can move left
 
 // TODO: The xy mapping to ij is wrong
-// TODO: Change all places where char is used to BlcokType
+// TODO: Change all places where char is used to BlockType
 
 BlockType Block::getBlockType() const{
 
