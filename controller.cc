@@ -85,7 +85,7 @@ void Controller::HandleCommandSequenceFromFile(string filename){
     }
 }
 
-void Controller::executeCommand(Action action, string filename = ""){
+void Controller::executeCommand(Action action, string filename){
     switch(action){
         case LEFT:
             controller_->board_->moveCurBlockLeft();

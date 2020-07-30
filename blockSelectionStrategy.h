@@ -4,7 +4,6 @@
 #include <string>
 #include <map>
 #include <queue>
-#include "quadris.h"
 #include "block.h"
 #include "blockFactory.h"
 

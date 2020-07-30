@@ -1,9 +1,12 @@
 #ifndef _QUADRIS_
 #define _QUADRIS_
 
-#include "board.h"
 #include "controller.h"
+#include "observer.h"
 #include <string>
+
+//Forward declaration of Board class
+class Board;
 
 struct PImpl_Q{
 	Board* board_;

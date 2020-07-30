@@ -4,8 +4,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "controller.h"
-#include "quadris.h"
 
 enum Action { LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP,
 			  LEVELUP, LEVELDOWN, NORANDOM, RANDOM, SEQUENCE,

@@ -8,6 +8,7 @@
 #include "level4.h"
 #include "textDisplay.h"
 #include "graphics.h"
+#include "observer.h"
 #include <vector>
 
 using namespace std;

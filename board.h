@@ -4,16 +4,19 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "quadris.h"
 #include "subject.h"
 #include "tile.h"
 #include "block.h"
+#include "blockFactory.h"
 #include "blockSelectionStrategy.h"
 
 #define MIN_LEVEL 0
 #define MAX_LEVEL 4
 #define BOARD_WIDTH 11
 #define BOARD_HEIGHT 18
+
+//Forward declaration of Quadris class
+class Quadris;
 
 struct PImpl_B{
     Block* curBlock_;

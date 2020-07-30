@@ -5,7 +5,7 @@ using namespace std;
 
 // Constructor
 BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
-    blockFactory_ = bf;
+    //blockFactory_ = bf;
 }
 
 // Destructor
