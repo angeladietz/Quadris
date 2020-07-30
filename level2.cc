@@ -10,7 +10,8 @@ using namespace std;
 Level2::Level2(){
     level2_ = new PImpl_bs;
     setBlockProbabilities();
-    areBlocksHeavy_ = false;
+    level2_->areBlocksHeavy_ = false;
+    level2_->isRandom_ = true;
 }
 
 void Level2::setBlockProbabilities(){
@@ -30,7 +31,7 @@ Level2::~Level2(){
 
 Block* Level2::getNextBlock(){
     BlockType type = getNextBlockType();
-    return blockFactory_->createBlock(type, areBlocksHeavy_);
+    return level2_->blockFactory_->createBlock(type, level2_->areBlocksHeavy_);
 }
 
 BlockType Level2::getNextBlockType(){

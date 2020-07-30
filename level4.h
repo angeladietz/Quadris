@@ -11,6 +11,8 @@ class Level4: public BlockSelectionStrategy{
         Level4();
         ~Level4();
         Block* getNextBlock();
+        void setRandom(bool);
+        void setSequenceFile(std::string);
 };
 
 #endif

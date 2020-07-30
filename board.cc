@@ -11,12 +11,12 @@
 using namespace std;
 
 // Constructor
-Board::Board(int startLevel, string scriptFile){
+Board::Board(int startLevel, string l0ScriptFile){
     board_ = new PImpl_B;
     initGrid();
     board_->curScore_ = 0;
     board_->curLevel_ = startLevel;
-    board_->scriptFile_ = scriptFile;
+    board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
 }
@@ -104,4 +104,27 @@ void Board::levelDown(){
     }
     board_->curLevel_--;
     initBlockSelector();
+}
+
+// Sets the current block to be of type bType
+void Board::setCurBlock(BlockType bType){
+    if (board_->curBlock_->getBlockType() != bType){
+        //TODO
+    }
+}
+
+void Board::setNoRand(std::string filename){
+    if (board_->curLevel_ == 3 || board_->curLevel_ == 4){
+        board_->blockSelectionStrategy_->setRandom(false);
+        board_->blockSelectionStrategy_->setSequenceFile(filename);
+        board_->isRandom_ = false;
+        board_->noRandFile_ = filename;
+    }
+}
+
+void Board::setRand(){
+    if (board_->curLevel_ == 3 || board_->curLevel_ == 4){
+        board_->blockSelectionStrategy_->setRandom(true);
+        board_->isRandom_ = true;
+    }
 }

@@ -21,9 +21,11 @@ struct PImpl_B{
     std::vector<std::vector<Tile*> > grid_;
     int curLevel_;
     BlockSelectionStrategy* blockSelectionStrategy_;
-    std::string scriptFile_;
+    std::string L0SeqFile_;
+    std::string noRandFile_;
     int curScore_;
     int highScore_;
+    bool isRandom_;
 };
 
 // Forward declaration of Block class

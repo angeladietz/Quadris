@@ -11,6 +11,8 @@ class Level2: public BlockSelectionStrategy{
         Level2();
         ~Level2();
         Block* getNextBlock();
+        void setRandom(bool){}
+        void setSequenceFile(std::string){}
     private:
         void setBlockProbabilities();
         BlockType getNextBlockType();

@@ -8,6 +8,8 @@
 
 struct PImpl_L0{
     std::queue<BlockType> blockList_;
+    bool areBlocksHeavy_;
+    BlockFactory* blockFactory_;
 };
 
 class Level0: public BlockSelectionStrategy{
@@ -15,6 +17,7 @@ class Level0: public BlockSelectionStrategy{
         Level0(std::string="sequence.txt");
         ~Level0();
         Block* getNextBlock();
+        virtual void setRandom(){};
     private:
         BlockType getNextBlockType();
         PImpl_L0* level0_;
