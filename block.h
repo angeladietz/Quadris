@@ -5,9 +5,11 @@
 #include <vector>
 
 #include "tile.h"
-#include "board.h"
 
-enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
+// Forward declaration of board class
+class Board;
+
+enum class BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
 
 class Block {
 

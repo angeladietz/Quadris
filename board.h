@@ -7,15 +7,20 @@
 #include "quadris.h"
 #include "subject.h"
 #include "tile.h"
-#include "block.h"
 
 #define MIN_LEVEL 0
 #define MAX_LEVEL 4
 
+// Forward declaration of Block class
+class Block;
+
+//Forward declaration of BlockType
+enum class BlockType: int;
+
 class Board: public Subject{
 
 	  public:
-		    Board();
+		Board();
         ~Board();
 		
         Tile* getTileAt_(int, int);
