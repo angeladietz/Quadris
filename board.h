@@ -2,6 +2,8 @@
 #define _BOARD_
 
 #include <iostream>
+#include <vector>
+
 #include "quadris.h"
 #include "subject.h"
 #include "tile.h"
@@ -11,10 +13,12 @@
 #define MAX_LEVEL 4
 
 class Board: public Subject{
-	public:
-		Board();
+
+	  public:
+		    Board();
         ~Board();
 		
+        Tile* getTileAt_(int, int);
         void moveCurBlockLeft();
         void moveCurBlockRight();
         void moveCurBlockDown();
@@ -29,8 +33,12 @@ class Board: public Subject{
         void showHint();
         Tile operator[](int);
         void reset();
+        void updateTileAt(int, int);
 
         friend std::ostream& operator<<(std::ostream&, Board&);     
+
+    private:
+        std::vector<Tile> board;
 };
 
 #endif
