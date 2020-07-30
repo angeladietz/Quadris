@@ -44,6 +44,8 @@ class Block {
         virtual bool canRotateClockwise(Board*) = 0;
         virtual bool canRotateCounterClockwise(Board*) = 0;
 
+        std::vector<int> getEndCoordinates();
+
         // Member variables
         std::vector<Tile*> tiles_;
         char type;
