@@ -24,6 +24,7 @@ class Controller {
         void executeCommand(Action, std::string ="");
         void HandleCommandSequenceFromFile(std::string);
         bool DoesRequireFile(Action);
+        void finishCommandExecution();
         PImpl_C* controller_;
 };
 

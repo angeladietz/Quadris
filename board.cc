@@ -202,3 +202,9 @@ void Board::setRand(){
         board_->isRandom_ = true;
     }
 }
+
+void Board::moveDownHeavyBlock(){
+    if (board_->curBlock_->isHeavy()){
+        board_->curBlock_->moveDown(this);
+    }
+}

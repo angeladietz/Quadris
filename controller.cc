@@ -64,6 +64,7 @@ void Controller::handleCommand(string command){
                 executeCommand(actions[j]);
             }
         }
+        finishCommandExecution();
     }
 }
 
@@ -146,4 +147,9 @@ void Controller::executeCommand(Action action, string filename){
         case HINT:
             break;
     }
+}
+
+// Executes actions necessary after each command
+void Controller::finishCommandExecution(){
+    controller_->board_->moveDownHeavyBlock();
 }

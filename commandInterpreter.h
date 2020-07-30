@@ -23,6 +23,8 @@ class CommandInterpreter {
 	private:
 		void initCmdActions();
 		void initCmdStrings();
+		int getMultiplier(std::string);
+		std::string getCommandText(std::string, int);
 
 		PImpl_CI* commandInterpreter_;
 };

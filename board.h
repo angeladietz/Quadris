@@ -53,6 +53,7 @@ class Board: public Subject{
         Tile operator[](int);
         void reset();
         void updateTileAt(int, int);
+        void moveDownHeavyBlock();
 
         friend std::ostream& operator<<(std::ostream&, Board&);
 
