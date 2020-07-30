@@ -3,12 +3,14 @@
 
 #include <string>
 #include <map>
+#include <queue>
 #include "quadris.h"
 #include "block.h"
 #include "blockFactory.h"
 
 struct PImpl_bs{
     std::map<BlockType, int> blockProbabilities_;
+	std::queue<BlockType> blockList_;
 	BlockFactory* blockFactory_;
 	bool areBlocksHeavy_;
 	bool isRandom_;

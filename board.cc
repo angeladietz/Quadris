@@ -30,7 +30,7 @@ void Board::initGrid(){
 void Board::initBlockSelector(){
     switch (board_->curLevel_){
         case 0:
-            board_->blockSelectionStrategy_ = new Level0(board_->scriptFile_);
+            board_->blockSelectionStrategy_ = new Level0(board_->L0SeqFile_);
             break;
         case 1:
             board_->blockSelectionStrategy_ = new Level1();

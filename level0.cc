@@ -1,12 +1,13 @@
 #include "level0.h"
 #include "blockSelectionStrategy.h"
+#include "block.h"
 #include <fstream>
 
 using namespace std;
 
 // Constructor
 Level0::Level0(string filename = "sequence.txt"){
-    level0_ = new PImpl_L0;
+    level0_ = new PImpl_bs;
     level0_->areBlocksHeavy_ = false;
 
     ifstream blockFile;

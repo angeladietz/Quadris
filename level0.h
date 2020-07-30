@@ -20,7 +20,7 @@ class Level0: public BlockSelectionStrategy{
         virtual void setRandom(){};
     private:
         BlockType getNextBlockType();
-        PImpl_L0* level0_;
+        PImpl_bs* level0_;
 };
 
 #endif
