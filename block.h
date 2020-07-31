@@ -14,7 +14,7 @@ enum class BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_B
 class Block {
 
     public:
-        Block();
+        Block(BlockType, Board*);
         ~Block();
 
         // Public methods to rotate a given block
@@ -35,6 +35,7 @@ class Block {
     protected:
 
         // Private helper methods - do not need to be exposed to the client (i.e. Board)
+        bool canMove(Board*, std::vector<int>);
         bool canMoveLeft(Board*);
         bool canMoveRight(Board*);
         bool canMoveDown(Board*);
@@ -42,8 +43,10 @@ class Block {
         // Private virtual methods to check if a block can be rotated
         // Do not need to be exposed to client programmer but are dependent on the kind of block
         // Thus are required to be virtual
-        virtual bool canRotateClockwise(Board*) = 0;
-        virtual bool canRotateCounterClockwise(Board*) = 0;
+        bool canRotateClockwise(Board*);
+        bool canRotateCounterClockwise(Board*);
+
+        std::vector<int> getEndCoordinates();
 
         // Member variables
         std::vector<Tile*> tiles_;
