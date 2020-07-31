@@ -30,12 +30,13 @@ struct PImpl_B{
     int highScore_;
     bool isRandom_;
     int blockCount_;
+    Quadris* quadris_;
     BlockFactory* blockFactory_;
 };
 
 class Board: public Subject{
 	public:
-		Board(int, std::string);
+		Board(Quadris*, int, std::string);
         ~Board();
 		
         Tile* getTileAt(int, int);
@@ -52,7 +53,7 @@ class Board: public Subject{
         void setCurBlock(BlockType);
         void showHint();
         Tile operator[](int);
-        void reset();
+        void restart();
         void updateTileAt(int, int);
         void moveDownHeavyBlock();
 

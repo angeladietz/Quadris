@@ -28,6 +28,7 @@ class Quadris{
 		void restartGame();
 
 	private:
+		void resetQuadrisParams();
 		PImpl_Q* quadris_;
 };
 

@@ -1,5 +1,6 @@
 #include "board.h"
 #include "block.h"
+#include "quadris.h"
 #include "tile.h"
 #include "level0.h"
 #include "level1.h"
@@ -12,10 +13,12 @@
 using namespace std;
 
 // Constructor
-Board::Board(int startLevel, string l0ScriptFile){
+Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_ = new PImpl_B;
+    board_->quadris_ = quadris;
     initGrid();
     board_->curScore_ = 0;
+    board_->highScore_ = 0;
     board_->blockFactory_ = new BlockFactory();
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
@@ -177,6 +180,7 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 
 void Board::updateScore(int points){
     board_->curScore_ += points;
+    board_->highScore_ = max(board_->highScore_, board_->curScore_);
 }
 
 bool Board::doesLevelDropTiles(){
@@ -240,4 +244,8 @@ void Board::moveDownHeavyBlock(){
     if (board_->curBlock_->isHeavy()){
         board_->curBlock_->moveDown(this);
     }
+}
+
+void Board::restart(){
+    board_->quadris_->restartGame();
 }

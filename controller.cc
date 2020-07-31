@@ -143,6 +143,7 @@ void Controller::executeCommand(Action action, string filename){
             controller_->board_->setCurBlock(TBlock);
             break;
         case RESTART:
+            controller_->board_->restart();
             break;
         case HINT:
             break;
