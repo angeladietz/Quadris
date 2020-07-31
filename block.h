@@ -12,7 +12,7 @@ enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
 class Block {
 
     public:
-        Block();
+        Block(BlockType, Board*);
         ~Block();
 
         // Public methods to rotate a given block

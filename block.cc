@@ -1,10 +1,48 @@
 #include "block.h"
+#include "board.h"
 #include "tile.h"
 #include <utility>
 #include <vector>
 #include <algorithm>
 
-Block::Block() {}
+Block::Block(BlockType blocktype, Board* board) {
+    
+    std::vector<std::vector<int>> locations;
+    // Specify the locations for each block type
+    if (blocktype == BlockType::IBlock) {
+        locations = {{0,3}, {1,3}, {2,3}, {3,3}};
+        type = 'I';
+    } else if (blocktype == BlockType::JBlock) {
+        locations = {{0,3}, {0,4}, {1,4}, {2,4}};
+        type = 'J';
+    } else if (blocktype == BlockType::LBlock) {
+        locations = {{2,3}, {0,4}, {1,4}, {2,4}};
+        type = 'L';
+    } else if (blocktype == BlockType::OBlock) {
+        locations = {{0,3}, {1,3}, {0,4}, {1,4}};
+        type = 'O';
+    } else if (blocktype == BlockType::SBlock) {
+        locations = {{1,3}, {2,3}, {0,4}, {1,4}};
+        type = 'S';
+    } else if (blocktype == BlockType::ZBlock) {
+        locations = {{0,3}, {1,3}, {1,4}, {2,4}};
+        type = 'Z';
+    } else if (blocktype == BlockType::TBlock) {
+        locations = {{0,3}, {1,3}, {2,3}, {1,4}};
+        type = 'T';
+    } else {
+        // Invalid block type
+        // TODO: Need to handle case better
+    }
+
+    // Create block with the specified locations
+    for (auto location: locations) {
+        Tile* blockTile = board->getTileAt_(location[0], location[1]);
+        blockTile->setTileValue(type);
+        tiles_.push_back(blockTile);
+    }
+}
+
 Block::~Block() {}
 
 // Private methods to check if block can move left
@@ -119,7 +157,9 @@ void Block::rotateClockwise(Board* board) {
 
     // Find the new tiles
     for (auto tile:tiles_) {
-       tempTiles_.push_back(board->getTileAt_(tile->getXCoordinate(), tile->getYCoordinate()));
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
+       tempTiles_.push_back(board->getTileAt_(newX, newY));
     }
 
     // Clear old tiles
@@ -143,7 +183,9 @@ void Block::rotateCounterClockwise(Board* board) {
 
     // Find the new tiles
     for (auto tile:tiles_) {
-       tempTiles_.push_back(board->getTileAt_(tile->getXCoordinate(), tile->getYCoordinate()));
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
+       tempTiles_.push_back(board->getTileAt_(newX, newY));
     }
 
     // Clear old tiles
