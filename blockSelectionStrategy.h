@@ -9,7 +9,8 @@
 
 struct PImpl_bs{
     std::map<BlockType, int> blockProbabilities_;
-	std::queue<BlockType> blockList_;
+	std::vector<BlockType> blockList_;
+	int blockIndex_;
 	BlockFactory* blockFactory_;
 	bool areBlocksHeavy_;
 	bool isRandom_;

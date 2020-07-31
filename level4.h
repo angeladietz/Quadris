@@ -9,7 +9,7 @@
 
 class Level4: public BlockSelectionStrategy{
     public:
-        Level4(BlockFactory*);
+        Level4(BlockFactory*, bool);
         ~Level4();
         Block* getNextBlock();
         Block* getBlockOfType(BlockType);
@@ -20,6 +20,8 @@ class Level4: public BlockSelectionStrategy{
         BlockType getNextBlockType();
         BlockType getNextRandBlockType();
         BlockType getNextNonRandBlockType();
+        void updateBlockIndex();
+        void readSequenceFile();
         PImpl_bs* level4_;
 };
 

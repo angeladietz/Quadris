@@ -8,11 +8,11 @@
 using namespace std;
 
 // Default constructor
-Level3::Level3(BlockFactory* blockFactory){
+Level3::Level3(BlockFactory* blockFactory, bool isRandom){
     level3_ = new PImpl_bs;
     setBlockProbabilities();
     level3_->areBlocksHeavy_ = true;
-    level3_->isRandom_ = true;
+    level3_->isRandom_ = isRandom;
     level3_->blockFactory_ = blockFactory;
 }
 
@@ -64,8 +64,20 @@ BlockType Level3::getNextRandBlockType(){
 }
 
 BlockType Level3::getNextNonRandBlockType(){
-    //TODO
-    return INVALID_BLOCK;
+    if (level3_->blockList_.size() == 0){
+        return INVALID_BLOCK;
+    }
+
+    BlockType bType = level3_->blockList_.at(level3_->blockIndex_);
+    updateBlockIndex();
+    return bType;
+}
+
+void Level3::updateBlockIndex(){
+    level3_->blockIndex_++;
+    if (level3_->blockIndex_++ >= level3_->blockList_.size()){
+        level3_->blockIndex_ = 0;
+    }
 }
 
 void Level3::setRandom(bool isRandom){
@@ -74,6 +86,26 @@ void Level3::setRandom(bool isRandom){
 
 void Level3::setSequenceFile(string filename){
     level3_->sequenceFile_ = filename;
+    level3_->blockList_.clear();
+    readSequenceFile();
+}
+
+void Level3::readSequenceFile(){
+    ifstream blockFile;
+
+    //TODO: ADD EXCEPTION HANDLING!
+    blockFile.open(level3_->sequenceFile_);
+
+    if (blockFile.is_open()){
+        char nextBlock;
+        while(blockFile>>nextBlock){
+            BlockType bType = getBlockType(nextBlock);
+            if (bType != INVALID_BLOCK){
+                level3_->blockList_.push_back(bType);
+            }
+        }
+        blockFile.close();
+    }
 }
 
 Block* Level3::getBlockOfType(BlockType bType){

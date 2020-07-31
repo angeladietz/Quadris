@@ -10,6 +10,7 @@ Level0::Level0(BlockFactory* blockFactory, string filename = "sequence.txt"){
     level0_ = new PImpl_bs;
     level0_->areBlocksHeavy_ = false;
     level0_->blockFactory_ = blockFactory;
+    level0_->blockIndex_ = 0;
 
     ifstream blockFile;
 
@@ -22,7 +23,7 @@ Level0::Level0(BlockFactory* blockFactory, string filename = "sequence.txt"){
         while(blockFile>>nextBlock){
             BlockType bType = getBlockType(nextBlock);
             if (bType != INVALID_BLOCK){
-                level0_->blockList_.emplace(bType);
+                level0_->blockList_.push_back(bType);
             }
         }
         blockFile.close();
@@ -40,9 +41,16 @@ Block* Level0::getNextBlock(){
 }
 
 BlockType Level0::getNextBlockType(){
-    BlockType bType = level0_->blockList_.front();
-    level0_->blockList_.pop();
+    BlockType bType = level0_->blockList_.at(level0_->blockIndex_);
+    updateBlockIndex();
     return bType;
+}
+
+void Level0::updateBlockIndex(){
+    level0_->blockIndex_++;
+    if (level0_->blockIndex_++ >= level0_->blockList_.size()){
+        level0_->blockIndex_ = 0;
+    }
 }
 
 Block* Level0::getBlockOfType(BlockType bType){

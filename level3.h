@@ -9,7 +9,7 @@
 
 class Level3: public BlockSelectionStrategy{
     public:
-        Level3(BlockFactory*);
+        Level3(BlockFactory*, bool);
         ~Level3();
         Block* getNextBlock();
         Block* getBlockOfType(BlockType);
@@ -20,6 +20,8 @@ class Level3: public BlockSelectionStrategy{
         BlockType getNextBlockType();
         BlockType getNextRandBlockType();
         BlockType getNextNonRandBlockType();
+        void updateBlockIndex();
+        void readSequenceFile();
         PImpl_bs* level3_;
         bool isRandom_;
 };

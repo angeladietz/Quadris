@@ -22,6 +22,7 @@ Board::Board(int startLevel, string l0ScriptFile){
     initBlockSelector();
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->isRandom_ = true;
     board_->blockCount_ = 0;
     notifyObservers();
 }
@@ -44,10 +45,16 @@ void Board::initBlockSelector(){
             board_->blockSelectionStrategy_ = new Level2(board_->blockFactory_);
             break;
         case 3:
-            board_->blockSelectionStrategy_ = new Level3(board_->blockFactory_);
+            board_->blockSelectionStrategy_ = new Level3(board_->blockFactory_, board_->isRandom_);
+            if (!board_->isRandom_){
+                board_->blockSelectionStrategy_->setSequenceFile(board_->noRandFile_);
+            }
             break;
         case 4:
-            board_->blockSelectionStrategy_ = new Level4(board_->blockFactory_);
+            board_->blockSelectionStrategy_ = new Level4(board_->blockFactory_, board_->isRandom_);
+            if (!board_->isRandom_){
+                board_->blockSelectionStrategy_->setSequenceFile(board_->noRandFile_);
+            }
             break;
     }
 }
