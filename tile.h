@@ -9,6 +9,9 @@
 //Forward declaration of Board class
 class Board;
 
+//Forward declaration of Block Class
+class Block;
+
 class Tile {
     public:
         Tile(int, int, char = ' ');
@@ -22,6 +25,7 @@ class Tile {
         void deleteTileFromRow();
         void moveDownOneRow(Board*);
         bool isLastTileFromBlock();
+        Block* getBlock();
 
         friend std::ostream& operator<< (std::ostream&, Tile&);
 

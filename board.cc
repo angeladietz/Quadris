@@ -22,7 +22,7 @@ Board::Board(int startLevel, string l0ScriptFile){
     initBlockSelector();
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    board_->blockCount_=0;
+    board_->blockCount_ = 0;
 }
 
 void Board::initGrid(){
@@ -105,10 +105,6 @@ void Board::rotateCurBlockCounterClockwise(){
     board_->curBlock_->rotateCounterClockwise(this);
 }
 
-bool Board::doesLevelDropTiles(){
-    return board_->curLevel_ == 4;
-}
-
 void Board::dropCurBlock(){
     board_->curBlock_->dropBlock();
     board_->blockCount_++;
@@ -120,12 +116,6 @@ void Board::dropCurBlock(){
         }
     }
     setupNextBlocks();
-}
-
-void Board::dropTileBlock(){
-    Block* tileBlock = board_->blockFactory_->createBlock(TILE_BLOCK, false);
-    tileBlock -> dropBlock();
-    checkForFullRow();
 }
 
 void Board::checkForFullRow(){
@@ -152,7 +142,7 @@ void Board::checkForFullRow(){
 void Board::clearRow(int rowNum){
     for (int i = 0; i < BOARD_WIDTH; i++){
         if (board_->grid_[rowNum][i]->isLastTileFromBlock()){
-            updateScore(getPointsFromClearedBlock());
+            updateScore(getPointsFromClearedBlock(board_->grid_[rowNum][i]->getBlock()));
         }
         board_->grid_[rowNum][i]->deleteTileFromRow();
     }
@@ -167,8 +157,8 @@ void Board::moveRowsDownOneRow(int rowNum){
     }
 }
 
-int Board::getPointsFromClearedBlock(){
-    return (board_->curLevel_ + 1)*(board_->curLevel_ + 1);
+int Board::getPointsFromClearedBlock(Block* block){
+    return (block->getGenLevel() + 1)*(block->getGenLevel() + 1);
 }
 
 int Board::getPointsFromClearedRows(int numRowsCleared){
@@ -179,6 +169,16 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 
 void Board::updateScore(int points){
     board_->curScore_ += points;
+}
+
+bool Board::doesLevelDropTiles(){
+    return board_->curLevel_ == 4;
+}
+
+void Board::dropTileBlock(){
+    Block* tileBlock = board_->blockSelectionStrategy_->getBlockOfType(TILE_BLOCK);
+    tileBlock -> dropBlock();
+    checkForFullRow();
 }
 
 void Board::setupNextBlocks(){

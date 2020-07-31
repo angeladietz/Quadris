@@ -32,6 +32,7 @@ class Block {
         bool getTilePositions() const;
         bool isHeavy();
         char getType();
+        int getGenLevel();
 
     protected:
 

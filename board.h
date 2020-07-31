@@ -66,11 +66,11 @@ class Board: public Subject{
         void clearRow(int);
         void moveRowsDownOneRow(int);
         int getPointsFromClearedRows(int);
-        int getPointsFromClearedBlock();
+        int getPointsFromClearedBlock(Block*);
         void updateScore(int);
         bool doesLevelDropTiles();
         void dropTileBlock();
-        void getNextBlocks();
+        void setupNextBlocks();
         PImpl_B* board_;
 };
 
