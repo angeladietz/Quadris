@@ -37,7 +37,7 @@ Block::Block(BlockType blocktype, Board* board) {
 
     // Create block with the specified locations
     for (auto location: locations) {
-        Tile* blockTile = board->getTileAt_(location[0], location[1]);
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
         blockTile->setTileValue(type);
         tiles_.push_back(blockTile);
     }
@@ -59,7 +59,7 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
 
     for (auto tile: tiles_) {
         if (tile->getXCoordinate() + dir[0] < 0 || tile->getXCoordinate() + dir[0] > 10 || tile->getYCoordinate() + dir[1] == 17 || \
-                !board->getTileAt_(tile->getXCoordinate() + dir[0], tile->getYCoordinate() + dir[1])->isFilled()) {
+                !board->getTileAt(tile->getXCoordinate() + dir[0], tile->getYCoordinate() + dir[1])->isFilled()) {
             return false;
         }
     }
@@ -165,7 +165,7 @@ void Block::rotateClockwise(Board* board) {
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
        int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
-       tempTiles_.push_back(board->getTileAt_(newX, newY));
+       tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
     // Clear old tiles
@@ -191,7 +191,7 @@ void Block::rotateCounterClockwise(Board* board) {
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
        int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
-       tempTiles_.push_back(board->getTileAt_(newX, newY));
+       tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
     // Clear old tiles
@@ -216,7 +216,7 @@ bool Block::canRotateClockwise(Board* board) {
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
        int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
-        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt_(newX, newY)->isFilled()){
+        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt(newX, newY)->isFilled()){
             return false;
         }
     }
@@ -230,7 +230,7 @@ bool Block::canRotateCounterClockwise(Board* board) {
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
        int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
-        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt_(newX, newY)->isFilled()){
+        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt(newX, newY)->isFilled()){
             return false;
         }
     }
