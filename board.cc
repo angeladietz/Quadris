@@ -23,6 +23,7 @@ Board::Board(int startLevel, string l0ScriptFile){
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->blockCount_ = 0;
+    notifyObservers();
 }
 
 void Board::initGrid(){

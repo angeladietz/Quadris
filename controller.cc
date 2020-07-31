@@ -152,4 +152,5 @@ void Controller::executeCommand(Action action, string filename){
 // Executes actions necessary after each command
 void Controller::finishCommandExecution(){
     controller_->board_->moveDownHeavyBlock();
+    controller_->board_->notifyObservers();
 }
