@@ -11,7 +11,7 @@ using namespace std;
 Level3::Level3(BlockFactory* blockFactory){
     level3_ = new PImpl_bs;
     setBlockProbabilities();
-    level3_->areBlocksHeavy_ = false;
+    level3_->areBlocksHeavy_ = true;
     level3_->isRandom_ = true;
     level3_->blockFactory_ = blockFactory;
 }

@@ -9,7 +9,7 @@
 // Forward declaration of board class
 class Board;
 
-enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
+enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,TILE_BLOCK,INVALID_BLOCK};
 
 class Block {
 

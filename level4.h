@@ -15,6 +15,12 @@ class Level4: public BlockSelectionStrategy{
         Block* getBlockOfType(BlockType);
         void setRandom(bool);
         void setSequenceFile(std::string);
+    private:
+        void setBlockProbabilities();
+        BlockType getNextBlockType();
+        BlockType getNextRandBlockType();
+        BlockType getNextNonRandBlockType();
+        PImpl_bs* level4_;
 };
 
 #endif

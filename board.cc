@@ -21,6 +21,8 @@ Board::Board(int startLevel, string l0ScriptFile){
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->blockCount_=0;
 }
 
 void Board::initGrid(){
@@ -103,8 +105,26 @@ void Board::rotateCurBlockCounterClockwise(){
     board_->curBlock_->rotateCounterClockwise(this);
 }
 
+bool Board::doesLevelDropTiles(){
+    return board_->curLevel_ == 4;
+}
+
 void Board::dropCurBlock(){
     board_->curBlock_->dropBlock();
+    board_->blockCount_++;
+    checkForFullRow();
+
+    if (doesLevelDropTiles()){
+        if (board_->blockCount_%5 == 0){
+            dropTileBlock();
+        }
+    }
+    setupNextBlocks();
+}
+
+void Board::dropTileBlock(){
+    Block* tileBlock = board_->blockFactory_->createBlock(TILE_BLOCK, false);
+    tileBlock -> dropBlock();
     checkForFullRow();
 }
 
@@ -159,6 +179,11 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 
 void Board::updateScore(int points){
     board_->curScore_ += points;
+}
+
+void Board::setupNextBlocks(){
+    board_->curBlock_ = board_->nextBlock_;
+    board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
 }
 
 // Increases the level of the game by one

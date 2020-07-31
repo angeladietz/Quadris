@@ -29,6 +29,7 @@ struct PImpl_B{
     int curScore_;
     int highScore_;
     bool isRandom_;
+    int blockCount_;
     BlockFactory* blockFactory_;
 };
 
@@ -67,6 +68,9 @@ class Board: public Subject{
         int getPointsFromClearedRows(int);
         int getPointsFromClearedBlock();
         void updateScore(int);
+        bool doesLevelDropTiles();
+        void dropTileBlock();
+        void getNextBlocks();
         PImpl_B* board_;
 };
 
