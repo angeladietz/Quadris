@@ -202,3 +202,31 @@ void Block::rotateCounterClockwise(Board* board) {
     tiles_.clear();
     tiles_ = tempTiles_;
 }
+
+bool Block::canRotateClockwise(Board* board) {
+    std::vector<int> endPoints = getEndCoordinates();
+
+    // Check that each new tile is in bounds
+    for (auto tile:tiles_) {
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
+        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt_(newX, newY)->isFilled()){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Block::canRotateCounterClockwise(Board* board) {
+    std::vector<int> endPoints = getEndCoordinates();
+
+    // Check that each new tile is in bounds
+    for (auto tile:tiles_) {
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
+        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt_(newX, newY)->isFilled()){
+            return false;
+        }
+    }
+    return true;
+}

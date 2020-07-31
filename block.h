@@ -41,8 +41,8 @@ class Block {
         // Private virtual methods to check if a block can be rotated
         // Do not need to be exposed to client programmer but are dependent on the kind of block
         // Thus are required to be virtual
-        virtual bool canRotateClockwise(Board*) = 0;
-        virtual bool canRotateCounterClockwise(Board*) = 0;
+        bool canRotateClockwise(Board*);
+        bool canRotateCounterClockwise(Board*);
 
         std::vector<int> getEndCoordinates();
 
