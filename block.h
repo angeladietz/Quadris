@@ -19,8 +19,8 @@ class Block {
 
         // Public methods to rotate a given block
         // Rotation is dependent on the kind of block so it is defined as a virtual method
-        virtual void rotateClockwise(Board*) = 0;
-        virtual void rotateCounterClockwise(Board*) = 0;
+        virtual void rotateClockwise(Board*);
+        virtual void rotateCounterClockwise(Board*);
         
         // Public methods to move block around - same for each block so non-virtual
         void moveLeft(Board*);

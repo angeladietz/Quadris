@@ -9,7 +9,3 @@ OBlock::OBlock(Board *board) {
 }
 
 OBlock::~OBlock() {}
-
-//Undefined since rotation of O Blocks is meaningless
-void OBlock::rotateClockwise() {}
-void OBlock::rotateCounterClockwise() {}

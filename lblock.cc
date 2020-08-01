@@ -9,11 +9,3 @@ LBlock::LBlock(Board *board) {
 }
 
 LBlock::~LBlock() {}
-
-void LBlock::rotateClockwise() {
-
-}
-
-void LBlock::rotateCounterClockwise() {
-
-}
