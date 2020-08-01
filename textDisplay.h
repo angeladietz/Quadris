@@ -7,19 +7,21 @@
 #include "board.h"
 #include "commandInterpreter.h"
 #include "observer.h"
+#include "controller.h"
 
 class TextDisplay : public Observer {
-  std::vector<std::vector<char>> theDisplay;
-  commandInterpreter *command;
+  
+  Controller *controller_;
+  Board *board_;
   Block *nextBlock;
   int currScore;
   int highScore;
   int level;
 
  public:
-  TextDisplay();
+  TextDisplay(Board*, Controller*);
   ~TextDisplay();
-  void update(board &);
+  void update() override;
 
   friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };

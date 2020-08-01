@@ -37,6 +37,7 @@ bool Tile::isLastTileFromBlock(){
     if (block_->getNumTiles() == 1){
         return true;
     }
+    return false;
 }
 
 void Tile::deleteFromBlock(){
@@ -49,4 +50,9 @@ void Tile::moveDownOneRow(Board* board){
     block_->moveTileDown(this, board);
 }
 
+std::ostream& operator<< (std::ostream& out, Tile& tile) {
 
+		out << tile.getTileValue();
+    return out;
+
+}

@@ -29,8 +29,7 @@ Block::~Block() {}
 // TODO: Change all places where char is used to BlockType
 
 BlockType Block::getBlockType() const{
-
-    //return type;
+    return blocktype;
 }
 
 bool Block::canMove(Board* board, std::vector<int> dir) {
