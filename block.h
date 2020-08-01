@@ -9,7 +9,7 @@
 // Forward declaration of board class
 class Board;
 
-enum class BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,INVALID_BLOCK};
+enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,TILE_BLOCK,INVALID_BLOCK};
 
 class Block {
 
@@ -26,11 +26,13 @@ class Block {
         void moveLeft(Board*);
         void moveRight(Board*);
         void moveDown(Board*);
-        // void dropBlock();
+        void dropBlock();
 
+        BlockType getBlockType() const;
         bool getTilePositions() const;
         bool isHeavy();
         char getType();
+        int getGenLevel();
 
     protected:
 

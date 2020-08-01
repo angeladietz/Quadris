@@ -11,7 +11,7 @@ class BlockFactory{
         Block* createBlock(BlockType, bool);
 
     private:
-        virtual Block* create(bool) =0;
+        virtual Block* create(bool);
         std::map<BlockType, BlockFactory*> factories_;
 };
 

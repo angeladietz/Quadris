@@ -6,6 +6,12 @@
 
 #include "location.h"
 
+//Forward declaration of Board class
+class Board;
+
+//Forward declaration of Block Class
+class Block;
+
 class Tile {
     public:
         Tile(int, int, char = ' ');
@@ -16,6 +22,10 @@ class Tile {
         void setTileValue(const char);
         int  getXCoordinate();
         int  getYCoordinate();
+        void deleteTileFromRow();
+        void moveDownOneRow(Board*);
+        bool isLastTileFromBlock();
+        Block* getBlock();
 
         friend std::ostream& operator<< (std::ostream&, Tile&);
 

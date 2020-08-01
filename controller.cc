@@ -64,6 +64,7 @@ void Controller::handleCommand(string command){
                 executeCommand(actions[j]);
             }
         }
+        finishCommandExecution();
     }
 }
 
@@ -85,7 +86,7 @@ void Controller::HandleCommandSequenceFromFile(string filename){
     }
 }
 
-void Controller::executeCommand(Action action, string filename = ""){
+void Controller::executeCommand(Action action, string filename){
     switch(action){
         case LEFT:
             controller_->board_->moveCurBlockLeft();
@@ -142,8 +143,15 @@ void Controller::executeCommand(Action action, string filename = ""){
             controller_->board_->setCurBlock(TBlock);
             break;
         case RESTART:
+            controller_->board_->restart();
             break;
         case HINT:
             break;
     }
+}
+
+// Executes actions necessary after each command
+void Controller::finishCommandExecution(){
+    controller_->board_->moveDownHeavyBlock();
+    controller_->board_->notifyObservers();
 }

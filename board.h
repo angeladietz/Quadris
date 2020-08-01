@@ -3,27 +3,43 @@
 
 #include <iostream>
 #include <vector>
-
-#include "quadris.h"
+#include <string>
 #include "subject.h"
 #include "tile.h"
+#include "block.h"
+#include "blockFactory.h"
+#include "blockSelectionStrategy.h"
 
 #define MIN_LEVEL 0
 #define MAX_LEVEL 4
+#define BOARD_WIDTH 11
+#define BOARD_HEIGHT 18
 
-// Forward declaration of Block class
-class Block;
+//Forward declaration of Quadris class
+class Quadris;
 
-//Forward declaration of BlockType
-enum class BlockType: int;
+struct PImpl_B{
+    Block* curBlock_;
+    Block* nextBlock_;
+    std::vector<std::vector<Tile*> > grid_;
+    int curLevel_;
+    BlockSelectionStrategy* blockSelectionStrategy_;
+    std::string L0SeqFile_;
+    std::string noRandFile_;
+    int curScore_;
+    int highScore_;
+    bool isRandom_;
+    int blockCount_;
+    Quadris* quadris_;
+    BlockFactory* blockFactory_;
+};
 
 class Board: public Subject{
-
-	  public:
-		Board();
+	public:
+		Board(Quadris*, int, std::string);
         ~Board();
 		
-        Tile* getTileAt_(int, int);
+        Tile* getTileAt(int, int);
         void moveCurBlockLeft();
         void moveCurBlockRight();
         void moveCurBlockDown();
@@ -37,13 +53,26 @@ class Board: public Subject{
         void setCurBlock(BlockType);
         void showHint();
         Tile operator[](int);
-        void reset();
+        void restart();
         void updateTileAt(int, int);
+        void moveDownHeavyBlock();
 
-        friend std::ostream& operator<<(std::ostream&, Board&);     
+        friend std::ostream& operator<<(std::ostream&, Board&);
 
     private:
-        std::vector<Tile> board;
+        void initGrid();
+        void initBlockSelector();
+        void deleteGrid();
+        void checkForFullRow();
+        void clearRow(int);
+        void moveRowsDownOneRow(int);
+        int getPointsFromClearedRows(int);
+        int getPointsFromClearedBlock(Block*);
+        void updateScore(int);
+        bool doesLevelDropTiles();
+        void dropTileBlock();
+        void setupNextBlocks();
+        PImpl_B* board_;
 };
 
 #endif
