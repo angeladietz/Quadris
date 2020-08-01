@@ -96,6 +96,18 @@ Tile* Board::getTileAt(int x, int y){
     return board_->grid_[x][y];
 }
 
+int Board::getScore(){
+    return board_->curScore_;
+}
+
+int Board::getHighScore(){
+    return board_->highScore_;
+}
+
+Block* Board::getNextBlock(){
+    return board_->nextBlock_;
+}
+
 void Board::moveCurBlockLeft(){
     board_->curBlock_->moveLeft(this);
 }
