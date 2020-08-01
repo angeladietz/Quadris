@@ -16,6 +16,8 @@ class TextDisplay : public Observer {
   int highScore;
   int level;
 
+  void read();
+
  public:
   TextDisplay();
   ~TextDisplay();

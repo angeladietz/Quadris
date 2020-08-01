@@ -24,6 +24,14 @@ void TextDisplay::update(board &notifier) {
   level = board.getLevel();
 }
 
+void TextDisplay::read() {
+  string cmd = "";
+  cin >> cmd;
+  if (!EOF) {
+    command->getCommands(cmd);
+  }
+}
+
 ostream &operator<<(ostream &out, const TextDisplay &td) {
   out << "Level:	  " << td.level << endl;
   out << "Score:	  " << td.currScore << endl;
