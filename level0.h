@@ -19,7 +19,9 @@ class Level0: public BlockSelectionStrategy{
         ~Level0();
         Block* getNextBlock();
         Block* getBlockOfType(BlockType);
-        virtual void setRandom(){};
+        
+        void setRandom(bool){};
+        void setSequenceFile(std::string){};
     private:
         BlockType getNextBlockType();
         void updateBlockIndex();

@@ -26,7 +26,7 @@ class Block {
         void moveLeft(Board*);
         void moveRight(Board*);
         void moveDown(Board*);
-        void dropBlock();
+        void dropBlock(Board*);
 
         BlockType getBlockType() const;
         bool getTilePositions() const;
@@ -58,7 +58,7 @@ class Block {
         std::vector<Tile*> tiles_;
         char type;
         BlockType blocktype;
-
+        bool isHeavy_;
 };
 
 #endif

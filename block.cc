@@ -5,6 +5,10 @@
 #include <vector>
 #include <algorithm>
 
+// TODO:
+// getGenLevel
+// heavy blocks
+
 Block::Block() {}
 
 void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
@@ -121,6 +125,12 @@ void Block::moveDown(Board* board) {
 
 }
 
+void Block::dropBlock(Board* board){
+    while (canMoveDown(board)){
+        moveDown(board);
+    }
+}
+
 std::vector<int> Block::getEndCoordinates() {
 
     std::vector<int> x_coordinates, y_coordinates;
@@ -216,6 +226,15 @@ bool Block::canRotateCounterClockwise(Board* board) {
 
 int Block::getNumTiles(){
     return tiles_.size();
+}
+
+int Block::getGenLevel(){
+    //TODO
+    return 0;
+}
+
+bool Block::isHeavy(){
+    return isHeavy_;
 }
 
 void Block::removeTile(Tile* tile){

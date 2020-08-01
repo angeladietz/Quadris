@@ -134,7 +134,7 @@ void Board::rotateCurBlockCounterClockwise(){
 }
 
 void Board::dropCurBlock(){
-    board_->curBlock_->dropBlock();
+    board_->curBlock_->dropBlock(this);
     board_->blockCount_++;
     checkForFullRow();
 
@@ -208,7 +208,7 @@ bool Board::doesLevelDropTiles(){
 
 void Board::dropTileBlock(){
     Block* tileBlock = board_->blockSelectionStrategy_->getBlockOfType(TILE_BLOCK);
-    tileBlock -> dropBlock();
+    tileBlock -> dropBlock(this);
     checkForFullRow();
 }
 

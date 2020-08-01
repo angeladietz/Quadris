@@ -21,6 +21,10 @@ void Tile::setTileValue(const char tile) {
     tileValue_ = tile;
 }
 
+Block* Tile::getBlock(){
+    return block_;
+}
+
 int Tile::getXCoordinate(){
     return location_.getX();
 }
