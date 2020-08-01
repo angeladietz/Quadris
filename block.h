@@ -33,6 +33,9 @@ class Block {
         bool isHeavy();
         char getType();
         int getGenLevel();
+        int getNumTiles();
+        void removeTile(Tile*);
+        void moveTileDown(Tile*, Board*);
 
     protected:
 

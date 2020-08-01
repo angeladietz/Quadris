@@ -22,33 +22,18 @@ class Tile {
         void setTileValue(const char);
         int  getXCoordinate();
         int  getYCoordinate();
-        void deleteTileFromRow();
+        void deleteFromBlock();
         void moveDownOneRow(Board*);
-        bool isLastTileFromBlock();
         Block* getBlock();
+        void setBlock(Block*);
+        bool isLastTileFromBlock();
 
         friend std::ostream& operator<< (std::ostream&, Tile&);
 
     private:
-        char tile_;
+        char tileValue_;
         Location location_;
-        bool isFilled_ = false;
+        Block* block_;
 };
-
-char Tile::getTileValue() const {
-    return tile_;
-}
-
-bool Tile::isFilled() const {
-    return isFilled_;
-}
-
-Tile::Tile(int x, int y, char tile) : location_(x, y) {
-   tile_ = tile; 
-}
-
-void Tile::setTileValue(const char tile) {
-    tile_ = tile;
-}
 
 #endif
