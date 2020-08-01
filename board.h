@@ -57,6 +57,9 @@ class Board: public Subject{
         void updateTileAt(int, int);
         void moveDownHeavyBlock();
 
+        int getScore();
+        int getHighScore();
+
         friend std::ostream& operator<<(std::ostream&, Board&);
 
     private:

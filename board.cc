@@ -96,6 +96,18 @@ Tile* Board::getTileAt(int x, int y){
     return board_->grid_[x][y];
 }
 
+int Board::getScore(){
+    return board_->curScore_;
+}
+
+int Board::getHighScore(){
+    return board_->highScore_;
+}
+
+Block* Board::getNextBlock(){
+    return board_->nextBlock_;
+}
+
 void Board::moveCurBlockLeft(){
     board_->curBlock_->moveLeft(this);
 }
@@ -155,7 +167,7 @@ void Board::clearRow(int rowNum){
         if (board_->grid_[rowNum][i]->isLastTileFromBlock()){
             updateScore(getPointsFromClearedBlock(board_->grid_[rowNum][i]->getBlock()));
         }
-        board_->grid_[rowNum][i]->deleteTileFromRow();
+        board_->grid_[rowNum][i]->deleteFromBlock();
     }
     moveRowsDownOneRow(rowNum);
 }
@@ -163,7 +175,9 @@ void Board::clearRow(int rowNum){
 void Board::moveRowsDownOneRow(int rowNum){
     for (int i = rowNum-1; i >=3; i++){
         for (int j = 0; j < BOARD_WIDTH; j++){
-            board_->grid_[i][j]->moveDownOneRow(this);
+            if (board_->grid_[i][j]->isFilled()){
+                board_->grid_[i][j]->moveDownOneRow(this);
+            }
         }
     }
 }

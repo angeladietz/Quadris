@@ -9,25 +9,25 @@ Block::Block(BlockType blocktype, Board* board) {
     
     std::vector<std::vector<int>> locations;
     // Specify the locations for each block type
-    if (blocktype == BlockType::IBlock) {
+    if (blocktype == IBlock) {
         locations = {{0,3}, {1,3}, {2,3}, {3,3}};
         type = 'I';
-    } else if (blocktype == BlockType::JBlock) {
+    } else if (blocktype == JBlock) {
         locations = {{0,3}, {0,4}, {1,4}, {2,4}};
         type = 'J';
-    } else if (blocktype == BlockType::LBlock) {
+    } else if (blocktype == LBlock) {
         locations = {{2,3}, {0,4}, {1,4}, {2,4}};
         type = 'L';
-    } else if (blocktype == BlockType::OBlock) {
+    } else if (blocktype == OBlock) {
         locations = {{0,3}, {1,3}, {0,4}, {1,4}};
         type = 'O';
-    } else if (blocktype == BlockType::SBlock) {
+    } else if (blocktype == SBlock) {
         locations = {{1,3}, {2,3}, {0,4}, {1,4}};
         type = 'S';
-    } else if (blocktype == BlockType::ZBlock) {
+    } else if (blocktype == ZBlock) {
         locations = {{0,3}, {1,3}, {1,4}, {2,4}};
         type = 'Z';
-    } else if (blocktype == BlockType::TBlock) {
+    } else if (blocktype == TBlock) {
         locations = {{0,3}, {1,3}, {2,3}, {1,4}};
         type = 'T';
     } else {
@@ -235,4 +235,30 @@ bool Block::canRotateCounterClockwise(Board* board) {
         }
     }
     return true;
+}
+
+int Block::getNumTiles(){
+    return tiles_.size();
+}
+
+void Block::removeTile(Tile* tile){
+    for (int i = 0; i < tiles_.size(); i++){
+        if (tiles_[i] == tile){
+            tiles_.erase(tiles_.begin() + i);
+            return;
+        }
+    }
+}
+
+void Block::moveTileDown(Tile* oldTile, Board* board){
+    //get the tile one row below and set its value to be that of the block
+    Tile* tileBelow = board->getTileAt(oldTile->getXCoordinate(), oldTile->getYCoordinate() +1);
+    tileBelow->setTileValue(type);
+
+    //clear the old tile value and remove it from the block
+    oldTile->setTileValue(' ');
+    removeTile(oldTile);
+
+    //Add the new tile to the block
+    tiles_.push_back(tileBelow);
 }
