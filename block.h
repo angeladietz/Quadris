@@ -14,7 +14,7 @@ enum BlockType {IBlock,JBlock,LBlock,SBlock,ZBlock,OBlock,TBlock,TILE_BLOCK,INVA
 class Block {
 
     public:
-        Block(BlockType, Board*);
+        Block();
         ~Block();
 
         // Public methods to rotate a given block
@@ -52,6 +52,7 @@ class Block {
         bool canRotateCounterClockwise(Board*);
 
         std::vector<int> getEndCoordinates();
+        void createBlock(std::vector<std::vector<int>>, Board*);
 
         // Member variables
         std::vector<Tile*> tiles_;
