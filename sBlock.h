@@ -9,7 +9,7 @@
 
 class SBlock: public Block {
     public:
-        SBlock();
+        SBlock(Board*);
         ~SBlock();
 
         void rotateClockwise();

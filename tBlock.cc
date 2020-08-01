@@ -1,7 +1,7 @@
-#include "oBlock.h"
+#include "tBlock.h"
 #include "board.h"
 
-OBlock::OBlock(Board *board) {
+TBlock::TBlock(Board *board) {
    
     type = 'T';
     blocktype = BlockType::TBlock;
@@ -9,4 +9,4 @@ OBlock::OBlock(Board *board) {
 
 }
 
-OBlock::~OBlock() {}
+TBlock::~TBlock() {}

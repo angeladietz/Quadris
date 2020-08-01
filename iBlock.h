@@ -9,7 +9,7 @@
 
 class IBlock: public Block {
     public:
-        IBlock();
+        IBlock(Board*);
         ~IBlock();
 
         void rotateClockwise();
