@@ -8,11 +8,11 @@ class Subject {
   std::unordered_set<Observer*> _observers;
 
  public:
-  Subject();
+  Subject() {};
   void subscribe(Observer*);
   void unsubscribe(Observer*);
   void notifyObservers();
-  virtual ~Subject() = 0;
+  virtual ~Subject() {};
 };
 
 #endif

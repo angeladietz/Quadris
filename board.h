@@ -36,7 +36,7 @@ struct PImpl_B{
 
 class Board: public Subject{
 	public:
-		Board(Quadris*, int, std::string);
+		    Board(Quadris*, int, std::string);
         ~Board();
 		
         Tile* getTileAt(int, int);
