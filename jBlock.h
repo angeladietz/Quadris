@@ -9,7 +9,7 @@
 
 class JBlock: public Block {
     public:
-        JBlock();
+        JBlock(Board*);
         ~JBlock();
 
         void rotateClockwise();

@@ -1,6 +1,5 @@
 #include "lBlock.h"
 #include "block.h"
-#include "board.h"
 
 LBlock::LBlock(Board *board) {
 

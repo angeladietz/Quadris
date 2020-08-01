@@ -1,7 +1,6 @@
-#include "oBlock.h"
-#include "board.h"
+#include "sBlock.h"
 
-OBlock::OBlock(Board *board) {
+SBlock::SBlock(Board *board) {
    
     type = 'S';
     blocktype = BlockType::SBlock;
@@ -9,4 +8,4 @@ OBlock::OBlock(Board *board) {
 
 }
 
-OBlock::~OBlock() {}
+SBlock::~SBlock() {}

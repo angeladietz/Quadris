@@ -1,8 +1,8 @@
 #include "block.h"
-#include "oBlock.h"
+#include "iBlock.h"
 #include "board.h"
 
-OBlock::OBlock(Board *board) {
+IBlock::IBlock(Board *board) {
    
     type = 'I';
     blocktype = BlockType::IBlock;
@@ -10,4 +10,4 @@ OBlock::OBlock(Board *board) {
 
 }
 
-OBlock::~OBlock() {}
+IBlock::~IBlock() {}

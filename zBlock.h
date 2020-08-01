@@ -3,13 +3,14 @@
 
 #include <iostream>
 #include <vector>
+#include "board.h"
 #include "tile.h"
 #include "block.h"
 #include "blockFactory.h"
 
 class ZBlock: public Block {
     public:
-        ZBlock();
+        ZBlock(Board*);
         ~ZBlock();
 
         void rotateClockwise();
