@@ -4,15 +4,22 @@
 #include <iostream>
 #include <vector>
 
+#include "board.h"
+#include "commandInterpreter.h"
 #include "observer.h"
 
 class TextDisplay : public Observer {
-std::vector<std::vector<char>> theDisplay;
+  std::vector<std::vector<char>> theDisplay;
+  commandInterpreter *command;
+  Block *nextBlock;
+  int currScore;
+  int highScore;
+  int level;
 
  public:
   TextDisplay();
   ~TextDisplay();
-  void update();
+  void update(board &);
 
   friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };
