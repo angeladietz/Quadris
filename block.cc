@@ -5,42 +5,20 @@
 #include <vector>
 #include <algorithm>
 
-Block::Block(BlockType blocktype, Board* board) {
-    
-    std::vector<std::vector<int>> locations;
-    // Specify the locations for each block type
-    if (blocktype == IBlock) {
-        locations = {{0,3}, {1,3}, {2,3}, {3,3}};
-        type = 'I';
-    } else if (blocktype == JBlock) {
-        locations = {{0,3}, {0,4}, {1,4}, {2,4}};
-        type = 'J';
-    } else if (blocktype == LBlock) {
-        locations = {{2,3}, {0,4}, {1,4}, {2,4}};
-        type = 'L';
-    } else if (blocktype == OBlock) {
-        locations = {{0,3}, {1,3}, {0,4}, {1,4}};
-        type = 'O';
-    } else if (blocktype == SBlock) {
-        locations = {{1,3}, {2,3}, {0,4}, {1,4}};
-        type = 'S';
-    } else if (blocktype == ZBlock) {
-        locations = {{0,3}, {1,3}, {1,4}, {2,4}};
-        type = 'Z';
-    } else if (blocktype == TBlock) {
-        locations = {{0,3}, {1,3}, {2,3}, {1,4}};
-        type = 'T';
-    } else {
-        // Invalid block type
-        // TODO: Need to handle case better
-    }
+Block::Block() {}
 
-    // Create block with the specified locations
+void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
+
     for (auto location: locations) {
         Tile* blockTile = board->getTileAt(location[0], location[1]);
         blockTile->setTileValue(type);
         tiles_.push_back(blockTile);
     }
+
+    for (auto tile: tiles_) {
+        tile->setTileValue(type);
+    }
+
 }
 
 Block::~Block() {}

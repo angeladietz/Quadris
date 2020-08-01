@@ -3,8 +3,8 @@
 
 OBlock::OBlock(Board *board) {
    
-    type = 'O';
-    createBlock({{0,3}, {1,3}, {0,4}, {1,4}}, board);
+    type = 'Z';
+    createBlock({{0,3}, {1,3}, {1,4}, {2,4}}, board);
 
 }
 

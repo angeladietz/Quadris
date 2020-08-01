@@ -3,25 +3,9 @@
 
 LBlock::LBlock(Board *board) {
 
-    // Initialize the block at the right location
-    tiles_.push_back(board->getTileAt_(2, 3));
-    tiles_.push_back(board->getTileAt_(0, 4));
-    tiles_.push_back(board->getTileAt_(1, 4));
-    tiles_.push_back(board->getTileAt_(2, 4));
-
-    // Update the tiles with the right value
-    for (auto tile: tiles_) {
-        tile->setTileValue(type);
-    }
+		type = 'L';
+    createBlock({{2,3}, {0,4}, {1,4}, {2,4}}, board);
 
 }
 
 LBlock::~LBlock() {}
-
-void LBlock::rotateClockwise() {
-
-}
-
-void LBlock::rotateCounterClockwise() {
-
-}
