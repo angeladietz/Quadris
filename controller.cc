@@ -2,6 +2,7 @@
 #include "commandInterpreter.h"
 #include "quadris.h"
 #include "block.h"
+#include <cstddef>
 #include <string>
 #include <iterator>
 #include <algorithm>
@@ -51,10 +52,10 @@ bool Controller::DoesRequireFile(Action action){
 void Controller::handleCommand(string command){
     vector<string> cmds = ParseCommand(command);
     vector<Action> actions;
-    for (int i = 0; i < cmds.size(); i++){
+    for (size_t i = 0; i < cmds.size(); i++){
         actions = controller_->commandInterpreter_->getCommands(cmds[i]);
 
-        for (int j = 0; j < actions.size(); j++){
+        for (size_t j = 0; j < actions.size(); j++){
             if (DoesRequireFile(actions[j])){
                 if (i < cmds.size()-1){
                     executeCommand(actions[j], cmds[i++]);

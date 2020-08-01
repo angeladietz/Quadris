@@ -21,7 +21,7 @@ class Quadris;
 struct PImpl_B{
     Block* curBlock_;
     Block* nextBlock_;
-    std::vector<std::vector<Tile*> > grid_;
+    std::vector<std::vector<Tile*>> grid_;
     int curLevel_;
     BlockSelectionStrategy* blockSelectionStrategy_;
     std::string L0SeqFile_;
@@ -36,7 +36,7 @@ struct PImpl_B{
 
 class Board: public Subject{
 	public:
-		Board(Quadris*, int, std::string);
+		    Board(Quadris*, int, std::string);
         ~Board();
 		
         Tile* getTileAt(int, int);
@@ -59,6 +59,8 @@ class Board: public Subject{
 
         int getScore();
         int getHighScore();
+        int getLevel();
+        Block* getNextBlock();
 
         friend std::ostream& operator<<(std::ostream&, Board&);
 

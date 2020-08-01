@@ -15,7 +15,7 @@ class Block {
 
     public:
         Block();
-        ~Block();
+        virtual ~Block();
 
         // Public methods to rotate a given block
         // Rotation is dependent on the kind of block so it is defined as a virtual method
@@ -57,6 +57,7 @@ class Block {
         // Member variables
         std::vector<Tile*> tiles_;
         char type;
+        BlockType blocktype;
 
 };
 

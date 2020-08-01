@@ -6,7 +6,7 @@
 using namespace std;
 
 // Constructor
-Level0::Level0(BlockFactory* blockFactory, string filename = "sequence.txt"){
+Level0::Level0(BlockFactory* blockFactory, string filename){
     level0_ = new PImpl_bs;
     level0_->areBlocksHeavy_ = false;
     level0_->blockFactory_ = blockFactory;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <cstdlib>
 #include <time.h>
 #include "quadris.h"
@@ -14,18 +15,18 @@ int main(int argc, char* argv[]) {
 
 	if (argc > 1){
         for (int i = 1; i < argc; i++){
-            if ("-text" == argv[i]){
+            if (!strcmp(argv[i], "-text")){
                 textOnly = true;
             }
-            else if ("-seed" == argv[i] && i < argc-1){
+            else if (!strcmp(argv[i], "-seed") && i < argc-1){
                 int seed = std::stoi(argv[++i]);
                 std::srand(seed);
                 didSetSeed = true;
             }
-            else if ("-scriptfile" == argv[i] && i < argc-1){
+            else if (!strcmp(argv[i], "-scriptfile") && i < argc-1){
                 scriptFile = argv[++i];
             }
-            else if ("-startlevel" == argv[i] && i < argc-1){
+            else if (!strcmp(argv[i], "-startlevel") && i < argc-1){
                 startLevel = std::stoi(argv[++i]);
             }
         }

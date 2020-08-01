@@ -31,11 +31,11 @@ void Quadris::playGame(){
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
     quadris_->controller_ = new Controller(quadris_->board_);
 
-    quadris_->views_.push_back(new TextDisplay());
+    quadris_->views_.push_back(new TextDisplay(quadris_->board_, quadris_->controller_));
 
-    if (!quadris_->textOnly_){
-        quadris_->views_.push_back(new Graphics());
-    }
+    /* if (!quadris_->textOnly_){ */
+    /*     quadris_->views_.push_back(new Graphics()); */
+    /* } */
 
     quadris_->board_->subscribe(quadris_->views_[0]);
     quadris_->board_->subscribe(quadris_->views_[1]);

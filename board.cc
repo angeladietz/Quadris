@@ -8,6 +8,7 @@
 #include "level3.h"
 #include "level4.h"
 #include "blockFactory.h"
+#include <ostream>
 #include <vector>
 
 using namespace std;
@@ -102,6 +103,10 @@ int Board::getScore(){
 
 int Board::getHighScore(){
     return board_->highScore_;
+}
+
+int Board::getLevel() {
+    return board_->curLevel_;
 }
 
 Block* Board::getNextBlock(){
@@ -262,4 +267,14 @@ void Board::moveDownHeavyBlock(){
 
 void Board::restart(){
     board_->quadris_->restartGame();
+}
+
+std::ostream& operator<< (ostream &out, Board &board) {
+
+    for (auto row: board.board_->grid_){
+        for (auto col: row) {
+            out << col;
+        }
+        out << std::endl;
+    }
 }
