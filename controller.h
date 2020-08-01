@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "quadris.h"
 #include "commandInterpreter.h"
+#include "board.h"
 
 struct PImpl_C{
     CommandInterpreter* commandInterpreter_;
@@ -21,9 +21,10 @@ class Controller {
         std::vector<std::string> ParseCommand(std::string);
 		std::string ConvertToLowercase(std::string);
 		std::vector<std::string> SplitCommand(std::string);
-        void executeCommand(Action, std::string);
+        void executeCommand(Action, std::string ="");
         void HandleCommandSequenceFromFile(std::string);
         bool DoesRequireFile(Action);
+        void finishCommandExecution();
         PImpl_C* controller_;
 };
 

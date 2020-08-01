@@ -1,0 +1,5 @@
+#ignore any object files
+*.o
+
+#ignore any dependency files
+*.d

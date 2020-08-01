@@ -1,20 +1,21 @@
 #ifndef _QUADRIS_
 #define _QUADRIS_
 
-#include "board.h"
-#include "blockSelectionStrategy.h"
 #include "controller.h"
+#include "observer.h"
 #include <string>
+
+//Forward declaration of Board class
+class Board;
 
 struct PImpl_Q{
 	Board* board_;
-	BlockSelectionStrategy* blockSelectionStrategy_;
 	Controller* controller_;
 	std::vector<Observer*> views_;
 	bool textOnly_;
 	int level_;
 	std::string scriptFile_;
-	int score_;
+	int highScore_;
 };
 
 class Quadris{
@@ -27,6 +28,7 @@ class Quadris{
 		void restartGame();
 
 	private:
+		void resetQuadrisParams();
 		PImpl_Q* quadris_;
 };
 

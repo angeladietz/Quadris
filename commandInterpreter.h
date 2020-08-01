@@ -4,8 +4,6 @@
 #include <string>
 #include <map>
 #include <vector>
-#include "controller.h"
-#include "quadris.h"
 
 enum Action { LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP,
 			  LEVELUP, LEVELDOWN, NORANDOM, RANDOM, SEQUENCE,
@@ -25,6 +23,8 @@ class CommandInterpreter {
 	private:
 		void initCmdActions();
 		void initCmdStrings();
+		int getMultiplier(std::string);
+		std::string getCommandText(std::string, int);
 
 		PImpl_CI* commandInterpreter_;
 };

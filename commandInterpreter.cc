@@ -2,6 +2,7 @@
 #include "quadris.h"
 #include <string>
 #include <vector>
+#include <ctype.h>
 
 using namespace std;
 
@@ -76,20 +77,73 @@ void CommandInterpreter::initCmdStrings(){
 }
 
 vector<Action> CommandInterpreter::getCommands(string command){
-    //first split command by whitespace incase we have more than one
 
-    if (commandInterpreter_->cmdActions_.count(command)>0){
-        return commandInterpreter_->cmdActions_[command];
+    int multiplier = getMultiplier(command);
+
+    if (multiplier == -1){
+        return vector<Action>(BAD_COMMAND);
+    }
+
+    string cmdText = getCommandText(command, multiplier);
+
+    vector<Action> actions;
+    vector<Action> multipliedActions;
+
+    if (commandInterpreter_->cmdActions_.count(cmdText)>0){
+        actions = commandInterpreter_->cmdActions_[cmdText];
     }
     else{
-        //check if a minimal string is contained in command
+        //check if a minimal string is a prefix of command
         for (auto const& it : commandInterpreter_->cmdStrings_)
         {
-            if (it.first == command.substr(0, it.first.length())){
-                return commandInterpreter_->cmdActions_[it.second];
+            if (it.first == cmdText.substr(0, it.first.length())){
+                actions = commandInterpreter_->cmdActions_[it.second];
             }
         }
     }
+
+    if (actions.size() > 0){
+        for (int i = 0; i < multiplier; i++){
+            for (int j = 0; j < actions.size(); j++){
+                multipliedActions.push_back(actions[j]);
+            }
+        }
+        return multipliedActions;
+    }
+
     return vector<Action>(BAD_COMMAND);
 }
 
+int CommandInterpreter::getMultiplier(string command){
+    string multStr = "";
+    int multInt = -1;
+    bool hasMultiplier = false;
+
+    for (int i = 0; i < command.size(); i++){
+        if (isdigit(command[i])){
+            hasMultiplier = true;
+            multStr += command[i];
+        }
+        else{
+            break;
+        }
+    }
+
+    if (!hasMultiplier){
+        return 1;
+    }
+
+    multInt = stoi(multStr);
+
+    if (multInt > 0){
+        return multInt;
+    }
+
+    return -1;
+}
+
+string CommandInterpreter::getCommandText(string command, int multiplier){
+    string mult = to_string(multiplier);
+    string cmdText = command.substr(mult.size());
+    return cmdText;
+}
