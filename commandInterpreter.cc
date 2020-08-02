@@ -77,7 +77,7 @@ void CommandInterpreter::initCmdStrings(){
 }
 
 vector<Action> CommandInterpreter::getCommands(string command){
-
+    cerr << "Checking cmd in board" << endl;
     int multiplier = getMultiplier(command);
 
     if (multiplier == -1){

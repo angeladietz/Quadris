@@ -3,6 +3,7 @@
 
 #include "controller.h"
 #include "observer.h"
+#include "textDisplay.h"
 #include <string>
 
 //Forward declaration of Board class
@@ -30,6 +31,7 @@ class Quadris{
 	private:
 		void resetQuadrisParams();
 		PImpl_Q* quadris_;
+		TextDisplay* td;
 };
 
 #endif

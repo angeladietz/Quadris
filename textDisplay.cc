@@ -20,8 +20,17 @@ TextDisplay::~TextDisplay() {}
 void TextDisplay::update() {
   nextBlock = board_->getNextBlock();
   currScore = board_->getScore();
-  highScore = board_->getHighScore();
+  highScore = highScore_;
   level = board_->getLevel();
+}
+
+void TextDisplay::read() {
+  string cmd = "";
+  if (cin >> cmd) {
+    cerr << "cmd is " << cmd << endl;
+    //segfaulting here
+    //cmd_->getCommands(cmd); 
+  }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {

@@ -15,6 +15,8 @@
 #define BOARD_WIDTH 11
 #define BOARD_HEIGHT 18
 
+extern int highScore_;
+
 //Forward declaration of Quadris class
 class Quadris;
 
@@ -27,7 +29,7 @@ struct PImpl_B{
     std::string L0SeqFile_;
     std::string noRandFile_;
     int curScore_;
-    int highScore_;
+    //int highScore_;
     bool isRandom_;
     int blockCount_;
     Quadris* quadris_;

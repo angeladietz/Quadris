@@ -5,14 +5,14 @@
 #include "observer.h"
 
 class Subject {
-  std::unordered_set<Observer*> _observers;
-
- public:
-  Subject() {};
-  void subscribe(Observer*);
-  void unsubscribe(Observer*);
-  void notifyObservers();
-  virtual ~Subject() {};
+  public:
+    Subject() {};
+    void subscribe(Observer*);
+    void unsubscribe(Observer*);
+    void notifyObservers();
+    virtual ~Subject() {};
+  private:
+    std::unordered_set<Observer*> _observers;
 };
 
 #endif
