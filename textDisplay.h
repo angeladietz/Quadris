@@ -20,12 +20,11 @@ class TextDisplay : public Observer {
   private:
       
     Controller *controller_;
-    CommandInterpreter *cmd_;
     Board *board_;
-    Block *nextBlock;
-    int currScore;
-    int highScore;
-    int level;
+    Block *nextBlock_;
+    int currScore_;
+    int highScore_;
+    int level_;
 };
 
 #endif

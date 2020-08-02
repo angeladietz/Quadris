@@ -6,6 +6,8 @@
 #include "textDisplay.h"
 #include <string>
 
+extern int highScore;
+
 //Forward declaration of Board class
 class Board;
 
@@ -16,7 +18,6 @@ struct PImpl_Q{
 	bool textOnly_;
 	int level_;
 	std::string scriptFile_;
-	int highScore_;
 };
 
 class Quadris{

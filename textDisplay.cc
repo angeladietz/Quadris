@@ -1,12 +1,11 @@
 #include "textDisplay.h"
 #include "controller.h"
+#include "quadris.h"
 
 using namespace std;
 
 #include <iostream>
 #include <vector>
-
-#include "board.h"
 
 TextDisplay::TextDisplay(Board* board, Controller * controller) {
 
@@ -18,25 +17,24 @@ TextDisplay::TextDisplay(Board* board, Controller * controller) {
 TextDisplay::~TextDisplay() {}
 
 void TextDisplay::update() {
-  nextBlock = board_->getNextBlock();
-  currScore = board_->getScore();
-  highScore = highScore_;
-  level = board_->getLevel();
+  nextBlock_ = board_->getNextBlock();
+  currScore_ = board_->getScore();
+  highScore_ = highScore;
+  level_ = board_->getLevel();
 }
 
 void TextDisplay::read() {
   string cmd = "";
   if (cin >> cmd) {
     cerr << "cmd is " << cmd << endl;
-    //segfaulting here
-    //cmd_->getCommands(cmd); 
+    //controller_->handleCommand(cmd); 
   }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
-  out << "Level:	    " << td.level << endl;
-  out << "Score:	    " << td.currScore << endl;
-  out << "High Score: " << td.highScore << endl;
+  out << "Level:	    " << td.level_ << endl;
+  out << "Score:	    " << td.currScore_ << endl;
+  out << "High Score: " << td.highScore_ << endl;
   out << td.board_;
   return out;
 }

@@ -18,6 +18,7 @@ Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
     quadris_->textOnly_ = textOnly;
     quadris_->level_ = startLevel <= 4 && startLevel >= 0 ? startLevel : 0;
     quadris_->scriptFile_ = scriptFile;
+    highScore = 0;
 }
 
 Quadris::~Quadris(){

@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int highScore_;
+int highScore;
 
 int main(int argc, char* argv[]) {
 
