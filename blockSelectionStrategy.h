@@ -24,7 +24,7 @@ class BlockSelectionStrategy {
 		//////////////////////////
 
 		//BlockSelectionStrategy(BlockFactory*);
-        ~BlockSelectionStrategy();
+        virtual ~BlockSelectionStrategy();
 		virtual Block* getNextBlock()=0;
 		virtual Block* getBlockOfType(BlockType)=0;
 		virtual void setRandom(bool);

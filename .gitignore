@@ -3,3 +3,6 @@
 
 #ignore any dependency files
 *.d
+
+#ignore executable
+quadris
