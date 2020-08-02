@@ -25,7 +25,11 @@ void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
 
 }
 
-Block::~Block() {}
+Block::~Block() {
+    for (auto tile: tiles_){
+        tile->reset();
+    }
+}
 
 // Private methods to check if block can move left
 
@@ -257,8 +261,7 @@ int Block::getNumTiles(){
 }
 
 int Block::getGenLevel(){
-    //TODO
-    return 0;
+    return levelGen_;
 }
 
 bool Block::isHeavy(){

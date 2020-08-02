@@ -15,12 +15,11 @@ using namespace std;
 
 // Constructor
 Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
-    cerr << "Board constructor" <<endl;
     board_ = new PImpl_B;
     board_->quadris_ = quadris;
     initGrid();
     board_->curScore_ = 0;
-    board_->highScore_ = 0;
+    board_->highScore_ = highScore; 
     board_->blockFactory_ = new BlockFactory(this);
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
@@ -30,7 +29,6 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     //board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->isRandom_ = true;
     board_->blockCount_ = 0;
-    notifyObservers();
 }
 
 void Board::initGrid(){
@@ -115,9 +113,9 @@ int Board::getScore(){
     return board_->curScore_;
 }
 
-int Board::getHighScore(){
-    return board_->highScore_;
-}
+// int Board::getHighScore(){
+//     return board_->highScore_;
+// }
 
 int Board::getLevel() {
     return board_->curLevel_;
@@ -171,7 +169,7 @@ void Board::checkForFullRow(){
             if (!board_->grid_[i][j]->isFilled()){
                 break;
             }
-            else if (j == BOARD_WIDTH-1){
+            if (j == BOARD_WIDTH-1){
                 // Row is full
                 clearRow(i);
                 numRowsFilled++;
@@ -213,7 +211,7 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 
 void Board::updateScore(int points){
     board_->curScore_ += points;
-    board_->highScore_ = max(board_->highScore_, board_->curScore_);
+    highScore = max(highScore, board_->curScore_);
 }
 
 bool Board::doesLevelDropTiles(){
@@ -227,8 +225,8 @@ void Board::dropTileBlock(){
 }
 
 void Board::setupNextBlocks(){
-    board_->curBlock_ = board_->nextBlock_;
-    board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
 }
 
 // Increases the level of the game by one
@@ -251,10 +249,8 @@ void Board::levelDown(){
 
 // Sets the current block to be of type bType
 void Board::setCurBlock(BlockType bType){
-    if (board_->curBlock_->getBlockType() != bType){
-        delete board_->curBlock_;
-        board_->curBlock_ = board_->blockSelectionStrategy_->getBlockOfType(bType);
-    }
+    delete board_->curBlock_;
+    board_->curBlock_ = board_->blockSelectionStrategy_->getBlockOfType(bType);
 }
 
 void Board::setNoRand(std::string filename){
@@ -285,12 +281,11 @@ void Board::restart(){
 
 std::ostream& operator<< (ostream &out, Board &board) {
 
-    std::cout << "HELLO " << std::endl;
-    for (auto row: board.board_->grid_){
-        for (auto col: row) {
+    for (int row = 0; row < BOARD_HEIGHT; row++){
+	    out << row+1<<"	";
+        for (auto col: board.board_->grid_[row]) {
             out << *col;
         }
         out << std::endl;
     }
-    std::cout << "DEAD " << std::endl;
 }

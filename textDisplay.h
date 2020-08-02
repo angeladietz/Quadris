@@ -10,22 +10,21 @@
 #include "controller.h"
 
 class TextDisplay : public Observer {
-  
-  void print();
-  Controller *controller_;
-  Board *board_;
-  Block *nextBlock;
-  int currScore;
-  int highScore;
-  int level;
+  public:
+    TextDisplay(Board*, Controller*);
+    ~TextDisplay();
+    void update() override;
+    void poll() override;
 
- public:
-  TextDisplay(Board*, Controller*);
-  ~TextDisplay();
-  void poll() override;
-  void update() override;
-
-  friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+    friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
+  private:
+    void print();  
+    Controller *controller_;
+    Board *board_;
+    Block *nextBlock_;
+    int currScore_;
+    int highScore_;
+    int level_;
 };
 
 #endif

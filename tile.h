@@ -27,6 +27,7 @@ class Tile {
         Block* getBlock();
         void setBlock(Block*);
         bool isLastTileFromBlock();
+        void reset();
 
         friend std::ostream& operator<< (std::ostream&, Tile&);
 
