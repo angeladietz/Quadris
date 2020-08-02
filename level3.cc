@@ -80,7 +80,7 @@ BlockType Level3::getNextNonRandBlockType(){
 
 void Level3::updateBlockIndex(){
     level3_->blockIndex_++;
-    if (level3_->blockIndex_++ >= level3_->blockList_.size()){
+    if (level3_->blockIndex_ >= level3_->blockList_.size() - 1){
         level3_->blockIndex_ = 0;
     }
 }
