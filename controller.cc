@@ -51,6 +51,7 @@ bool Controller::DoesRequireFile(Action action){
 }
 
 void Controller::handleCommand(string command){
+    cerr << "Checking cmd : " << command << " in controller" << endl;
     vector<string> cmds = ParseCommand(command);
     vector<Action> actions;
     for (size_t i = 0; i < cmds.size(); i++){

@@ -6,6 +6,8 @@
 
 using namespace std;
 
+int highScore;
+
 int main(int argc, char* argv[]) {
 
     bool didSetSeed = false;

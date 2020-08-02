@@ -20,7 +20,7 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->quadris_ = quadris;
     initGrid();
     board_->curScore_ = 0;
-    board_->highScore_ = 0;
+    board_->highScore_ = highScore; 
     board_->blockFactory_ = new BlockFactory(this);
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
@@ -115,9 +115,9 @@ int Board::getScore(){
     return board_->curScore_;
 }
 
-int Board::getHighScore(){
-    return board_->highScore_;
-}
+// int Board::getHighScore(){
+//     return board_->highScore_;
+// }
 
 int Board::getLevel() {
     return board_->curLevel_;
@@ -213,7 +213,7 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 
 void Board::updateScore(int points){
     board_->curScore_ += points;
-    board_->highScore_ = max(board_->highScore_, board_->curScore_);
+    highScore = max(highScore, board_->curScore_);
 }
 
 bool Board::doesLevelDropTiles(){

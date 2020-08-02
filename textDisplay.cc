@@ -1,12 +1,11 @@
 #include "textDisplay.h"
 #include "controller.h"
+#include "quadris.h"
 
 using namespace std;
 
 #include <iostream>
 #include <vector>
-
-#include "board.h"
 
 TextDisplay::TextDisplay(Board* board, Controller * controller) {
 
@@ -18,10 +17,10 @@ TextDisplay::TextDisplay(Board* board, Controller * controller) {
 TextDisplay::~TextDisplay() {}
 
 void TextDisplay::update() {
-  nextBlock = board_->getNextBlock();
-  currScore = board_->getScore();
-  highScore = board_->getHighScore();
-  level = board_->getLevel();
+  nextBlock_ = board_->getNextBlock();
+  currScore_ = board_->getScore();
+  highScore_ = highScore;
+  level_ = board_->getLevel();
   print();
 }
 
@@ -31,20 +30,19 @@ void TextDisplay::poll() {
     while (cin >> command) {
         controller_->handleCommand(command);
     }
-
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
-  out << "Level:	    " << td.level << endl;
-  out << "Score:	    " << td.currScore << endl;
-  out << "High Score: " << td.highScore << endl;
+  out << "Level:	    " << td.level_ << endl;
+  out << "Score:	    " << td.currScore_ << endl;
+  out << "High Score: " << td.highScore_ << endl;
   out << td.board_;
   return out;
 }
 
 void TextDisplay::print() {
-    std::cout << "Level:	    " << level << endl;
-    std::cout << "Score:	    " << currScore << endl;
-    std::cout << "High Score: " << highScore << endl;
+    std::cout << "Level:	    " << level_ << endl;
+    std::cout << "Score:	    " << currScore_ << endl;
+    std::cout << "High Score: " << highScore_ << endl;
     std::cout << *board_;
 }

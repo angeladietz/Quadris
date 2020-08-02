@@ -10,7 +10,7 @@ enum Action { LEFT, RIGHT, DOWN, CLOCKWISE, COUNTERCLOCKWISE, DROP,
 			  I,J,L,S,Z,O,T, RESTART, HINT, BAD_COMMAND};
 
 struct PImpl_CI{
-	std::map<std::string, std::vector<Action> > cmdActions_;
+	std::map<std::string, std::vector<Action>> cmdActions_;
 	std::map<std::string, std::string> cmdStrings_;
 };
 
