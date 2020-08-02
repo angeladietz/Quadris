@@ -63,6 +63,7 @@ void Controller::handleCommand(string command){
                 }
             }
             else if (actions[j] != BAD_COMMAND){
+                cout << "DO STUFF " << actions[j] << endl;
                 executeCommand(actions[j]);
             }
         }
