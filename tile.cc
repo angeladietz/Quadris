@@ -9,6 +9,12 @@ Tile::Tile(int x, int y, char tile) : location_(x, y) {
    block_ = nullptr;
 }
 
+Tile::~Tile(){
+    if (block_ != nullptr && isLastTileFromBlock()){
+        delete block_;
+    }
+}
+
 bool Tile::isFilled() const {
     return tileValue_ == ' ';
 }
