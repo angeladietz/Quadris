@@ -17,10 +17,10 @@ TextDisplay::TextDisplay(Board* board, Controller * controller) {
 TextDisplay::~TextDisplay() {}
 
 void TextDisplay::update() {
-  nextBlock = board_->getNextBlock();
-  currScore = board_->getScore();
+  nextBlock_ = board_->getNextBlock();
+  currScore_ = board_->getScore();
   highScore_ = highScore;
-  level = board_->getLevel();
+  level_ = board_->getLevel();
   print();
 }
 
@@ -41,8 +41,8 @@ ostream &operator<<(ostream &out, const TextDisplay &td) {
 }
 
 void TextDisplay::print() {
-    std::cout << "Level:	    " << level << endl;
-    std::cout << "Score:	    " << currScore << endl;
-    std::cout << "High Score: " << highScore << endl;
+    std::cout << "Level:	    " << level_ << endl;
+    std::cout << "Score:	    " << currScore_ << endl;
+    std::cout << "High Score: " << highScore_ << endl;
     std::cout << *board_;
 }
