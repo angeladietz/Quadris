@@ -45,7 +45,6 @@ void Quadris::playGame(){
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
     cerr<< "Board made" << endl;
     cout<< "Enter cmd: ";
-    td->poll();
     cout << *quadris_->board_;
 
     quadris_->controller_ = new Controller(quadris_->board_);
