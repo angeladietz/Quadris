@@ -233,8 +233,7 @@ int Block::getNumTiles(){
 }
 
 int Block::getGenLevel(){
-    //TODO
-    return 0;
+    return levelGen_;
 }
 
 bool Block::isHeavy(){

@@ -169,7 +169,7 @@ void Board::checkForFullRow(){
             if (!board_->grid_[i][j]->isFilled()){
                 break;
             }
-            else if (j == BOARD_WIDTH-1){
+            if (j == BOARD_WIDTH-1){
                 // Row is full
                 clearRow(i);
                 numRowsFilled++;
@@ -225,8 +225,8 @@ void Board::dropTileBlock(){
 }
 
 void Board::setupNextBlocks(){
-    board_->curBlock_ = board_->nextBlock_;
-    board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
 }
 
 // Increases the level of the game by one

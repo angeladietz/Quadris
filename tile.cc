@@ -16,7 +16,7 @@ Tile::~Tile(){
 }
 
 bool Tile::isFilled() const {
-    return tileValue_ == ' ';
+    return tileValue_ != ' ';
 }
 
 char Tile::getTileValue() const {
