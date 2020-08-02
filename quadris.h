@@ -18,7 +18,7 @@ struct PImpl_Q{
 	int highScore_;
 };
 
-class Quadris{
+class Quadris {
 	public:
 		Quadris(bool, int, std::string);
 		~Quadris();

@@ -8,7 +8,7 @@
 #include "blockFactory.h"
 
 struct PImpl_bs{
-    std::map<BlockType, int> blockProbabilities_;
+  std::map<BlockType, int> blockProbabilities_;
 	std::vector<BlockType> blockList_;
 	int blockIndex_;
 	BlockFactory* blockFactory_;

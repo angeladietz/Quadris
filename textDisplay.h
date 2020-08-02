@@ -11,6 +11,7 @@
 
 class TextDisplay : public Observer {
   
+  void print();
   Controller *controller_;
   Board *board_;
   Block *nextBlock;
@@ -21,6 +22,7 @@ class TextDisplay : public Observer {
  public:
   TextDisplay(Board*, Controller*);
   ~TextDisplay();
+  void poll() override;
   void update() override;
 
   friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);

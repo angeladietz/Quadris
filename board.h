@@ -34,7 +34,7 @@ struct PImpl_B{
     BlockFactory* blockFactory_;
 };
 
-class Board: public Subject{
+class Board: public Subject {
 	public:
 		    Board(Quadris*, int, std::string);
         ~Board();

@@ -102,7 +102,7 @@ void Board::deleteGrid(){
 }
 
 Tile* Board::getTileAt(int x, int y){
-    return board_->grid_[x][y];
+    return board_->grid_[y][x];
 }
 
 int Board::getScore(){

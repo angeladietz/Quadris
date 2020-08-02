@@ -55,8 +55,11 @@ void Quadris::playGame(){
 
     quadris_->board_->subscribe(quadris_->views_[0]);
     //quadris_->board_->subscribe(quadris_->views_[1]);
-    cerr<<"end of game"<<endl;
 
+    for (auto view: quadris_->views_) {
+        view->poll();
+    }
+    cerr<<"end of game"<<endl;
     // TODO: FINISH THIS
 }
 
