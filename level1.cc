@@ -1,6 +1,5 @@
 #include "level1.h"
 #include "blockSelectionStrategy.h"
-#include "block.h"
 #include "blockFactory.h"
 #include <fstream>
 #include <time.h>

@@ -20,10 +20,10 @@ struct PImpl_bs{
 class BlockSelectionStrategy {
 	public:
 		//TODO: DECIDE WHAT TO DO WITH DEFAULT CONSTRUCTOR
-		BlockSelectionStrategy();
+		BlockSelectionStrategy(){}
 		//////////////////////////
 
-		BlockSelectionStrategy(BlockFactory*);
+		//BlockSelectionStrategy(BlockFactory*);
         ~BlockSelectionStrategy();
 		virtual Block* getNextBlock()=0;
 		virtual Block* getBlockOfType(BlockType)=0;

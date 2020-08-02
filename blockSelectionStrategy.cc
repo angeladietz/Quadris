@@ -3,12 +3,12 @@
 
 using namespace std;
 
-BlockSelectionStrategy::BlockSelectionStrategy(){}
+// BlockSelectionStrategy::BlockSelectionStrategy(){}
 
-// Constructor
-BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
-    //blockFactory_ = bf;
-}
+// // Constructor
+// BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
+//     //blockFactory_ = bf;
+// }
 
 // Destructor
 BlockSelectionStrategy::~BlockSelectionStrategy(){}
@@ -38,5 +38,5 @@ BlockType BlockSelectionStrategy::getBlockType(char c){
     return INVALID_BLOCK;
 }
 
-void setRandom(bool){}
-void setSequenceFile(string){}
+void BlockSelectionStrategy::setRandom(bool){}
+void BlockSelectionStrategy::setSequenceFile(string){}
