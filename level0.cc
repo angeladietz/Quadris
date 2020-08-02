@@ -1,6 +1,7 @@
 #include "level0.h"
 #include "blockSelectionStrategy.h"
 #include "block.h"
+#include <exception>
 #include <fstream>
 
 using namespace std;
@@ -15,7 +16,11 @@ Level0::Level0(BlockFactory* blockFactory, string filename){
     ifstream blockFile;
 
     //TODO: ADD EXCEPTION HANDLING!
-    blockFile.open(filename);
+    try {
+        blockFile.open(filename);
+    } catch (const ifstream::failure& e) {
+        std::cerr << "Exception occurred file handling file";
+    }
 
     if (blockFile.is_open()){
 
