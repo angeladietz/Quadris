@@ -33,6 +33,9 @@ Level0::Level0(BlockFactory* blockFactory, string filename){
         }
         blockFile.close();
     }
+    if (level0_->blockList_.size() == 0){
+        level0_->blockIndex_ = -1;
+    }
 }
 
 // Destructor
@@ -42,10 +45,15 @@ Level0::~Level0(){
 
 Block* Level0::getNextBlock(){
     BlockType type = getNextBlockType();
-    return level0_->blockFactory_->createBlock(type, level0_->areBlocksHeavy_);
+    Block* b = level0_->blockFactory_->createBlock(type, level0_->areBlocksHeavy_);
+    return b;
 }
 
 BlockType Level0::getNextBlockType(){
+    if (level0_->blockIndex_ == -1){
+        return OBlock;
+    }
+
     BlockType bType = level0_->blockList_.at(level0_->blockIndex_);
     updateBlockIndex();
     return bType;

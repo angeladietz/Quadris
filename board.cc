@@ -35,6 +35,10 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
 void Board::initGrid(){
     for (int i = 0; i < BOARD_HEIGHT; i++){
         board_->grid_.push_back(vector<Tile*>(BOARD_WIDTH, nullptr));
+
+        for (int j = 0; j<BOARD_WIDTH; j++){
+            board_->grid_[i][j] = new Tile(i,j);
+        }
     }
 }
 
