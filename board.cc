@@ -35,7 +35,6 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
 void Board::initGrid(){
     for (int i = 0; i < BOARD_HEIGHT; i++){
         board_->grid_.push_back(vector<Tile*>(BOARD_WIDTH, nullptr));
-
         for (int j = 0; j<BOARD_WIDTH; j++){
             board_->grid_[i][j] = new Tile(i,j);
         }
@@ -276,10 +275,12 @@ void Board::restart(){
 
 std::ostream& operator<< (ostream &out, Board &board) {
 
+    std::cout << "HELLO " << std::endl;
     for (auto row: board.board_->grid_){
         for (auto col: row) {
-            out << col;
+            out << *col;
         }
         out << std::endl;
     }
+    std::cout << "DEAD " << std::endl;
 }

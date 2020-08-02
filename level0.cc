@@ -26,6 +26,7 @@ Level0::Level0(BlockFactory* blockFactory, string filename){
 
         char nextBlock;
         while(blockFile>>nextBlock){
+            cout << "nextBlock " << nextBlock;
             BlockType bType = getBlockType(nextBlock);
             if (bType != INVALID_BLOCK){
                 level0_->blockList_.push_back(bType);
@@ -55,13 +56,14 @@ BlockType Level0::getNextBlockType(){
     }
 
     BlockType bType = level0_->blockList_.at(level0_->blockIndex_);
+    std::cout << level0_->blockIndex_ << "INDEX " << std::endl;
     updateBlockIndex();
     return bType;
 }
 
 void Level0::updateBlockIndex(){
     level0_->blockIndex_++;
-    if (level0_->blockIndex_++ >= level0_->blockList_.size()){
+    if (level0_->blockIndex_ >= level0_->blockList_.size() - 1){
         level0_->blockIndex_ = 0;
     }
 }
