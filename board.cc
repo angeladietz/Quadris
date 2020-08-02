@@ -15,7 +15,6 @@ using namespace std;
 
 // Constructor
 Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
-    cerr << "Board constructor" <<endl;
     board_ = new PImpl_B;
     board_->quadris_ = quadris;
     initGrid();
@@ -30,7 +29,6 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     //board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->isRandom_ = true;
     board_->blockCount_ = 0;
-    notifyObservers();
 }
 
 void Board::initGrid(){
@@ -283,12 +281,11 @@ void Board::restart(){
 
 std::ostream& operator<< (ostream &out, Board &board) {
 
-    std::cout << "HELLO " << std::endl;
-    for (auto row: board.board_->grid_){
-        for (auto col: row) {
+    for (int row = 0; row < BOARD_HEIGHT; row++){
+	    out << row+1<<"	";
+        for (auto col: board.board_->grid_[row]) {
             out << *col;
         }
         out << std::endl;
     }
-    std::cout << "DEAD " << std::endl;
 }

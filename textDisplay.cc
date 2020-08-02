@@ -22,14 +22,16 @@ void TextDisplay::update() {
   highScore_ = highScore;
   level_ = board_->getLevel();
   print();
+  poll();
 }
 
 void TextDisplay::poll() {
 
-    string command;
-    while (cin >> command) {
-        controller_->handleCommand(command);
-    }
+   cout << ">";
+   string command;
+   if (cin >> command){
+	   controller_->handleCommand(command);
+   }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
@@ -41,8 +43,10 @@ ostream &operator<<(ostream &out, const TextDisplay &td) {
 }
 
 void TextDisplay::print() {
-    std::cout << "Level:	    " << level_ << endl;
-    std::cout << "Score:	    " << currScore_ << endl;
-    std::cout << "High Score: " << highScore_ << endl;
-    std::cout << *board_;
+    cout << "	Level:	    " << level_ << endl;
+    cout << "	Score:	    " << currScore_ << endl;
+    cout << "	High Score: " << highScore_ << endl;
+    cout << "	-----------"<<endl;
+    cout << *board_;
+    cout << "	-----------"<<endl;
 }

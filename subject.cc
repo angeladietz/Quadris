@@ -1,5 +1,4 @@
 #include "subject.h"
-
 #include <set>
 
 #include "observer.h"
@@ -11,5 +10,5 @@ void Subject::unsubscribe(Observer* formerView) {
 }
 
 void Subject::notifyObservers() {
-  for (auto i : _observers) i->update();
+	for (auto i : _observers) i->update();
 }
