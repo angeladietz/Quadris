@@ -3,6 +3,8 @@
 
 using namespace std;
 
+BlockSelectionStrategy::BlockSelectionStrategy(){}
+
 // Constructor
 BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
     //blockFactory_ = bf;
@@ -35,3 +37,6 @@ BlockType BlockSelectionStrategy::getBlockType(char c){
     }
     return INVALID_BLOCK;
 }
+
+void setRandom(bool){}
+void setSequenceFile(string){}

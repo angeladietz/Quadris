@@ -35,3 +35,5 @@ Block* BlockFactory::createBlock(BlockType bType, bool isHeavy){
     }
     return nullptr;
 }
+
+Block* BlockFactory::create(bool){}
