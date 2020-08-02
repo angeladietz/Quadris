@@ -8,7 +8,7 @@
 #include "blockFactory.h"
 
 struct PImpl_bs{
-    std::map<BlockType, int> blockProbabilities_;
+  std::map<BlockType, int> blockProbabilities_;
 	std::vector<BlockType> blockList_;
 	int blockIndex_;
 	BlockFactory* blockFactory_;
@@ -24,7 +24,7 @@ class BlockSelectionStrategy {
 		//////////////////////////
 
 		//BlockSelectionStrategy(BlockFactory*);
-        ~BlockSelectionStrategy();
+        virtual ~BlockSelectionStrategy();
 		virtual Block* getNextBlock()=0;
 		virtual Block* getBlockOfType(BlockType)=0;
 		virtual void setRandom(bool);

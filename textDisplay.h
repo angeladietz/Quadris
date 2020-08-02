@@ -14,11 +14,11 @@ class TextDisplay : public Observer {
     TextDisplay(Board*, Controller*);
     ~TextDisplay();
     void update() override;
-    void read();
+    void poll() override;
 
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
   private:
-      
+    void print();  
     Controller *controller_;
     Board *board_;
     Block *nextBlock_;

@@ -20,7 +20,7 @@ struct PImpl_Q{
 	std::string scriptFile_;
 };
 
-class Quadris{
+class Quadris {
 	public:
 		Quadris(bool, int, std::string);
 		~Quadris();

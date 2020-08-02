@@ -17,18 +17,19 @@ TextDisplay::TextDisplay(Board* board, Controller * controller) {
 TextDisplay::~TextDisplay() {}
 
 void TextDisplay::update() {
-  nextBlock_ = board_->getNextBlock();
-  currScore_ = board_->getScore();
+  nextBlock = board_->getNextBlock();
+  currScore = board_->getScore();
   highScore_ = highScore;
-  level_ = board_->getLevel();
+  level = board_->getLevel();
+  print();
 }
 
-void TextDisplay::read() {
-  string cmd = "";
-  if (cin >> cmd) {
-    cerr << "cmd is " << cmd << endl;
-    //controller_->handleCommand(cmd); 
-  }
+void TextDisplay::poll() {
+
+    string command;
+    while (cin >> command) {
+        controller_->handleCommand(command);
+    }
 }
 
 ostream &operator<<(ostream &out, const TextDisplay &td) {
@@ -37,4 +38,11 @@ ostream &operator<<(ostream &out, const TextDisplay &td) {
   out << "High Score: " << td.highScore_ << endl;
   out << td.board_;
   return out;
+}
+
+void TextDisplay::print() {
+    std::cout << "Level:	    " << level << endl;
+    std::cout << "Score:	    " << currScore << endl;
+    std::cout << "High Score: " << highScore << endl;
+    std::cout << *board_;
 }

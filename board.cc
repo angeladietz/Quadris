@@ -69,17 +69,21 @@ void Board::initBlockSelector(){
 
 //Destructor
 Board::~Board(){
-    if (nullptr != board_){
-        if (board_->curBlock_ != nullptr){
-            delete board_->curBlock_;
+        if (board_->blockSelectionStrategy_ != nullptr){
+            delete board_->blockSelectionStrategy_;
         }
-        if (board_->nextBlock_ != nullptr){
-            delete board_->nextBlock_;
+        if (board_->blockFactory_ != nullptr){
+            delete board_->blockFactory_;
         }
         deleteGrid();
-        delete board_->blockSelectionStrategy_;
-        delete board_->blockFactory_;
-    }
+        if (nullptr != board_){
+            if (board_->curBlock_ != nullptr){
+                delete board_->curBlock_;
+            }
+            if (board_->nextBlock_ != nullptr){
+                delete board_->nextBlock_;
+            }
+        }
     delete board_;
 }
 
@@ -98,7 +102,7 @@ void Board::deleteGrid(){
 }
 
 Tile* Board::getTileAt(int x, int y){
-    return board_->grid_[x][y];
+    return board_->grid_[y][x];
 }
 
 int Board::getScore(){

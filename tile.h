@@ -15,7 +15,7 @@ class Block;
 class Tile {
     public:
         Tile(int, int, char = ' ');
-        ~Tile() {};
+        ~Tile();
 
         bool isFilled() const;
         char getTileValue() const;
