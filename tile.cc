@@ -52,12 +52,16 @@ bool Tile::isLastTileFromBlock(){
 
 void Tile::deleteFromBlock(){
     block_->removeTile(this);
-    setTileValue(' ');
-    block_ = nullptr;
+    reset();
 }
 
 void Tile::moveDownOneRow(Board* board){
     block_->moveTileDown(this, board);
+}
+
+void Tile::reset(){
+    setTileValue(' ');
+    block_ = nullptr;
 }
 
 std::ostream& operator<< (std::ostream& out, Tile& tile) {

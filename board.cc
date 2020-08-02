@@ -251,10 +251,8 @@ void Board::levelDown(){
 
 // Sets the current block to be of type bType
 void Board::setCurBlock(BlockType bType){
-    if (board_->curBlock_->getBlockType() != bType){
-        delete board_->curBlock_;
-        board_->curBlock_ = board_->blockSelectionStrategy_->getBlockOfType(bType);
-    }
+    delete board_->curBlock_;
+    board_->curBlock_ = board_->blockSelectionStrategy_->getBlockOfType(bType);
 }
 
 void Board::setNoRand(std::string filename){
