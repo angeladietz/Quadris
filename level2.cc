@@ -14,6 +14,7 @@ Level2::Level2(BlockFactory* blockFactory){
     level2_->areBlocksHeavy_ = false;
     level2_->isRandom_ = true;
     level2_->blockFactory_ = blockFactory;
+    setNextBlockType();
 }
 
 void Level2::setBlockProbabilities(){
@@ -37,6 +38,10 @@ Block* Level2::getNextBlock(){
 }
 
 BlockType Level2::getNextBlockType(){
+    return level2_->nextBlockType_;
+}
+
+void Level2::setNextBlockType(){
     int weightSum = 0;
 
     for (auto const& it : level2_->blockProbabilities_) {
@@ -48,7 +53,7 @@ BlockType Level2::getNextBlockType(){
 
     for (auto const& it : level2_->blockProbabilities_) {
         if (rand < it.second){
-            return it.first;
+            level2_->nextBlockType_ = it.first;
         }
         rand -= it.second;
     }

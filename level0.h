@@ -19,11 +19,12 @@ class Level0: public BlockSelectionStrategy{
         ~Level0();
         Block* getNextBlock();
         Block* getBlockOfType(BlockType);
+        BlockType getNextBlockType();
         
         void setRandom(bool){};
         void setSequenceFile(std::string){};
     private:
-        BlockType getNextBlockType();
+        void setNextBlockType();
         void updateBlockIndex();
         PImpl_bs* level0_;
 };

@@ -15,6 +15,7 @@ Level4::Level4(BlockFactory* blockFactory, bool isRandom){
     level4_->isRandom_ = isRandom;
     level4_->blockFactory_ = blockFactory;
     level4_->blockIndex_ = 0;
+    setNextBlockType();
 }
 
 void Level4::setBlockProbabilities(){
@@ -38,11 +39,15 @@ Block* Level4::getNextBlock(){
 }
 
 BlockType Level4::getNextBlockType(){
+    return level4_->nextBlockType_;
+}
+
+void Level4::setNextBlockType(){
     if (level4_->isRandom_){
-        return getNextRandBlockType();
+        level4_->nextBlockType_ = getNextRandBlockType();
     }
     else{
-        return getNextNonRandBlockType();
+        level4_->nextBlockType_ = getNextNonRandBlockType();
     }
 }
 

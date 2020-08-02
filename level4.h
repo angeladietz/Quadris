@@ -13,11 +13,13 @@ class Level4: public BlockSelectionStrategy{
         ~Level4();
         Block* getNextBlock();
         Block* getBlockOfType(BlockType);
+        BlockType getNextBlockType();
+
         void setRandom(bool);
         void setSequenceFile(std::string);
     private:
         void setBlockProbabilities();
-        BlockType getNextBlockType();
+        void setNextBlockType();
         BlockType getNextRandBlockType();
         BlockType getNextNonRandBlockType();
         void updateBlockIndex();
