@@ -15,12 +15,13 @@ using namespace std;
 
 // Constructor
 Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
+    cerr << "Board constructor" <<endl;
     board_ = new PImpl_B;
     board_->quadris_ = quadris;
     initGrid();
     board_->curScore_ = 0;
     board_->highScore_ = 0;
-    board_->blockFactory_ = new BlockFactory();
+    board_->blockFactory_ = new BlockFactory(this);
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();

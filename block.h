@@ -59,6 +59,7 @@ class Block {
         char type;
         BlockType blocktype;
         bool isHeavy_;
+        int levelGen_;
 };
 
 #endif

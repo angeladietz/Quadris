@@ -9,14 +9,16 @@
 
 class SBlock: public Block {
     public:
-        SBlock(Board*);
+        SBlock(Board*, bool);
         ~SBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         
         class SBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new SBlock(board, isHeavy);
+            }
         };
 };
 

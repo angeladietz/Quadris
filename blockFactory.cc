@@ -10,7 +10,9 @@
 
 using namespace std;
 
-BlockFactory::BlockFactory(){
+BlockFactory::BlockFactory(){}
+
+BlockFactory::BlockFactory(Board* board){
     factories_[IBlock] = new IBlock::IBlockFactory;
     factories_[JBlock] = new JBlock::JBlockFactory;
     factories_[LBlock] = new LBlock::LBlockFactory;
@@ -18,6 +20,7 @@ BlockFactory::BlockFactory(){
     factories_[ZBlock] = new ZBlock::ZBlockFactory;
     factories_[OBlock] = new OBlock::OBlockFactory;
     factories_[TBlock] = new TBlock::TBlockFactory;
+    board_ = board;
 }
 
 BlockFactory::~BlockFactory(){
@@ -31,9 +34,9 @@ BlockFactory::~BlockFactory(){
 
 Block* BlockFactory::createBlock(BlockType bType, bool isHeavy){
     if (factories_.count(bType) > 0){
-        return factories_[bType]->create(isHeavy);
+        return factories_[bType]->create(board_, isHeavy);
     }
     return nullptr;
 }
 
-Block* BlockFactory::create(bool){}
+Block* BlockFactory::create(Board*,bool){}

@@ -7,11 +7,13 @@
 class BlockFactory{
     public:
         BlockFactory();
+        BlockFactory(Board*);
         ~BlockFactory();
         Block* createBlock(BlockType, bool);
-
+    protected:
+        Board* board_;
     private:
-        virtual Block* create(bool);
+        virtual Block* create(Board*, bool);
         std::map<BlockType, BlockFactory*> factories_;
 };
 

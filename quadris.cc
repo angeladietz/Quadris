@@ -22,13 +22,24 @@ Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
 
 Quadris::~Quadris(){
     if (nullptr != quadris_){
+        if (quadris_->board_ != nullptr){
+            delete quadris_->board_;
+        }
+        if (quadris_->controller_ != nullptr){
+            delete quadris_->controller_;
+        }
+        for (int i = 0; i < quadris_->views_.size(); i++){
+            delete quadris_->views_[i];
+        }
         delete quadris_;
     }
 }
 
 void Quadris::playGame(){
+    cerr<<"Starting game"<<endl;
     //TODO: MOVE MOST OF THIS TO THE CONSTRUCTOR!!
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
+    cerr<< "Board made" << endl;
     quadris_->controller_ = new Controller(quadris_->board_);
 
     quadris_->views_.push_back(new TextDisplay(quadris_->board_, quadris_->controller_));

@@ -9,13 +9,15 @@
 
 class JBlock: public Block {
     public:
-        JBlock(Board*);
+        JBlock(Board*, bool);
         ~JBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         class JBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new JBlock(board, isHeavy);
+            }
         };
 };
 

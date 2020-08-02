@@ -9,13 +9,15 @@
 
 class TBlock: public Block {
     public:
-        TBlock(Board*);
+        TBlock(Board*, bool);
         ~TBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         class TBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new TBlock(board, isHeavy);
+            }
         };
 };
 

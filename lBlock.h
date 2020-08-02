@@ -9,13 +9,15 @@
 
 class LBlock: public Block {
     public:
-        LBlock(Board*);
+        LBlock(Board*, bool);
         ~LBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         class LBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new LBlock(board, isHeavy);
+            }
         };
 };
 

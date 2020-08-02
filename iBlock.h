@@ -9,14 +9,16 @@
 
 class IBlock: public Block {
     public:
-        IBlock(Board*);
+        IBlock(Board*, bool);
         ~IBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
 
         class IBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new IBlock(board, isHeavy);
+            }
         };
 };
 

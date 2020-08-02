@@ -9,13 +9,15 @@
 
 class OBlock: public Block {
     public:
-        OBlock(Board*);
+        OBlock(Board*, bool);
         ~OBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         class OBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new OBlock(board, isHeavy);
+            }
         };
 };
 

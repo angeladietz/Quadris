@@ -10,13 +10,15 @@
 
 class ZBlock: public Block {
     public:
-        ZBlock(Board*);
+        ZBlock(Board*, bool);
         ~ZBlock();
 
         void rotateClockwise();
         void rotateCounterClockwise();
         class ZBlockFactory: public BlockFactory{
-            Block* create(bool){};
+            Block* create(Board* board, bool isHeavy){
+                return new ZBlock(board, isHeavy);
+            }
         };
 };
 
