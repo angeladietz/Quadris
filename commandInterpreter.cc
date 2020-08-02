@@ -1,5 +1,6 @@
 #include "commandInterpreter.h"
 #include "quadris.h"
+#include <iostream>
 #include <string>
 #include <vector>
 #include <ctype.h>
@@ -89,7 +90,7 @@ vector<Action> CommandInterpreter::getCommands(string command){
     vector<Action> actions;
     vector<Action> multipliedActions;
 
-    if (commandInterpreter_->cmdActions_.count(cmdText)>0){
+    if (commandInterpreter_->cmdActions_.count(cmdText) > 0){
         actions = commandInterpreter_->cmdActions_[cmdText];
     }
     else{
@@ -144,6 +145,9 @@ int CommandInterpreter::getMultiplier(string command){
 
 string CommandInterpreter::getCommandText(string command, int multiplier){
     string mult = to_string(multiplier);
+    if (mult == "1" && command[0] != '1') {
+        return command;
+    }
     string cmdText = command.substr(mult.size());
     return cmdText;
 }
