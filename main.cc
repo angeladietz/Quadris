@@ -41,10 +41,18 @@ int main(int argc, char* argv[]) {
     }
 
     cerr << "Initializing quadris" << endl;
-    
-    Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
-    quadris->playGame();
-    cerr << "Finished game"<<endl;
+    if(textOnly){
+        Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
+        quadris->playGame();
+        cerr << "Finished game"<<endl;
+    } else {
+        Gtk::Main app(argc, argv);
+        Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("quadrisGUI.glade");
+        GUI *gui = nullptr;
+        builder->get_widget_derived("topWindow", gui, controller, newBoard);
+        Gtk::Main::run(*gui);
+        delete gui;
+    }
     delete quadris;
 
     return 0;
