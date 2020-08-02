@@ -14,6 +14,7 @@ Level3::Level3(BlockFactory* blockFactory, bool isRandom){
     level3_->areBlocksHeavy_ = true;
     level3_->isRandom_ = isRandom;
     level3_->blockFactory_ = blockFactory;
+    setNextBlockType();
 }
 
 void Level3::setBlockProbabilities(){
@@ -37,11 +38,15 @@ Block* Level3::getNextBlock(){
 }
 
 BlockType Level3::getNextBlockType(){
+    return level3_->nextBlockType_;
+}
+
+void Level3::setNextBlockType(){
     if (level3_->isRandom_){
-        return getNextRandBlockType();
+        level3_->nextBlockType_ = getNextRandBlockType();
     }
     else{
-        return getNextNonRandBlockType();
+        level3_->nextBlockType_ = getNextNonRandBlockType();
     }
 }
 

@@ -25,8 +25,9 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
-    board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    initBlocks();
+    //board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    //board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->isRandom_ = true;
     board_->blockCount_ = 0;
     notifyObservers();
@@ -65,6 +66,11 @@ void Board::initBlockSelector(){
             }
             break;
     }
+}
+
+void Board::initBlocks(){
+    board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
+    board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
 }
 
 //Destructor

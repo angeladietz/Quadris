@@ -37,6 +37,7 @@ Level0::Level0(BlockFactory* blockFactory, string filename){
     if (level0_->blockList_.size() == 0){
         level0_->blockIndex_ = -1;
     }
+    setNextBlockType();
 }
 
 // Destructor
@@ -45,20 +46,23 @@ Level0::~Level0(){
 }
 
 Block* Level0::getNextBlock(){
-    BlockType type = getNextBlockType();
-    Block* b = level0_->blockFactory_->createBlock(type, level0_->areBlocksHeavy_);
+    Block* b = level0_->blockFactory_->createBlock(level0_->nextBlockType_, level0_->areBlocksHeavy_);
+    setNextBlockType();
     return b;
 }
 
 BlockType Level0::getNextBlockType(){
+    return level0_->nextBlockType_;
+}
+
+void Level0::setNextBlockType(){
     if (level0_->blockIndex_ == -1){
-        return OBlock;
+        level0_->nextBlockType_ = OBlock;
     }
 
-    BlockType bType = level0_->blockList_.at(level0_->blockIndex_);
+    level0_->nextBlockType_ = level0_->blockList_.at(level0_->blockIndex_);
     std::cout << level0_->blockIndex_ << "INDEX " << std::endl;
     updateBlockIndex();
-    return bType;
 }
 
 void Level0::updateBlockIndex(){

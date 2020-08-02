@@ -25,26 +25,26 @@ void CommandInterpreter::initCmdActions(){
     commandInterpreter_->cmdActions_.clear();
 
     //TODO: REFACTOR THIS
-    commandInterpreter_->cmdActions_["left"] = vector<Action>(LEFT);
-    commandInterpreter_->cmdActions_["right"] = vector<Action>(RIGHT);
-    commandInterpreter_->cmdActions_["down"] = vector<Action>(DOWN);
-    commandInterpreter_->cmdActions_["clockwise"] = vector<Action>(CLOCKWISE);
-    commandInterpreter_->cmdActions_["counterclockwise"] = vector<Action>(COUNTERCLOCKWISE);
-    commandInterpreter_->cmdActions_["drop"] = vector<Action>(DROP);
-    commandInterpreter_->cmdActions_["levelup"] = vector<Action>(LEVELUP);
-    commandInterpreter_->cmdActions_["leveldown"] = vector<Action>(LEVELDOWN);
-    commandInterpreter_->cmdActions_["norandom"] = vector<Action>(NORANDOM);
-    commandInterpreter_->cmdActions_["random"] = vector<Action>(RANDOM);
-    commandInterpreter_->cmdActions_["sequence"] = vector<Action>(SEQUENCE);
-    commandInterpreter_->cmdActions_["i"] = vector<Action>(I);
-    commandInterpreter_->cmdActions_["j"] = vector<Action>(J);
-    commandInterpreter_->cmdActions_["l"] = vector<Action>(L);
-    commandInterpreter_->cmdActions_["s"] = vector<Action>(S);
-    commandInterpreter_->cmdActions_["z"] = vector<Action>(Z);
-    commandInterpreter_->cmdActions_["o"] = vector<Action>(O);
-    commandInterpreter_->cmdActions_["t"] = vector<Action>(T);
-    commandInterpreter_->cmdActions_["restart"] = vector<Action>(RESTART);
-    commandInterpreter_->cmdActions_["hint"] = vector<Action>(HINT);
+    commandInterpreter_->cmdActions_["left"] = vector<Action>(1, LEFT);
+    commandInterpreter_->cmdActions_["right"] = vector<Action>(1, RIGHT);
+    commandInterpreter_->cmdActions_["down"] = vector<Action>(1, DOWN);
+    commandInterpreter_->cmdActions_["clockwise"] = vector<Action>(1, CLOCKWISE);
+    commandInterpreter_->cmdActions_["counterclockwise"] = vector<Action>(1, COUNTERCLOCKWISE);
+    commandInterpreter_->cmdActions_["drop"] = vector<Action>(1, DROP);
+    commandInterpreter_->cmdActions_["levelup"] = vector<Action>(1, LEVELUP);
+    commandInterpreter_->cmdActions_["leveldown"] = vector<Action>(1, LEVELDOWN);
+    commandInterpreter_->cmdActions_["norandom"] = vector<Action>(1, NORANDOM);
+    commandInterpreter_->cmdActions_["random"] = vector<Action>(1, RANDOM);
+    commandInterpreter_->cmdActions_["sequence"] = vector<Action>(1, SEQUENCE);
+    commandInterpreter_->cmdActions_["i"] = vector<Action>(1, I);
+    commandInterpreter_->cmdActions_["j"] = vector<Action>(1, J);
+    commandInterpreter_->cmdActions_["l"] = vector<Action>(1, L);
+    commandInterpreter_->cmdActions_["s"] = vector<Action>(1, S);
+    commandInterpreter_->cmdActions_["z"] = vector<Action>(1, Z);
+    commandInterpreter_->cmdActions_["o"] = vector<Action>(1, O);
+    commandInterpreter_->cmdActions_["t"] = vector<Action>(1, T);
+    commandInterpreter_->cmdActions_["restart"] = vector<Action>(1, RESTART);
+    commandInterpreter_->cmdActions_["hint"] = vector<Action>(1, HINT);
 }
 
 void CommandInterpreter::initCmdStrings(){

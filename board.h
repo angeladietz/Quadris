@@ -21,6 +21,7 @@ class Quadris;
 struct PImpl_B{
     Block* curBlock_;
     Block* nextBlock_;
+    BlockType nextBlockType_;
     std::vector<std::vector<Tile*> > grid_;
     int curLevel_;
     BlockSelectionStrategy* blockSelectionStrategy_;
@@ -67,6 +68,7 @@ class Board: public Subject {
     private:
         void initGrid();
         void initBlockSelector();
+        void initBlocks();
         void deleteGrid();
         void checkForFullRow();
         void clearRow(int);
