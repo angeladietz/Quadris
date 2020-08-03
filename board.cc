@@ -79,15 +79,15 @@ Board::~Board(){
         if (board_->blockFactory_ != nullptr){
             delete board_->blockFactory_;
         }
-        deleteGrid();
         if (nullptr != board_){
             if (board_->curBlock_ != nullptr){
                 delete board_->curBlock_;
             }
-            if (board_->nextBlock_ != nullptr){
-                delete board_->nextBlock_;
-            }
+            //if (board_->nextBlock_ != nullptr){
+            //    delete board_->nextBlock_;
+            //}
         }
+		deleteGrid();
     delete board_;
 }
 
