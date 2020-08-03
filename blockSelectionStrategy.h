@@ -20,21 +20,23 @@ struct PImpl_bs{
 
 class BlockSelectionStrategy {
 	public:
-		//TODO: DECIDE WHAT TO DO WITH DEFAULT CONSTRUCTOR
 		BlockSelectionStrategy(){}
-		//////////////////////////
-
         virtual ~BlockSelectionStrategy();
+
 		Block* getNextBlock();
 		BlockType getNextBlockType();
 		Block* getBlockOfType(BlockType);
+
 		void setRandom(bool);
-		virtual void setSequenceFile(std::string);
+		void setSequenceFile(std::string);
 
 	protected:
 		BlockType getBlockType(char);
 		virtual void setNextBlockType()=0;
+		BlockType getNextRandBlockType();
+		BlockType getNextNonRandBlockType();
 		void updateBlockIndex();
+		void readSequenceFile();
 		PImpl_bs* level_;
 };
 

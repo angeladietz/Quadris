@@ -12,13 +12,9 @@ class Level3: public BlockSelectionStrategy{
         Level3(BlockFactory*, bool);
         ~Level3();
 
-        void setSequenceFile(std::string);
     private:
         void setBlockProbabilities();
         void setNextBlockType();
-        BlockType getNextRandBlockType();
-        BlockType getNextNonRandBlockType();
-        void readSequenceFile();
 };
 
 #endif

@@ -33,20 +33,5 @@ Level1::~Level1(){
 }
 
 void Level1::setNextBlockType(){
-    int weightSum = 0;
-
-    for (auto const& it : level_->blockProbabilities_) {
-        weightSum += it.second;
-    }
-
-    // get a random number >= 0 and < sum of weights
-    int rand = std::rand() % weightSum;
-
-    for (auto const& it : level_->blockProbabilities_) {
-        if (rand < it.second){
-            level_->nextBlockType_ = it.first;
-            return;
-        }
-        rand -= it.second;
-    }
+    level_->nextBlockType_ = getNextRandBlockType();
 }

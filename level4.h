@@ -16,9 +16,6 @@ class Level4: public BlockSelectionStrategy{
     private:
         void setBlockProbabilities();
         void setNextBlockType();
-        BlockType getNextRandBlockType();
-        BlockType getNextNonRandBlockType();
-        void readSequenceFile();
 };
 
 #endif

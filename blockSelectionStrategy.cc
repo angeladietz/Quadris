@@ -1,12 +1,8 @@
 #include "blockSelectionStrategy.h"
 #include "block.h"
+#include <fstream>
 
 using namespace std;
-
-// // Constructor
-// BlockSelectionStrategy::BlockSelectionStrategy(BlockFactory* bf){
-//     //blockFactory_ = bf;
-// }
 
 // Destructor
 BlockSelectionStrategy::~BlockSelectionStrategy(){}
@@ -27,6 +23,34 @@ Block* BlockSelectionStrategy::getBlockOfType(BlockType bType){
 
 void BlockSelectionStrategy::setRandom(bool isRandom){
     level_->isRandom_ = isRandom;
+}
+
+BlockType BlockSelectionStrategy::getNextRandBlockType(){
+    int weightSum = 0;
+
+    for (auto const& it : level_->blockProbabilities_) {
+        weightSum += it.second;
+    }
+
+    // get a random number >= 0 and < sum of weights
+    int rand = std::rand() % weightSum;
+
+    for (auto const& it : level_->blockProbabilities_) {
+        if (rand < it.second){
+            return it.first;
+        }
+        rand -= it.second;
+    }
+}
+
+BlockType BlockSelectionStrategy::getNextNonRandBlockType(){
+    if (level_->blockList_.size() == 0){
+        return INVALID_BLOCK;
+    }
+
+    BlockType bType = level_->blockList_.at(level_->blockIndex_);
+    updateBlockIndex();
+    return bType;
 }
 
 void BlockSelectionStrategy::updateBlockIndex(){
@@ -61,4 +85,30 @@ BlockType BlockSelectionStrategy::getBlockType(char c){
     return INVALID_BLOCK;
 }
 
-void BlockSelectionStrategy::setSequenceFile(string){}
+void BlockSelectionStrategy::setSequenceFile(string filename){
+    level_->sequenceFile_ = filename;
+    level_->blockList_.clear();
+    readSequenceFile();
+}
+
+void BlockSelectionStrategy::readSequenceFile(){
+    ifstream blockFile;
+
+    try {
+        blockFile.open(level_->sequenceFile_);
+    } catch (const ifstream::failure& e){
+        std::cerr << "Exception occurred file handling file";
+    }
+
+    if (blockFile.is_open()){
+        char nextBlock;
+        while(blockFile>>nextBlock){
+            cerr<<nextBlock<<endl;
+            BlockType bType = getBlockType(nextBlock);
+            if (bType != INVALID_BLOCK){
+                level_->blockList_.push_back(bType);
+            }
+        }
+        blockFile.close();
+    }
+}

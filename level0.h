@@ -11,9 +11,7 @@ class Level0: public BlockSelectionStrategy{
     public:
         Level0(BlockFactory*, std::string="sequence.txt");
         ~Level0();
-        
-        void setRandom(bool){};
-        void setSequenceFile(std::string){};
+
     private:
         void setNextBlockType();
 };
