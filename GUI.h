@@ -10,15 +10,93 @@
 using std::string;
 using std::vector;
 
-class GUI: public Gtk::Window, public observer {
+class GUI: public Gtk::Window, public Observer {
 
 public:
-    GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, GameController* controller, GameBoard* board);
+    GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board);
     ~GUI();
     void draw() override;
 	
 	// "quit" action handler.
-	void OnQuit() { hide(); } 
+	void OnQuit() { hide(); }
+
+	/** Subclass for drawing area. */ 
+	class CDrawingArea: public Gtk::DrawingArea { 
+	public: 
+		typedef enum { IBLOCK, JBLOCK, LBLOCK, OBLOCK, SBLOCK, ZBLOCK, TBLOCK, HINTBLOCK, STARBLOCK, EMPTYBLOCK } shape_t; 
+	private: 
+		shape_t _curBlock = IBLOCK; 
+
+		/** Drawing event handler. */ 
+		virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) { 
+			switch (_curBlock) { 
+				case IBLOCK: 
+					cr->rectangle(0, 0, 40, 40); 
+					cr->set_source_rgb(0, 0.8, 0); 
+					cr->fill_preserve(); 
+					break; 
+				case JBLOCK: 
+					cr->rectangle(0, 0, 40, 40); 
+					cr->set_source_rgb(0.8, 0, 0); 
+					cr->fill_preserve(); 
+					break;  
+				case LBLOCK: 
+					cr->rectangle(0, 0, 40, 40);  
+					cr->set_source_rgb(0, 0, 0.8); 
+					cr->fill_preserve(); 
+					break; 
+				case OBLOCK: 
+					cr->rectangle(0, 0, 40, 40); 
+					cr->set_source_rgb(0.8, 0.8, 0); 
+					cr->fill_preserve(); 
+					break; 
+				case SBLOCK: 
+					cr->rectangle(0, 0, 40, 40);  
+					cr->set_source_rgb(0, 0.8, 0.8); 
+					cr->fill_preserve(); 
+					break; 
+				case ZBLOCK: 
+					cr->rectangle(0, 0, 40, 40);  
+					cr->set_source_rgb(0.8, 0, 0.8); 
+					cr->fill_preserve(); 
+					break; 
+				case TBLOCK: 
+					cr->rectangle(0, 0, 40, 40);  
+					cr->set_source_rgb(0.8, 0.8, 0.8); 
+					cr->fill_preserve(); 
+					break;  	
+				case HINTBLOCK: 
+					cr->rectangle(0, 0, 40, 40);  
+					cr->set_source_rgb(0.2, 0.8, 0.4); 
+					cr->fill_preserve(); 
+					break; 
+				case STARBLOCK: 
+					cr->rectangle(0, 0, 40, 40); 
+					cr->set_source_rgb(0.4, 0.8, 0.2); 
+					cr->fill_preserve(); 
+					break;  
+				case EMPTYBLOCK: 
+					cr->rectangle(0, 0, 40, 40); 
+					cr->set_source_rgb(0, 0, 0); 
+					cr->fill_preserve(); 
+					break;  																			
+				} 
+				cr->set_line_width(3); 
+				cr->set_source_rgb(0, 0, 0); 
+				cr->stroke(); 
+				return true; 
+			} 
+	public: 
+		CDrawingArea(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
+			: Gtk::DrawingArea(cobject) {} 
+
+		void SetBlock(shape_t block) { 
+			if (_curBlock != block) { 
+				_curBlock = block; 
+				queue_draw(); // Request re-drawing. 
+			} 
+		} 
+	}; 
 	
 private:
 	
@@ -38,16 +116,9 @@ private:
 	
 	vector<vector<CDrawingArea*>> drawBlocks = vector<vector<CDrawingArea*>>( 18 , vector<CDrawingArea*> (11));
 	vector<vector<CDrawingArea*>> nextBlock = vector<vector<CDrawingArea*>>( 4 , vector<CDrawingArea*> (4));
-	
-	vector<vector<Gtk::Image*>> gameBlocks = vector<vector<Gtk::Image*>>( 18 , vector<Gtk::Image*> (11));
-	vector<vector<Gtk::Image*>> nextBlock = vector<vector<Gtk::Image*>>( 3 , vector<Gtk::Image*> (4));
-	vector< Glib::RefPtr< Gdk::Pixbuf > > blocks;     
-	
+
 	//OnClick handler for start button
 	void startButtonClicked();
-	
-	//Helper function to clear the next block display
-	void clearNextDisplay();
 };
 
 #endif
