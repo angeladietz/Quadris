@@ -28,6 +28,8 @@ public:
 	public: 
 		typedef enum { IBLOCK, JBLOCK, LBLOCK, OBLOCK, SBLOCK, ZBLOCK, TBLOCK, HINTBLOCK, STARBLOCK, EMPTYBLOCK } shape_t; 
 	private: 
+		Board* board_;
+		Controller* controller_;
 		shape_t _curBlock = EMPTYBLOCK; 
 
 		/** Drawing event handler. */ 
