@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 // TODO:
 // getGenLevel
 // heavy blocks

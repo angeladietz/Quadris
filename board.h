@@ -60,7 +60,7 @@ class Board: public Subject {
 
         int getScore();
         int getHighScore();
-        Block* getNextBlock();
+        BlockType getNextBlockType();
         int getLevel();
 
         friend std::ostream& operator<<(std::ostream&, Board&);

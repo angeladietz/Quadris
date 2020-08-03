@@ -18,10 +18,11 @@ class TextDisplay : public Observer {
 
     friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
   private:
-    void print();  
+    void print();
+    void printBlock(BlockType);
     Controller *controller_;
     Board *board_;
-    Block *nextBlock_;
+    BlockType nextBlock_;
     int currScore_;
     int highScore_;
     int level_;
