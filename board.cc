@@ -209,12 +209,11 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 		return 0;
 	}
 	int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
-    int scoredPoints = sqrtScoredPoints*sqrtScoredPoints;
+    int scoredPoints = sqrtScoredPoints * sqrtScoredPoints;
     return scoredPoints;
 }
 
 void Board::updateScore(int points){
-	cerr<<"updating score"<<endl;
     board_->curScore_ += points;
     highScore = max(highScore, board_->curScore_);
 }

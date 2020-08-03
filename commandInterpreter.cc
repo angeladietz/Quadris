@@ -25,26 +25,26 @@ void CommandInterpreter::initCmdActions(){
     commandInterpreter_->cmdActions_.clear();
 
     //TODO: REFACTOR THIS
-    commandInterpreter_->cmdActions_["left"] = vector<Action>(1, LEFT);
-    commandInterpreter_->cmdActions_["right"] = vector<Action>(1, RIGHT);
-    commandInterpreter_->cmdActions_["down"] = vector<Action>(1, DOWN);
-    commandInterpreter_->cmdActions_["clockwise"] = vector<Action>(1, CLOCKWISE);
-    commandInterpreter_->cmdActions_["counterclockwise"] = vector<Action>(1, COUNTERCLOCKWISE);
-    commandInterpreter_->cmdActions_["drop"] = vector<Action>(1, DROP);
-    commandInterpreter_->cmdActions_["levelup"] = vector<Action>(1, LEVELUP);
-    commandInterpreter_->cmdActions_["leveldown"] = vector<Action>(1, LEVELDOWN);
-    commandInterpreter_->cmdActions_["norandom"] = vector<Action>(1, NORANDOM);
-    commandInterpreter_->cmdActions_["random"] = vector<Action>(1, RANDOM);
-    commandInterpreter_->cmdActions_["sequence"] = vector<Action>(1, SEQUENCE);
-    commandInterpreter_->cmdActions_["i"] = vector<Action>(1, I);
-    commandInterpreter_->cmdActions_["j"] = vector<Action>(1, J);
-    commandInterpreter_->cmdActions_["l"] = vector<Action>(1, L);
-    commandInterpreter_->cmdActions_["s"] = vector<Action>(1, S);
-    commandInterpreter_->cmdActions_["z"] = vector<Action>(1, Z);
-    commandInterpreter_->cmdActions_["o"] = vector<Action>(1, O);
-    commandInterpreter_->cmdActions_["t"] = vector<Action>(1, T);
-    commandInterpreter_->cmdActions_["restart"] = vector<Action>(1, RESTART);
-    commandInterpreter_->cmdActions_["hint"] = vector<Action>(1, HINT);
+    commandInterpreter_->cmdActions_["left"] = {LEFT};
+    commandInterpreter_->cmdActions_["right"] = {RIGHT};
+    commandInterpreter_->cmdActions_["down"] = {DOWN};
+    commandInterpreter_->cmdActions_["clockwise"] = {CLOCKWISE};
+    commandInterpreter_->cmdActions_["counterclockwise"] = {COUNTERCLOCKWISE};
+    commandInterpreter_->cmdActions_["drop"] = {DROP};
+    commandInterpreter_->cmdActions_["levelup"] = {LEVELUP};
+    commandInterpreter_->cmdActions_["leveldown"] = {LEVELDOWN};
+    commandInterpreter_->cmdActions_["norandom"] = {NORANDOM};
+    commandInterpreter_->cmdActions_["random"] = {RANDOM};
+    commandInterpreter_->cmdActions_["sequence"] = {SEQUENCE};
+    commandInterpreter_->cmdActions_["i"] = {I};
+    commandInterpreter_->cmdActions_["j"] = {J};
+    commandInterpreter_->cmdActions_["l"] = {L};
+    commandInterpreter_->cmdActions_["s"] = {S};
+    commandInterpreter_->cmdActions_["z"] = {Z};
+    commandInterpreter_->cmdActions_["o"] = {O};
+    commandInterpreter_->cmdActions_["t"] = {T};
+    commandInterpreter_->cmdActions_["restart"] = {RESTART};
+    commandInterpreter_->cmdActions_["hint"] = {HINT};
 }
 
 void CommandInterpreter::initCmdStrings(){
@@ -81,7 +81,7 @@ vector<Action> CommandInterpreter::getCommands(string command){
     int multiplier = getMultiplier(command);
 
     if (multiplier == -1){
-        return vector<Action>(BAD_COMMAND);
+        return {BAD_COMMAND};
     }
 
     string cmdText = getCommandText(command, multiplier);
@@ -105,13 +105,15 @@ vector<Action> CommandInterpreter::getCommands(string command){
     if (actions.size() > 0){
         for (int i = 0; i < multiplier; i++){
             for (int j = 0; j < actions.size(); j++){
-                multipliedActions.push_back(actions[j]);
+				if (canBeMultiplied(actions[j])){
+					multipliedActions.push_back(actions[j]);
+				}
             }
         }
         return multipliedActions;
     }
 
-    return vector<Action>(BAD_COMMAND);
+    return {BAD_COMMAND};
 }
 
 int CommandInterpreter::getMultiplier(string command){
@@ -149,4 +151,8 @@ string CommandInterpreter::getCommandText(string command, int multiplier){
     }
     string cmdText = command.substr(mult.size());
     return cmdText;
+}
+
+bool CommandInterpreter::canBeMultiplied(Action action){
+	return !(action == RESTART || action == HINT || action == NORANDOM || action == RANDOM);
 }
