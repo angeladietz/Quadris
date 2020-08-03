@@ -24,15 +24,12 @@ Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
 Quadris::~Quadris(){
     if (nullptr != quadris_){
         for (int i = 0; i < quadris_->views_.size(); i++){
-            //cerr<<"deleting view"<<endl;
             delete quadris_->views_[i];
         }
         if (quadris_->controller_ != nullptr){
-            //cerr<<"deleting controller"<<endl;
             delete quadris_->controller_;
         }
         if (quadris_->board_ != nullptr){
-            //cerr<<"deleting board"<<endl;
             delete quadris_->board_;
         }
         delete quadris_;
@@ -40,12 +37,8 @@ Quadris::~Quadris(){
 }
 
 void Quadris::playGame(){
-    //cerr<<"Starting game"<<endl;
     //TODO: MOVE MOST OF THIS TO THE CONSTRUCTOR!!
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
-    //cerr<< "Board made" << endl;
-    //cout<< "Enter cmd: ";
-    //cout << *quadris_->board_;
 
     quadris_->controller_ = new Controller(quadris_->board_);
 
@@ -58,10 +51,6 @@ void Quadris::playGame(){
     quadris_->board_->subscribe(quadris_->views_[0]);
     //quadris_->board_->subscribe(quadris_->views_[1]);
 
-    cerr<<"hello"<<endl;
-    //for (auto view: quadris_->views_) {
-        //view->poll();
-    //}
     //cerr<<"end of game"<<endl;
     // TODO: FINISH THIS
 

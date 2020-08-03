@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 // TODO:
 // getGenLevel
 // heavy blocks
@@ -41,30 +43,31 @@ BlockType Block::getBlockType() const{
 
 bool Block::canMove(Board* board, std::vector<int> dir) {
 
+    std::cout << "Checking if can move!" << std::endl;
     std::vector<Tile*> tempTiles_;
     for (auto tile: tiles_) {
-        std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl;
-        std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
-        std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
+        /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
+        //std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
+        //std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
         int newX = tile->getXCoordinate() + dir[0];
         int newY = tile->getYCoordinate() + dir[1];
-        if (newX < 0 || newX > 10 || newY < 0 || newY == 17) {
-            // TODO: This needs to check if the ifFilled is by the current block
+        if (newX < 0 || newX > 10 || newY < 0 || newY > 17) {
             return false;
         }
-        tempTiles_.push_back(tile);
+        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
     bool filledByCurrentTile = false;
     for (auto newTile: tempTiles_) {
+	    filledByCurrentTile = false;
         if (board->getTileAt(newTile->getXCoordinate(), newTile->getYCoordinate())->isFilled()) {
-            for (auto tile: tiles_) {
+	    for (auto tile: tiles_) {
                if (newTile->getXCoordinate() == tile->getXCoordinate() && newTile->getYCoordinate() == tile->getYCoordinate()) {
                     // There's a tile in the current block that exists at the same location
                     filledByCurrentTile = true;
-               } 
+	       }
             }
             if (!filledByCurrentTile) {
-                return false;
+		    return false;
             }
         }
     }
@@ -94,7 +97,7 @@ void Block::moveLeft(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt(tile->getYCoordinate() - 1, tile->getXCoordinate()));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate()-1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
@@ -120,18 +123,16 @@ void Block::moveRight(Board* board) {
         /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
         std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
         std::cout << "New Coordinates " << tile->getXCoordinate() + 1 << tile->getYCoordinate() + 0 << std::endl;
-        tempTiles_.push_back(board->getTileAt(tile->getYCoordinate() + 1, tile->getXCoordinate()));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate() + 1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
     for (auto tile: tempTiles_) {
-        std::cout << "COUNT";
         tile->setTileValue(type);
     }
 
     tiles_.clear();
     tiles_ = tempTiles_;
-    std::cout << tiles_.size() << tempTiles_.size();
 
 }
 
@@ -144,7 +145,7 @@ void Block::moveDown(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt(tile->getYCoordinate(), tile->getXCoordinate() + 1));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate(), tile->getYCoordinate()+1));
     }
 
     // Populate new locations for the block with the block type
@@ -177,13 +178,19 @@ std::vector<int> Block::getEndCoordinates() {
 }
 
 void Block::rotateClockwise(Board* board) {
+
+    if (!canRotateClockwise(board)) { return; }
+
     std::vector<int> endPoints = getEndCoordinates();
+    std::cout << "Endpoints " << endPoints[0] << " " << endPoints[1] << " " << endPoints[2] << " " << endPoints[3] << std::endl;
     std::vector<Tile*> tempTiles_;
 
     // Find the new tiles
     for (auto tile:tiles_) {
-       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
-       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
+        std::cout << "Current " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[3] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
+       std::cout << "New " << newX << newY << std::endl;
        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
@@ -203,13 +210,16 @@ void Block::rotateClockwise(Board* board) {
 }
 
 void Block::rotateCounterClockwise(Board* board) {
+
+    if (!canRotateCounterClockwise(board)) { return; }
+
     std::vector<int> endPoints = getEndCoordinates();
     std::vector<Tile*> tempTiles_;
 
     // Find the new tiles
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
-       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[3] - tile->getYCoordinate());
        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
@@ -229,28 +239,65 @@ void Block::rotateCounterClockwise(Board* board) {
 }
 
 bool Block::canRotateClockwise(Board* board) {
-    std::vector<int> endPoints = getEndCoordinates();
 
+    std::vector<Tile*> tempTiles_;
+    std::vector<int> endPoints = getEndCoordinates();
     // Check that each new tile is in bounds
     for (auto tile:tiles_) {
-       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[2] - tile->getYCoordinate());
-       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[2] - tile->getYCoordinate());
-        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt(newX, newY)->isFilled()){
+       int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[3] - tile->getYCoordinate());
+       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
+        if (newX < 0 || newX > 10 || newY < 0 || newY > 17){
             return false;
+        }
+        tempTiles_.push_back(board->getTileAt(newX, newY));
+    }
+
+    bool filledByCurrentTile = false;
+    for (auto newTile: tempTiles_) {
+        if (board->getTileAt(newTile->getXCoordinate(), newTile->getYCoordinate())->isFilled()) {
+            for (auto tile: tiles_) {
+               if (newTile->getXCoordinate() == tile->getXCoordinate() && newTile->getYCoordinate() == tile->getYCoordinate()) {
+                    // There's a tile in the current block that exists at the same location
+                    filledByCurrentTile = true;
+               } 
+            }
+            if (!filledByCurrentTile) {
+                std::cerr<<"second check"<<std::endl;
+                return false;
+            }
         }
     }
     return true;
 }
 
 bool Block::canRotateCounterClockwise(Board* board) {
+
+    std::vector<Tile*> tempTiles_;
     std::vector<int> endPoints = getEndCoordinates();
 
     // Check that each new tile is in bounds
     for (auto tile:tiles_) {
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) - (endPoints[2] - tile->getYCoordinate());
-       int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
-        if (newX < 0 || newX > 10 || newY >= 17 || !board->getTileAt(newX, newY)->isFilled()){
+       int newY = tile->getYCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[3] - tile->getYCoordinate());
+        if (newX < 0 || newX > 10 || newY < 0 || newY >= 17){
             return false;
+        }
+        tempTiles_.push_back(board->getTileAt(newX, newY));
+    }
+
+    bool filledByCurrentTile = false;
+    for (auto newTile: tempTiles_) {
+        if (board->getTileAt(newTile->getXCoordinate(), newTile->getYCoordinate())->isFilled()) {
+            for (auto tile: tiles_) {
+               if (newTile->getXCoordinate() == tile->getXCoordinate() && newTile->getYCoordinate() == tile->getYCoordinate()) {
+                    // There's a tile in the current block that exists at the same location
+                    filledByCurrentTile = true;
+               } 
+            }
+            if (!filledByCurrentTile) {
+                std::cerr<<"second check"<<std::endl;
+                return false;
+            }
         }
     }
     return true;
