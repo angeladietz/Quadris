@@ -7,6 +7,7 @@
 #include "zBlock.h"
 #include "oBlock.h"
 #include "tBlock.h"
+#include "tileBlock.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ BlockFactory::BlockFactory(Board* board){
     factories_[ZBlock] = new ZBlock::ZBlockFactory;
     factories_[OBlock] = new OBlock::OBlockFactory;
     factories_[TBlock] = new TBlock::TBlockFactory;
+    factories_[TILE_BLOCK] = new TileBlock::TileBlockFactory;
     board_ = board;
 }
 

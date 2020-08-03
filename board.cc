@@ -25,8 +25,6 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
     initBlocks();
-    //board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    //board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->isRandom_ = true;
     board_->blockCount_ = 0;
 }
@@ -106,9 +104,6 @@ void Board::deleteGrid(){
 }
 
 Tile* Board::getTileAt(int x, int y){
-    //std::cout << "get tile at" << std::endl;
-    //std::cout << "X: " << x << "Y: " << y << std::endl;
-    //std::cout << board_->grid_[y][x]->getXCoordinate() << board_->grid_[y][x]->getYCoordinate() << std::endl;
     return board_->grid_[y][x];
 }
 
@@ -146,10 +141,10 @@ void Board::rotateCurBlockCounterClockwise(){
 
 void Board::dropCurBlock(){
     board_->curBlock_->dropBlock(this);
-    board_->blockCount_++;
     checkForFullRow();
 
     if (doesLevelDropTiles()){
+        board_->blockCount_++;
         if (board_->blockCount_%5 == 0){
             dropTileBlock();
         }
