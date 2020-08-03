@@ -27,7 +27,7 @@ void TextDisplay::update() {
 
 void TextDisplay::poll() {
 
-   cout << ">";
+   cout << endl<<">";
    string command;
    if (cin >> command){
 	   controller_->handleCommand(command);
@@ -49,4 +49,40 @@ void TextDisplay::print() {
     cout << "	-----------"<<endl;
     cout << *board_;
     cout << "	-----------"<<endl;
+    cout << "	Next block:"<<endl;
+    printBlock(nextBlock_);
+}
+
+void TextDisplay::printBlock(BlockType bType){
+  switch (bType){
+        case IBlock:
+            cout << "	IIII"<<endl;
+            break;
+        case JBlock:
+            cout << "	J  "<<endl;
+            cout << "	JJJ"<<endl;
+            break;
+        case LBlock:
+            cout << "	  L"<<endl;
+            cout << "	LLL"<<endl;
+            break;
+        case SBlock:
+            cout << "	 SS"<<endl;
+            cout << "	SS "<<endl;
+            break;
+        case ZBlock:
+            cout << "	ZZ "<<endl;
+            cout << "	 ZZ"<<endl;
+            break;
+        case OBlock:
+            cout << "	OO"<<endl;
+            cout << "	OO"<<endl;
+            break;
+        case TBlock:
+            cout << "	TTT"<<endl;
+            cout << "	 T "<<endl;
+            break;
+        case TILE_BLOCK:
+            cout << "	*"<<endl;
+  }
 }

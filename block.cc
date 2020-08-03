@@ -5,6 +5,8 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 // TODO:
 // getGenLevel
 // heavy blocks
@@ -289,4 +291,3 @@ void Block::moveTileDown(Tile* oldTile, Board* board){
     //Add the new tile to the block
     tiles_.push_back(tileBelow);
 }
-

@@ -13,8 +13,3 @@ OBlock::OBlock(Board *board, bool isHeavy) {
 }
 
 OBlock::~OBlock() {}
-
-std::ostream& OBlock::printOBlock(ostream &out){
-	out << "	OO"<<endl;
-	out << "	OO"<<endl;
-}
