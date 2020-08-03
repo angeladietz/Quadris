@@ -249,7 +249,7 @@ bool Block::canRotateClockwise(Board* board) {
         if (newX < 0 || newX > 10 || newY < 0 || newY > 17){
             return false;
         }
-        tempTiles_.push_back(tile);
+        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
     bool filledByCurrentTile = false;
@@ -282,7 +282,7 @@ bool Block::canRotateCounterClockwise(Board* board) {
         if (newX < 0 || newX > 10 || newY < 0 || newY >= 17){
             return false;
         }
-        tempTiles_.push_back(tile);
+        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
     bool filledByCurrentTile = false;
