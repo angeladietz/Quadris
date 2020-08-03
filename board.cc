@@ -35,7 +35,7 @@ void Board::initGrid(){
     for (int i = 0; i < BOARD_HEIGHT; i++){
         board_->grid_.push_back(vector<Tile*>(BOARD_WIDTH, nullptr));
         for (int j = 0; j<BOARD_WIDTH; j++){
-            board_->grid_[i][j] = new Tile(i,j);
+            board_->grid_[i][j] = new Tile(j,i);
         }
     }
 }
@@ -108,8 +108,8 @@ void Board::deleteGrid(){
 Tile* Board::getTileAt(int x, int y){
     std::cout << "get tile at" << std::endl;
     std::cout << "X: " << x << "Y: " << y << std::endl;
-    std::cout << board_->grid_[x][y]->getXCoordinate() << board_->grid_[x][y]->getYCoordinate() << std::endl;
-    return board_->grid_[x][y];
+    std::cout << board_->grid_[y][x]->getXCoordinate() << board_->grid_[y][x]->getYCoordinate() << std::endl;
+    return board_->grid_[y][x];
 }
 
 int Board::getScore(){
@@ -236,18 +236,18 @@ void Board::setupNextBlocks(){
 void Board::levelUp(){
     if (board_->curLevel_ < MAX_LEVEL){
         delete board_->blockSelectionStrategy_;
+    	board_->curLevel_++;
+    	initBlockSelector();
     }
-    board_->curLevel_++;
-    initBlockSelector();
 }
 
 // Decreases the level of the game by one
 void Board::levelDown(){
     if (board_->curLevel_ > MIN_LEVEL){
         delete board_->blockSelectionStrategy_;
+    	board_->curLevel_--;
+    	initBlockSelector();
     }
-    board_->curLevel_--;
-    initBlockSelector();
 }
 
 // Sets the current block to be of type bType

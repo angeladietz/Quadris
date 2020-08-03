@@ -16,7 +16,7 @@ Block::Block() {}
 void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
 
     for (auto location: locations) {
-        Tile* blockTile = board->getTileAt(location[1], location[0]);
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
         blockTile->setTileValue(type);
         tiles_.push_back(blockTile);
     }
@@ -66,7 +66,8 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
                } 
             }
             if (!filledByCurrentTile) {
-                return false;
+		    std::cerr<<"second check"<<std::endl;
+		    return false;
             }
         }
     }
@@ -75,16 +76,16 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
 
 bool Block::canMoveLeft(Board* board) {
     std::cout << "Moving left " << std::endl;
-    return canMove(board, {0, -1});
+    return canMove(board, {-1, 0});
 }
 
 bool Block::canMoveRight(Board* board) {
     std::cout << "HERE!! " << std::endl;
-    return canMove(board, {0, 1});
+    return canMove(board, {1, 0});
 }
 
 bool Block::canMoveDown(Board* board) {
-    return canMove(board, {1, 0});
+    return canMove(board, {0, 1});
 }
 
 void Block::moveLeft(Board* board) {
@@ -96,7 +97,7 @@ void Block::moveLeft(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate(), tile->getYCoordinate() - 1));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate()-1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
@@ -122,7 +123,7 @@ void Block::moveRight(Board* board) {
         /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
         std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
         std::cout << "New Coordinates " << tile->getXCoordinate() + 1 << tile->getYCoordinate() + 0 << std::endl;
-        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate(), tile->getYCoordinate() + 1));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate() + 1, tile->getYCoordinate()));
     }
 
     // Populate new locations for the block with the block type
@@ -144,7 +145,7 @@ void Block::moveDown(Board* board) {
     // Clear current location of block
     for(auto tile: tiles_) {
         tile->setTileValue(' ');
-        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate() + 1, tile->getYCoordinate()));
+        tempTiles_.push_back(board->getTileAt(tile->getXCoordinate(), tile->getYCoordinate()+1));
     }
 
     // Populate new locations for the block with the block type
