@@ -14,7 +14,13 @@
 
 using namespace std;
 
-GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board): Gtk::Window(cobject), _builder(builder){
+GUI::GUI(BaseObjectType* cobject, 
+		 const Glib::RefPtr<Gtk::Builder>& builder, 
+		 Controller* controller, 
+		 Board* board): 
+		 Gtk::Window(cobject), 
+		 _builder(builder) {
+
 	controller_ = controller;
 	board_ = board;
 
@@ -74,18 +80,6 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 //Destructor
 //TODO: FIX THIS
 GUI::~GUI(){
-    Gtk::Box *objectContainer;
-	Gtk::Box *scoreBoard;
-	Gtk::Box *controlBox;
-	Gtk::Grid *gameGrid;
-	Gtk::Label *levelLabel;
-	Gtk::Label *scoreLabel;
-	Gtk::Label *hiScoreLabel;
-	Gtk::ToggleButton *startButton;
-	Gtk::Label *nextLabel;
-	Gtk::Grid *nextGrid;
-	Gtk::Separator *controlSeparator;
-
     if (objectContainer != nullptr){
         delete objectContainer;
     }
@@ -121,42 +115,58 @@ GUI::~GUI(){
         delete controlSeparator;
     }
 	
-	Gtk::Box *objectContainer;
-	Gtk::Box *scoreBoard;
-	Gtk::Box *controlBox;
-	Gtk::Grid *gameGrid;
-	Gtk::Label *levelLabel;
-	Gtk::Label *scoreLabel;
-	Gtk::Label *hiScoreLabel;
-	Gtk::ToggleButton *startButton;
-	Gtk::Label *nextLabel;
-	Gtk::Grid *nextGrid;
-	Gtk::Separator *controlSeparator;
-	
 	for (int i = 0; i < nextBlock.size(); i++){
-        for (int j = 0; j < nextBlock.at(i).size(); j++){
-            if (nextBlock.at(i).at(j) != nullptr){
-                delete nextBlock.at(i).at(j);
+        for (int j = 0; j < nextBlock[i].size(); j++){
+            if (nextBlock[i][j] != nullptr){
+                delete nextBlock[i][j];
             }
         }
     }
     
     for (int i = 0; i < drawBlocks.size(); i++){
-        for (int j = 0; j < drawBlocks.at(i).size(); j++){
-            if (drawBlocks.at(i).at(j) != nullptr){
-                delete drawBlocks.at(i).at(j);
+        for (int j = 0; j < drawBlocks[i].size(); j++){
+            if (drawBlocks[i][j] != nullptr){
+                delete drawBlocks[i][j];
             }
         }
     }
 }
 
 void GUI::draw(){
+	char tile;
 	//iterate over text display board
 	for (int row = 0; row < BOARD_HEIGHT; row++){
-	    row+1;
-        for (auto col: board_->grid_[row]) {
-            board_[row][col] 
+        for (int col = 0; col < BOARD_WIDTH; col++) {
+			tile = board_->getTileAt(row,col)->getTileValue();
+			switch(tile){
+				case 'I':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::IBLOCK);
+					break;
+				case 'J':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::JBLOCK);
+					break;
+				case 'L':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::LBLOCK);
+					break;
+				case 'O':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::OBLOCK);
+					break;
+				case 'S':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::SBLOCK);
+					break;
+				case 'Z':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::ZBLOCK);
+					break;
+				case 'T':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::TBLOCK);
+					break;
+				case '*':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::STARBLOCK);
+					break;
+				case ' ':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::EMPTYBLOCK);
+					break;
+			}
         }
-        out << std::endl;
     }
 }
