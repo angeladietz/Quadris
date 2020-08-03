@@ -22,15 +22,14 @@ void TextDisplay::update() {
   highScore_ = highScore;
   level_ = board_->getLevel();
   print();
-  poll();
 }
 
 void TextDisplay::poll() {
-
-   cout << endl<<">";
    string command;
-   if (cin >> command){
+   cout << endl<<">";
+   while (getline(cin,command)){
 	   controller_->handleCommand(command);
+	   cout<<endl<<">";
    }
 }
 

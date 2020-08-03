@@ -79,15 +79,15 @@ Board::~Board(){
         if (board_->blockFactory_ != nullptr){
             delete board_->blockFactory_;
         }
-        deleteGrid();
         if (nullptr != board_){
             if (board_->curBlock_ != nullptr){
                 delete board_->curBlock_;
             }
-            if (board_->nextBlock_ != nullptr){
-                delete board_->nextBlock_;
-            }
+            //if (board_->nextBlock_ != nullptr){
+            //    delete board_->nextBlock_;
+            //}
         }
+		deleteGrid();
     delete board_;
 }
 
@@ -115,10 +115,6 @@ Tile* Board::getTileAt(int x, int y){
 int Board::getScore(){
     return board_->curScore_;
 }
-
-// int Board::getHighScore(){
-//     return board_->highScore_;
-// }
 
 int Board::getLevel() {
     return board_->curLevel_;
@@ -179,7 +175,9 @@ void Board::checkForFullRow(){
             }
         }
     }
-    updateScore(getPointsFromClearedRows(numRowsFilled));
+	if (numRowsFilled != 0){
+    	updateScore(getPointsFromClearedRows(numRowsFilled));
+	}
 }
 
 void Board::clearRow(int rowNum){
@@ -193,7 +191,7 @@ void Board::clearRow(int rowNum){
 }
 
 void Board::moveRowsDownOneRow(int rowNum){
-    for (int i = rowNum-1; i >=3; i++){
+	for (int i = rowNum-1; i >=0; i--){
         for (int j = 0; j < BOARD_WIDTH; j++){
             if (board_->grid_[i][j]->isFilled()){
                 board_->grid_[i][j]->moveDownOneRow(this);
@@ -207,12 +205,16 @@ int Board::getPointsFromClearedBlock(Block* block){
 }
 
 int Board::getPointsFromClearedRows(int numRowsCleared){
-    int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
+    if (numRowsCleared == 0){
+		return 0;
+	}
+	int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
     int scoredPoints = sqrtScoredPoints*sqrtScoredPoints;
     return scoredPoints;
 }
 
 void Board::updateScore(int points){
+	cerr<<"updating score"<<endl;
     board_->curScore_ += points;
     highScore = max(highScore, board_->curScore_);
 }

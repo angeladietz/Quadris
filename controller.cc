@@ -28,7 +28,7 @@ Controller::~Controller(){
 }
 
 vector<string> Controller::ParseCommand(string command){
-    return SplitCommand(ConvertToLowercase(command));
+    return SplitCommand(command);
 }
 
 vector<string> Controller::SplitCommand(string command){
@@ -54,16 +54,16 @@ void Controller::handleCommand(string command){
     vector<string> cmds = ParseCommand(command);
     vector<Action> actions;
     for (size_t i = 0; i < cmds.size(); i++){
-        actions = controller_->commandInterpreter_->getCommands(cmds[i]);
+        cerr<<"get actions for: "<<cmds[i]<<endl;
+	    actions = controller_->commandInterpreter_->getCommands(ConvertToLowercase(cmds[i]));
 
         for (size_t j = 0; j < actions.size(); j++){
             if (DoesRequireFile(actions[j])){
                 if (i < cmds.size()-1){
-                    executeCommand(actions[j], cmds[i++]);
+                    executeCommand(actions[j], cmds[++i]);
                 }
             }
             else if (actions[j] != BAD_COMMAND){
-                cout << "DO STUFF " << actions[j] << endl;
                 executeCommand(actions[j]);
             }
         }
@@ -81,8 +81,10 @@ void Controller::HandleCommandSequenceFromFile(string filename){
         string command = "";
         string nextCmd;
         while(seqFile>>nextCmd){
-            command += nextCmd;
+
+            command += nextCmd + " ";
         }
+	cerr<<"command: " << command<<endl;
         seqFile.close();
 
         handleCommand(command);

@@ -37,7 +37,6 @@ Quadris::~Quadris(){
 }
 
 void Quadris::playGame(){
-    //TODO: MOVE MOST OF THIS TO THE CONSTRUCTOR!!
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
 
     quadris_->controller_ = new Controller(quadris_->board_);
@@ -55,6 +54,7 @@ void Quadris::playGame(){
     // TODO: FINISH THIS
 
     quadris_->board_->notifyObservers();
+    quadris_->views_[0]->poll();
 }
 
 void Quadris::restartGame(){
@@ -62,6 +62,7 @@ void Quadris::restartGame(){
         quadris_->board_->unsubscribe(view);
         delete view;
     }
+	quadris_->views_.clear();
     delete quadris_->controller_;
     delete quadris_->board_;
     resetQuadrisParams();
