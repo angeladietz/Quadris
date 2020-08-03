@@ -18,7 +18,7 @@ class GUI: public Gtk::Window, public Observer {
 public:
     GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board);
     ~GUI();
-    void draw() override;
+    void draw();
 	
 	// "quit" action handler.
 	void OnQuit() { hide(); }
@@ -28,7 +28,9 @@ public:
 	public: 
 		typedef enum { IBLOCK, JBLOCK, LBLOCK, OBLOCK, SBLOCK, ZBLOCK, TBLOCK, HINTBLOCK, STARBLOCK, EMPTYBLOCK } shape_t; 
 	private: 
-		shape_t _curBlock = IBLOCK; 
+		Board* board_;
+		Controller* controller_;
+		shape_t _curBlock = EMPTYBLOCK; 
 
 		/** Drawing event handler. */ 
 		virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) { 
@@ -102,7 +104,9 @@ public:
 	}; 
 	
 private:
-	
+	Board* board_;
+	Controller* controller_;
+
 	//Gtk objects
     Glib::RefPtr<Gtk::Builder> _builder; 
 	Gtk::Box *objectContainer;
