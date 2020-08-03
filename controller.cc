@@ -13,7 +13,6 @@
 using namespace std;
 
 Controller::Controller(Board* b){
-    cerr<<"Controller constructor"<<endl;
     controller_ = new PImpl_C;
     controller_->commandInterpreter_ = new CommandInterpreter();
     controller_->board_ = b;
