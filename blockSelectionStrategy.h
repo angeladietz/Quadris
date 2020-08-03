@@ -24,16 +24,18 @@ class BlockSelectionStrategy {
 		BlockSelectionStrategy(){}
 		//////////////////////////
 
-		//BlockSelectionStrategy(BlockFactory*);
         virtual ~BlockSelectionStrategy();
-		virtual Block* getNextBlock()=0;
-		virtual BlockType getNextBlockType()=0;
-		virtual Block* getBlockOfType(BlockType)=0;
-		virtual void setRandom(bool);
+		Block* getNextBlock();
+		BlockType getNextBlockType();
+		Block* getBlockOfType(BlockType);
+		void setRandom(bool);
 		virtual void setSequenceFile(std::string);
 
 	protected:
 		BlockType getBlockType(char);
+		virtual void setNextBlockType()=0;
+		void updateBlockIndex();
+		PImpl_bs* level_;
 };
 
 #endif
