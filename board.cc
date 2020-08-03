@@ -175,7 +175,9 @@ void Board::checkForFullRow(){
             }
         }
     }
-    updateScore(getPointsFromClearedRows(numRowsFilled));
+	if (numRowsFilled != 0){
+    	updateScore(getPointsFromClearedRows(numRowsFilled));
+	}
 }
 
 void Board::clearRow(int rowNum){
@@ -203,7 +205,10 @@ int Board::getPointsFromClearedBlock(Block* block){
 }
 
 int Board::getPointsFromClearedRows(int numRowsCleared){
-    int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
+    if (numRowsCleared == 0){
+		return 0;
+	}
+	int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
     int scoredPoints = sqrtScoredPoints*sqrtScoredPoints;
     return scoredPoints;
 }
