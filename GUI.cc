@@ -11,6 +11,7 @@
 #include "controller.h"
 #include "observer.h"
 #include "GUI.h"
+#include "quadris.h"
 
 using namespace std;
 
@@ -128,7 +129,7 @@ GUI::~GUI(){
 }
 
 //draw blocks
-void GUI::draw(){
+void GUI::update(){
 	char tile;
 	//iterate over text display board
 	for (int row = 0; row < BOARD_HEIGHT; row++){

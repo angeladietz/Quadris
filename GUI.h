@@ -21,7 +21,7 @@ class GUI: public Gtk::Window, public Observer {
 public:
     GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board);
     ~GUI();
-    void draw();
+	void update() override;
 	
 	// "quit" action handler.
 	void OnQuit();

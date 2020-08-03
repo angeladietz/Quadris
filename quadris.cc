@@ -52,7 +52,7 @@ void Quadris::playGame(){
     /*     quadris_->views_.push_back(new Graphics()); */
     /* } */
     if(!quadris_->textOnly_){
-        //Gtk::Main app(argc, argv);
+        Gtk::Main app();
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
         //GUI *gui = nullptr;
         builder->get_widget_derived("topWindow", quadris_->gui_, quadris_->controller_, quadris_->board_);
