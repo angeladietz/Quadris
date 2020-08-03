@@ -116,7 +116,7 @@ private:
 	Gtk::Box *objectContainer;
 	Gtk::Box *scoreBoard;
 	Gtk::Box *controlBox;
-	Gtk::Grid *gameGrid;
+	Gtk::Grid *gameBoard;
 	Gtk::Label *levelLabel;
 	Gtk::Label *scoreLabel;
 	Gtk::Label *hiScoreLabel;

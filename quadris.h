@@ -26,7 +26,7 @@ class Quadris {
 	public:
 		Quadris(bool textOnly, int startLevel, std::string scriptFile);
 		~Quadris();
-		void playGame();
+		void playGame(int argc, char* argv[]);
 		int getScore() const;
 		void updateScore(int);
 		void restartGame();

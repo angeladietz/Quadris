@@ -41,7 +41,7 @@ Quadris::~Quadris(){
     }
 }
 
-void Quadris::playGame(){
+void Quadris::playGame(int argc, char* argv[]){
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
 
     quadris_->controller_ = new Controller(quadris_->board_);
@@ -52,10 +52,10 @@ void Quadris::playGame(){
     /*     quadris_->views_.push_back(new Graphics()); */
     /* } */
     if(!quadris_->textOnly_){
-        Gtk::Main app();
+        Gtk::Main app(argc, argv);
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
         //GUI *gui = nullptr;
-        builder->get_widget_derived("topWindow", quadris_->gui_, quadris_->controller_, quadris_->board_);
+        builder->get_widget_derived("mainWindow", quadris_->gui_, quadris_->controller_, quadris_->board_);
         Gtk::Main::run(*quadris_->gui_);
         //delete gui;
     }
@@ -80,7 +80,8 @@ void Quadris::restartGame(){
     delete quadris_->board_;
     delete quadris_->gui_;
     resetQuadrisParams();
-    playGame();
+    char* quadris[0];
+    playGame(1, quadris);
 }
 
 void Quadris::resetQuadrisParams(){

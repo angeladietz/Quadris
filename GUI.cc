@@ -27,7 +27,7 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	_builder->get_widget("levelLabel", levelLabel);
 	_builder->get_widget("scoreLabel", scoreLabel);
 	_builder->get_widget("hiScoreLabel", hiScoreLabel);
-	_builder->get_widget("gameGrid", gameGrid);
+	_builder->get_widget("gameBoard", gameBoard);
 	_builder->get_widget("startButton", startButton);
 	_builder->get_widget("nextLabel", nextLabel);
 	_builder->get_widget("nextGrid", nextGrid);
@@ -85,8 +85,8 @@ GUI::~GUI(){
     if (controlBox != nullptr){
         delete controlBox;
     }
-    if (gameGrid != nullptr){
-        delete gameGrid;
+    if (gameBoard != nullptr){
+        delete gameBoard;
     }
     if (levelLabel != nullptr){
         delete levelLabel;
@@ -176,6 +176,7 @@ void GUI::OnQuit(){
 //OnClick handler for start button
 void GUI::startButtonClicked(){
 	this->startButton->hide();
-	quadris_->playGame();
+	char* quadris[0];
+    quadris_->playGame(1, quadris);
 	this->hide();
 }
