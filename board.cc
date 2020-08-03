@@ -106,9 +106,9 @@ void Board::deleteGrid(){
 }
 
 Tile* Board::getTileAt(int x, int y){
-    std::cout << "get tile at" << std::endl;
-    std::cout << "X: " << x << "Y: " << y << std::endl;
-    std::cout << board_->grid_[y][x]->getXCoordinate() << board_->grid_[y][x]->getYCoordinate() << std::endl;
+    //std::cout << "get tile at" << std::endl;
+    //std::cout << "X: " << x << "Y: " << y << std::endl;
+    //std::cout << board_->grid_[y][x]->getXCoordinate() << board_->grid_[y][x]->getYCoordinate() << std::endl;
     return board_->grid_[y][x];
 }
 

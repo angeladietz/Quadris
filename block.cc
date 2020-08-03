@@ -47,26 +47,26 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
     std::vector<Tile*> tempTiles_;
     for (auto tile: tiles_) {
         /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
-        std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
-        std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
+        //std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
+        //std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
         int newX = tile->getXCoordinate() + dir[0];
         int newY = tile->getYCoordinate() + dir[1];
         if (newX < 0 || newX > 10 || newY < 0 || newY > 17) {
             return false;
         }
-        tempTiles_.push_back(tile);
+        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
     bool filledByCurrentTile = false;
     for (auto newTile: tempTiles_) {
+	    filledByCurrentTile = false;
         if (board->getTileAt(newTile->getXCoordinate(), newTile->getYCoordinate())->isFilled()) {
-            for (auto tile: tiles_) {
+	    for (auto tile: tiles_) {
                if (newTile->getXCoordinate() == tile->getXCoordinate() && newTile->getYCoordinate() == tile->getYCoordinate()) {
                     // There's a tile in the current block that exists at the same location
                     filledByCurrentTile = true;
-               } 
+	       }
             }
             if (!filledByCurrentTile) {
-		    std::cerr<<"second check"<<std::endl;
 		    return false;
             }
         }
