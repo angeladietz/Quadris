@@ -34,8 +34,9 @@ Level4::~Level4(){
 }
 
 Block* Level4::getNextBlock(){
-    BlockType type = getNextBlockType();
-    return level4_->blockFactory_->createBlock(type, level4_->areBlocksHeavy_);
+    Block* b = level4_->blockFactory_->createBlock(level4_->nextBlockType_, level4_->areBlocksHeavy_);
+    setNextBlockType();
+    return b;
 }
 
 BlockType Level4::getNextBlockType(){
