@@ -55,17 +55,20 @@ void Quadris::playGame(int argc, char* argv[]){
         Gtk::Main app(argc, argv);
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
         //GUI *gui = nullptr;
-        builder->get_widget_derived("mainWindow", quadris_->gui_, quadris_->controller_, quadris_->board_);
+        builder->get_widget_derived("mainWindow", quadris_->gui_, quadris_->controller_, quadris_->board_, this);
         Gtk::Main::run(*quadris_->gui_);
         //delete gui;
     }
+    else{
+        quadris_->board_->subscribe(quadris_->views_[0]);
+        quadris_->board_->notifyObservers();
+        quadris_->views_[0]->poll();
+    }
+}
 
+void Quadris::start(){
     quadris_->board_->subscribe(quadris_->views_[0]);
-    //quadris_->board_->subscribe(quadris_->views_[1]);
-
-    //cerr<<"end of game"<<endl;
-    // TODO: FINISH THIS
-
+    quadris_->board_->subscribe(quadris_->gui_);
     quadris_->board_->notifyObservers();
     quadris_->views_[0]->poll();
 }

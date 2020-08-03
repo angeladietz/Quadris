@@ -19,7 +19,7 @@ class Quadris;
 class GUI: public Gtk::Window, public Observer {
 
 public:
-    GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board);
+    GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board, Quadris* quadris);
     ~GUI();
 	void update() override;
 	

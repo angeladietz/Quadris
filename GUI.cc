@@ -16,10 +16,11 @@
 using namespace std;
 
 //constructor
-GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board): Gtk::Window(cobject), _builder(builder) {
+GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board, Quadris* quadris): Gtk::Window(cobject), _builder(builder) {
 
 	controller_ = controller;
 	board_ = board;
+	quadris_ = quadris;
 
 	_builder->get_widget("objectContainer", objectContainer);
 	_builder->get_widget("scoreBoard", scoreBoard);
@@ -134,7 +135,7 @@ void GUI::update(){
 	//iterate over text display board
 	for (int row = 0; row < BOARD_HEIGHT; row++){
         for (int col = 0; col < BOARD_WIDTH; col++) {
-			tile = board_->getTileAt(row,col)->getTileValue();
+			tile = board_->getTileAt(col,row)->getTileValue();
 			switch(tile){
 				case 'I':
 					drawBlocks[row][col]->SetBlock(CDrawingArea::IBLOCK);
@@ -177,6 +178,7 @@ void GUI::OnQuit(){
 void GUI::startButtonClicked(){
 	this->startButton->hide();
 	char* quadris[0];
-    quadris_->playGame(1, quadris);
-	this->hide();
+	quadris_->start();
+    //quadris_->playGame(1, quadris);
+	//this->hide();
 }

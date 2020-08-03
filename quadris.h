@@ -30,6 +30,7 @@ class Quadris {
 		int getScore() const;
 		void updateScore(int);
 		void restartGame();
+		void start();
 
 	private:
 		void resetQuadrisParams();
