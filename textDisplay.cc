@@ -17,7 +17,7 @@ TextDisplay::TextDisplay(Board* board, Controller * controller) {
 TextDisplay::~TextDisplay() {}
 
 void TextDisplay::update() {
-  nextBlock_ = board_->getNextBlock();
+  nextBlock_ = board_->getNextBlockType();
   currScore_ = board_->getScore();
   highScore_ = highScore;
   level_ = board_->getLevel();

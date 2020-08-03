@@ -13,3 +13,7 @@ IBlock::IBlock(Board *board, bool isHeavy) {
 }
 
 IBlock::~IBlock() {}
+
+std::ostream& IBlock::printIBlock(ostream &out){
+	out << "	IIII"<<endl;
+}

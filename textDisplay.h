@@ -21,7 +21,7 @@ class TextDisplay : public Observer {
     void print();  
     Controller *controller_;
     Board *board_;
-    Block *nextBlock_;
+    BlockType nextBlock_;
     int currScore_;
     int highScore_;
     int level_;

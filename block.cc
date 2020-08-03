@@ -289,3 +289,4 @@ void Block::moveTileDown(Tile* oldTile, Board* board){
     //Add the new tile to the block
     tiles_.push_back(tileBelow);
 }
+

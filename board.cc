@@ -121,8 +121,8 @@ int Board::getLevel() {
     return board_->curLevel_;
 }
 
-Block* Board::getNextBlock(){
-    return board_->nextBlock_;
+BlockType Board::getNextBlockType(){
+    return board_->nextBlockType_;
 }
 
 void Board::moveCurBlockLeft(){
@@ -288,4 +288,5 @@ std::ostream& operator<< (ostream &out, Board &board) {
         }
         out << std::endl;
     }
+    return out;
 }
