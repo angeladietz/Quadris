@@ -7,8 +7,11 @@
 #include <vector>
 #include "observer.h"
 
-using std::string;
-using std::vector;
+#define BOARD_WIDTH 11
+#define BOARD_HEIGHT 18
+#define PREVIEW_SIZE 4
+
+using namespace std;
 
 class GUI: public Gtk::Window, public Observer {
 
@@ -32,52 +35,52 @@ public:
 			switch (_curBlock) { 
 				case IBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0, 0.8, 0); 
+					cr->set_source_rgb(0, 0.9, 0); // light green 
 					cr->fill_preserve(); 
 					break; 
 				case JBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0.8, 0, 0); 
+					cr->set_source_rgb(0.8, 0, 0); // red
 					cr->fill_preserve(); 
 					break;  
 				case LBLOCK: 
 					cr->rectangle(0, 0, 40, 40);  
-					cr->set_source_rgb(0, 0, 0.8); 
+					cr->set_source_rgb(0, 0, 0.8); //dark blue
 					cr->fill_preserve(); 
 					break; 
 				case OBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0.8, 0.8, 0); 
+					cr->set_source_rgb(0, 0.8, 1); // light blue
 					cr->fill_preserve(); 
 					break; 
 				case SBLOCK: 
 					cr->rectangle(0, 0, 40, 40);  
-					cr->set_source_rgb(0, 0.8, 0.8); 
+					cr->set_source_rgb(0, 0.3, 0); // dark green 
 					cr->fill_preserve(); 
 					break; 
 				case ZBLOCK: 
 					cr->rectangle(0, 0, 40, 40);  
-					cr->set_source_rgb(0.8, 0, 0.8); 
+					cr->set_source_rgb(0.8, 0, 0.8); //pink
 					cr->fill_preserve(); 
 					break; 
 				case TBLOCK: 
 					cr->rectangle(0, 0, 40, 40);  
-					cr->set_source_rgb(0.8, 0.8, 0.8); 
+					cr->set_source_rgb(0.8, 0.8, 0.8); // grey
 					cr->fill_preserve(); 
 					break;  	
 				case HINTBLOCK: 
 					cr->rectangle(0, 0, 40, 40);  
-					cr->set_source_rgb(0.2, 0.8, 0.4); 
+					cr->set_source_rgb(0.3, 0, 0); // brown
 					cr->fill_preserve(); 
 					break; 
 				case STARBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0.4, 0.8, 0.2); 
+					cr->set_source_rgb(0.4, 0.8, 0.2); // black
 					cr->fill_preserve(); 
 					break;  
 				case EMPTYBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0, 0, 0); 
+					cr->set_source_rgb(0, 0, 0); // white
 					cr->fill_preserve(); 
 					break;  																			
 				} 

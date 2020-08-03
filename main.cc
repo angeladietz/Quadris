@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
         delete Quadris;
     } else {
         Gtk::Main app(argc, argv);
-        Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("quadrisGUI.glade");
+        Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
         GUI *gui = nullptr;
         builder->get_widget_derived("topWindow", gui, Controller, Board);
         Gtk::Main::run(*gui);
