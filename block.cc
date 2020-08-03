@@ -43,14 +43,15 @@ BlockType Block::getBlockType() const{
 
 bool Block::canMove(Board* board, std::vector<int> dir) {
 
+    std::cout << "Checking if can move!" << std::endl;
     std::vector<Tile*> tempTiles_;
     for (auto tile: tiles_) {
-        std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl;
+        /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
         std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
         std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
         int newX = tile->getXCoordinate() + dir[0];
         int newY = tile->getYCoordinate() + dir[1];
-        if (newX < 0 || newX > 10 || newY < 0 || newY == 17) {
+        if (newX < 0 || newX > 17 || newY < 0 || newY > 10) {
             // TODO: This needs to check if the ifFilled is by the current block
             return false;
         }
@@ -75,16 +76,16 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
 
 bool Block::canMoveLeft(Board* board) {
     std::cout << "Moving left " << std::endl;
-    return canMove(board, {-1, 0});
+    return canMove(board, {0, -1});
 }
 
 bool Block::canMoveRight(Board* board) {
     std::cout << "HERE!! " << std::endl;
-    return canMove(board, {1, 0});
+    return canMove(board, {0, 1});
 }
 
 bool Block::canMoveDown(Board* board) {
-    return canMove(board, {0, 1});
+    return canMove(board, {1, 0});
 }
 
 void Block::moveLeft(Board* board) {
@@ -127,13 +128,11 @@ void Block::moveRight(Board* board) {
 
     // Populate new locations for the block with the block type
     for (auto tile: tempTiles_) {
-        std::cout << "COUNT";
         tile->setTileValue(type);
     }
 
     tiles_.clear();
     tiles_ = tempTiles_;
-    std::cout << tiles_.size() << tempTiles_.size();
 
 }
 
@@ -245,6 +244,7 @@ bool Block::canRotateClockwise(Board* board) {
 }
 
 bool Block::canRotateCounterClockwise(Board* board) {
+    std::cout << "Check if can rotate " << std::endl;
     std::vector<int> endPoints = getEndCoordinates();
 
     // Check that each new tile is in bounds
