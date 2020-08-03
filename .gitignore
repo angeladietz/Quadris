@@ -4,5 +4,8 @@
 #ignore any dependency files
 *.d
 
+# ignore input files
+*.in
+
 #ignore executable
 quadris
