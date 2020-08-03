@@ -13,6 +13,9 @@
 
 using namespace std;
 
+//forward declaration of Quadris
+class Quadris;
+
 class GUI: public Gtk::Window, public Observer {
 
 public:
@@ -21,7 +24,7 @@ public:
     void draw();
 	
 	// "quit" action handler.
-	void OnQuit() { hide(); }
+	void OnQuit();
 
 	/** Subclass for drawing area. */ 
 	class CDrawingArea: public Gtk::DrawingArea { 
@@ -106,6 +109,7 @@ public:
 private:
 	Board* board_;
 	Controller* controller_;
+	Quadris* quadris_;
 
 	//Gtk objects
     Glib::RefPtr<Gtk::Builder> _builder; 

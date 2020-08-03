@@ -7,9 +7,11 @@
 #include "level3.h"
 #include "level4.h"
 #include "textDisplay.h"
-#include "graphics.h"
+#include "GUI.h"
 #include "observer.h"
 #include <vector>
+#include <gtkmm.h> 
+#include <cairomm/cairomm.h> 
 
 using namespace std;
 
@@ -32,6 +34,9 @@ Quadris::~Quadris(){
         if (quadris_->board_ != nullptr){
             delete quadris_->board_;
         }
+        if (quadris_->gui_ != nullptr){
+            delete quadris_->gui_;
+        }
         delete quadris_;
     }
 }
@@ -46,6 +51,14 @@ void Quadris::playGame(){
     /* if (!quadris_->textOnly_){ */
     /*     quadris_->views_.push_back(new Graphics()); */
     /* } */
+    if(!quadris_->textOnly_){
+        //Gtk::Main app(argc, argv);
+        Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
+        //GUI *gui = nullptr;
+        builder->get_widget_derived("topWindow", quadris_->gui_, quadris_->controller_, quadris_->board_);
+        Gtk::Main::run(*quadris_->gui_);
+        //delete gui;
+    }
 
     quadris_->board_->subscribe(quadris_->views_[0]);
     //quadris_->board_->subscribe(quadris_->views_[1]);
@@ -65,6 +78,7 @@ void Quadris::restartGame(){
 	quadris_->views_.clear();
     delete quadris_->controller_;
     delete quadris_->board_;
+    delete quadris_->gui_;
     resetQuadrisParams();
     playGame();
 }

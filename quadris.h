@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "observer.h"
 #include "textDisplay.h"
+#include "GUI.h"
 #include <string>
 
 extern int highScore;
@@ -14,6 +15,7 @@ class Board;
 struct PImpl_Q{
 	Board* board_;
 	Controller* controller_;
+	GUI* gui_;
 	std::vector<Observer*> views_;
 	bool textOnly_;
 	int level_;
@@ -22,7 +24,7 @@ struct PImpl_Q{
 
 class Quadris {
 	public:
-		Quadris(bool, int, std::string);
+		Quadris(bool textOnly, int startLevel, std::string scriptFile);
 		~Quadris();
 		void playGame();
 		int getScore() const;

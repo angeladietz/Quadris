@@ -5,7 +5,7 @@
 #include <iterator>
 #include <string>
 #include <vector>
-#include <gdkmm/pixbuf.h>
+#include <gtkmm.h>
 #include "board.h"
 #include "block.h"
 #include "controller.h"
@@ -14,12 +14,8 @@
 
 using namespace std;
 
-GUI::GUI(BaseObjectType* cobject, 
-		 const Glib::RefPtr<Gtk::Builder>& builder, 
-		 Controller* controller, 
-		 Board* board): 
-		 Gtk::Window(cobject), 
-		 _builder(builder) {
+//constructor
+GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board): Gtk::Window(cobject), _builder(builder) {
 
 	controller_ = controller;
 	board_ = board;
@@ -78,7 +74,6 @@ GUI::GUI(BaseObjectType* cobject,
 }
 
 //Destructor
-//TODO: FIX THIS
 GUI::~GUI(){
     if (objectContainer != nullptr){
         delete objectContainer;
@@ -132,6 +127,7 @@ GUI::~GUI(){
     }
 }
 
+//draw blocks
 void GUI::draw(){
 	char tile;
 	//iterate over text display board
@@ -169,4 +165,16 @@ void GUI::draw(){
 			}
         }
     }
+}
+
+//quit
+void GUI::OnQuit(){
+	hide(); 
+}
+
+//OnClick handler for start button
+void GUI::startButtonClicked(){
+	this->startButton->hide();
+	quadris_->playGame();
+	this->hide();
 }

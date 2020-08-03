@@ -4,8 +4,6 @@
 #include <cstring>
 #include <cstdlib>
 #include <time.h>
-#include <gtkmm.h> 
-#include <cairomm/cairomm.h> 
 
 using namespace std;
 
@@ -44,19 +42,24 @@ int main(int argc, char* argv[]) {
     }
 
     cerr << "Initializing quadris" << endl;
-    if(textOnly){
-        Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
-        quadris->playGame();
-        cerr << "Finished game"<<endl;
-        delete Quadris;
-    } else {
-        Gtk::Main app(argc, argv);
-        Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
-        GUI *gui = nullptr;
-        builder->get_widget_derived("topWindow", gui, Controller, Board);
-        Gtk::Main::run(*gui);
-        delete gui;
-    }
+    // if(textOnly){
+    //     Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
+    //     quadris->playGame();
+    //     cerr << "Finished game"<<endl;
+    //     delete Quadris;
+    // } else {
+    //     Gtk::Main app(argc, argv);
+    //     Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
+    //     GUI *gui = nullptr;
+    //     builder->get_widget_derived("topWindow", gui, Controller, Board);
+    //     Gtk::Main::run(*gui);
+    //     delete gui;
+    // }
+
+    Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
+    quadris->playGame();
+    cerr << "Finished game"<<endl;
+    delete quadris;
 
     return 0;
 }
