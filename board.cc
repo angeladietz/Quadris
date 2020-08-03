@@ -189,7 +189,7 @@ void Board::clearRow(int rowNum){
 }
 
 void Board::moveRowsDownOneRow(int rowNum){
-    for (int i = rowNum-1; i >=3; i++){
+	for (int i = rowNum-1; i >=0; i--){
         for (int j = 0; j < BOARD_WIDTH; j++){
             if (board_->grid_[i][j]->isFilled()){
                 board_->grid_[i][j]->moveDownOneRow(this);
@@ -209,6 +209,7 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 }
 
 void Board::updateScore(int points){
+	cerr<<"updating score"<<endl;
     board_->curScore_ += points;
     highScore = max(highScore, board_->curScore_);
 }

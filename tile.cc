@@ -44,7 +44,7 @@ void Tile::setBlock(Block* block){
 }
 
 bool Tile::isLastTileFromBlock(){
-    if (block_->getNumTiles() == 1){
+	if (block_ != nullptr && block_->getNumTiles() == 1){
         return true;
     }
     return false;
