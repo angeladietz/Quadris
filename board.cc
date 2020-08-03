@@ -116,10 +116,6 @@ int Board::getScore(){
     return board_->curScore_;
 }
 
-// int Board::getHighScore(){
-//     return board_->highScore_;
-// }
-
 int Board::getLevel() {
     return board_->curLevel_;
 }

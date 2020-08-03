@@ -55,6 +55,7 @@ void Quadris::playGame(){
     // TODO: FINISH THIS
 
     quadris_->board_->notifyObservers();
+    quadris_->views_[0]->poll();
 }
 
 void Quadris::restartGame(){
