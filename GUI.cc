@@ -180,10 +180,10 @@ void GUI::update(){
 	switch (next) {
 		case 0: //IBlock
 			for(int j = 0; j < PREVIEW_SIZE; j++){ 
-				nextBlock[1][j]->SetBlock(CDrawingArea::IBLOCK);
+				nextBlock[2][j]->SetBlock(CDrawingArea::IBLOCK);
 			}
 			break;
-				case 1: //JBlock
+		case 1: //JBlock
 			nextBlock[1][0]->SetBlock(CDrawingArea::JBLOCK);
 			for(int j = 0; j < PREVIEW_SIZE-1; j++){ 
 				nextBlock[2][j]->SetBlock(CDrawingArea::JBLOCK);
@@ -195,11 +195,11 @@ void GUI::update(){
 				nextBlock[2][j]->SetBlock(CDrawingArea::LBLOCK);
 			}
 			break;
-				case 3: //SBlock
-			for(int j = 2; j < PREVIEW_SIZE; j++){ 
+		case 3: //SBlock
+			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
 				nextBlock[1][j]->SetBlock(CDrawingArea::SBLOCK);
 			}
-			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
+			for(int j = 0; j < PREVIEW_SIZE-2; j++){ 
 				nextBlock[2][j]->SetBlock(CDrawingArea::SBLOCK);
 			}
 			break;
