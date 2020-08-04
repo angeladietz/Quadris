@@ -192,11 +192,24 @@ void GUI::update(){
 				nextBlock[1][j]->SetBlock(CDrawingArea::IBLOCK);
 			}
 			break;
-		case 5: //OBlock
-			for(int i = 1; i < PREVIEW_SIZE-1; i++){
-				for(int j = 0; j < PREVIEW_SIZE-2; j++){ 
-					nextBlock[i][j]->SetBlock(CDrawingArea::OBLOCK);
-				}
+				case 1: //JBlock
+			nextBlock[1][0]->SetBlock(CDrawingArea::JBLOCK);
+			for(int j = 0; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::JBLOCK);
+			}
+			break;
+		case 2: //LBlock
+			nextBlock[1][3]->SetBlock(CDrawingArea::LBLOCK);
+			for(int j = 1; j < PREVIEW_SIZE; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::LBLOCK);
+			}
+			break;
+				case 3: //SBlock
+			for(int j = 2; j < PREVIEW_SIZE; j++){ 
+				nextBlock[1][j]->SetBlock(CDrawingArea::SBLOCK);
+			}
+			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::SBLOCK);
 			}
 			break;
 		case 4: //ZBlock
@@ -207,24 +220,11 @@ void GUI::update(){
 				nextBlock[2][j]->SetBlock(CDrawingArea::ZBLOCK);
 			}
 			break;
-		case 3: //SBlock
-			for(int j = 2; j < PREVIEW_SIZE; j++){ 
-				nextBlock[1][j]->SetBlock(CDrawingArea::SBLOCK);
-			}
-			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
-				nextBlock[2][j]->SetBlock(CDrawingArea::SBLOCK);
-			}
-			break;
-		case 1: //JBlock
-			nextBlock[1][0]->SetBlock(CDrawingArea::JBLOCK);
-			for(int j = 0; j < PREVIEW_SIZE-1; j++){ 
-				nextBlock[2][j]->SetBlock(CDrawingArea::JBLOCK);
-			}
-			break;
-		case 2: //LBlock
-			nextBlock[1][3]->SetBlock(CDrawingArea::LBLOCK);
-			for(int j = 1; j < PREVIEW_SIZE; j++){ 
-				nextBlock[2][j]->SetBlock(CDrawingArea::LBLOCK);
+		case 5: //OBlock
+			for(int i = 1; i < PREVIEW_SIZE-1; i++){
+				for(int j = 0; j < PREVIEW_SIZE-2; j++){ 
+					nextBlock[i][j]->SetBlock(CDrawingArea::OBLOCK);
+				}
 			}
 			break;
 		case 6: //TBlock
