@@ -22,11 +22,9 @@ public:
     GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board, Quadris* quadris);
     ~GUI();
 	void update() override;
-	
-	// "quit" action handler.
 	void OnQuit();
 
-	/** Subclass for drawing area. */ 
+	// Subclass for drawing area
 	class CDrawingArea: public Gtk::DrawingArea { 
 	public: 
 		typedef enum { IBLOCK, JBLOCK, LBLOCK, OBLOCK, SBLOCK, ZBLOCK, TBLOCK, HINTBLOCK, STARBLOCK, EMPTYBLOCK } shape_t; 
@@ -35,7 +33,7 @@ public:
 		Controller* controller_;
 		shape_t _curBlock = EMPTYBLOCK; 
 
-		/** Drawing event handler. */ 
+		// Drawing event handler
 		virtual bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) { 
 			switch (_curBlock) { 
 				case IBLOCK: 
@@ -101,7 +99,7 @@ public:
 		void SetBlock(shape_t block) { 
 			if (_curBlock != block) { 
 				_curBlock = block; 
-				queue_draw(); // Request re-drawing. 
+				queue_draw(); // Request re-drawing
 			} 
 		} 
 	}; 

@@ -37,6 +37,7 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	levelLabel->set_text("Level: 0");
     scoreLabel->set_text("Score: 0");
     hiScoreLabel->set_text("Hi Score: " + to_string(highScore));
+	
 	//build drawBlocks vector
 	CDrawingArea *temp;
 	int num1 = 0;
@@ -128,7 +129,7 @@ GUI::~GUI(){
     }
 }
 
-//draw blocks
+//draw blocks on the GUI
 void GUI::update(){
 
 	levelLabel->set_text("Level: " + to_string(board_->getLevel()));
@@ -136,7 +137,7 @@ void GUI::update(){
     hiScoreLabel->set_text("Hi Score: " + to_string(highScore));
 
 	char tile;
-	//iterate over text display board
+	//iterate over text display board to update GUI
 	for (int row = 0; row < BOARD_HEIGHT; row++){
         for (int col = 0; col < BOARD_WIDTH; col++) {
 			tile = board_->getTileAt(col,row)->getTileValue();
@@ -177,6 +178,7 @@ void GUI::update(){
 	//display next block on GUI
 	BlockType next = board_->getNextBlockType();
 
+	//print next set of blocks in GUI
 	switch (next) {
 		case 0: //IBlock
 			for(int j = 0; j < PREVIEW_SIZE; j++){ 
@@ -241,8 +243,6 @@ void GUI::startButtonClicked(){
 	this->startButton->hide();
 	char* quadris[0];
 	quadris_->start();
-    //quadris_->playGame(1, quadris);
-	//this->hide();
 }
 
 //Helper function to clear next block

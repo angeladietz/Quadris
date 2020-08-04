@@ -48,16 +48,12 @@ void Quadris::playGame(int argc, char* argv[]){
 
     quadris_->views_.push_back(new TextDisplay(quadris_->board_, quadris_->controller_));
 
-    /* if (!quadris_->textOnly_){ */
-    /*     quadris_->views_.push_back(new Graphics()); */
-    /* } */
     if(!quadris_->textOnly_){
         Gtk::Main app(argc, argv);
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
-        //GUI *gui = nullptr;
         builder->get_widget_derived("mainWindow", quadris_->gui_, quadris_->controller_, quadris_->board_, this);
         Gtk::Main::run(*quadris_->gui_);
-        //delete gui;
+        delete quadris_->gui_;
     }
     else{
         quadris_->board_->subscribe(quadris_->views_[0]);
