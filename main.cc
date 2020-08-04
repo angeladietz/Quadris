@@ -8,6 +8,40 @@ using namespace std;
 
 int highScore;
 
+void printUsage() {
+
+	cout << endl <<
+  "CS 247 Project - Quadris \n"
+  "Help: ./quadris [args]\n\n"
+  
+	// TODO: Add the text only mode when GUI is complete
+  "Possible Arguments:\n"
+  "  -seed [seed]             Set the random number generator's seed\n" 
+  "  -scriptfile [file]       Use [file] instead of the default sequence.txt (only applies to level 0)\n"
+  "  -startlevel [n]          Start game in level [n]\n"
+  "  -h  or  --help           Display this help message\n"
+  
+  "In-game commands:\n"
+  "  left                     Move Current Block Left\n"
+  "  right                    Move Current Block Right\n"
+  "  down                     Move Current Block Down\n"
+  "  clockwise                Rotate Block Clockwise\n"
+  "  counterclockwise         Rotate Block Counter Clockwise\n"
+  "  drop                     Drop the current block - required to move to the next block\n"
+  "  levelup                  Move up a level\n"
+  "  leveldown                Move down a level\n"
+  "  norandom [file]          Use [file] as a sequene of blocks\n"
+  "  random                   Make levels 3 and 4 random (true by default)\n"
+  "  sequence [file]          Change sequence file\n"
+  "  I, J, L ...              Replace current block with specified block\n"
+  "  restart                  Restart from Level 0\n"
+  "  hint                     Display possible location to drop current block\n"
+  
+  << endl;
+
+  exit(1);
+}
+
 int main(int argc, char* argv[]) {
 
     bool didSetSeed = false;
@@ -32,6 +66,13 @@ int main(int argc, char* argv[]) {
             }
             else if (!strcmp(argv[i], "-startlevel") && i < argc-1){
                 startLevel = std::stoi(argv[++i]);
+            }
+						else if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help")) {
+                printUsage();
+            }
+            else {
+                cout << "Invalid Input " << argv[i] << endl;
+                printUsage();
             }
         }
 	}
