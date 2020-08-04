@@ -24,6 +24,7 @@ class CommandInterpreter {
 		void initCmdActions();
 		void initCmdStrings();
 		int getMultiplier(std::string);
+		bool canBeMultiplied(Action);
 		std::string getCommandText(std::string, int);
 
 		PImpl_CI* commandInterpreter_;

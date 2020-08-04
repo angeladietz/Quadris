@@ -7,5 +7,6 @@
 # ignore input files
 *.in
 
-#ignore executable
+#ignore executable and zipped files
+*.zip
 quadris

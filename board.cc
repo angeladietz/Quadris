@@ -25,8 +25,6 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->L0SeqFile_ = l0ScriptFile;
     initBlockSelector();
     initBlocks();
-    //board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    //board_->nextBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->isRandom_ = true;
     board_->blockCount_ = 0;
 }
@@ -98,6 +96,10 @@ void Board::deleteGrid(){
         for (int i = 0; i < BOARD_HEIGHT; i++){
             for (int j = 0; j < BOARD_WIDTH; j++){
                 if (board_->grid_[i][j]!= nullptr){
+                    // TODO: Delete block while deleting board
+                    /* if (board_->grid_[i][j]->getBlock() != nullptr) { */
+                    /*     delete board_->grid_[i][j]; */
+                    /* } */
                     delete board_->grid_[i][j];
                 }
             }
@@ -106,9 +108,6 @@ void Board::deleteGrid(){
 }
 
 Tile* Board::getTileAt(int x, int y){
-    //std::cout << "get tile at" << std::endl;
-    //std::cout << "X: " << x << "Y: " << y << std::endl;
-    //std::cout << board_->grid_[y][x]->getXCoordinate() << board_->grid_[y][x]->getYCoordinate() << std::endl;
     return board_->grid_[y][x];
 }
 
@@ -146,10 +145,10 @@ void Board::rotateCurBlockCounterClockwise(){
 
 void Board::dropCurBlock(){
     board_->curBlock_->dropBlock(this);
-    board_->blockCount_++;
     checkForFullRow();
 
     if (doesLevelDropTiles()){
+        board_->blockCount_++;
         if (board_->blockCount_%5 == 0){
             dropTileBlock();
         }
@@ -209,12 +208,11 @@ int Board::getPointsFromClearedRows(int numRowsCleared){
 		return 0;
 	}
 	int sqrtScoredPoints = board_->curLevel_ + numRowsCleared;
-    int scoredPoints = sqrtScoredPoints*sqrtScoredPoints;
+    int scoredPoints = sqrtScoredPoints * sqrtScoredPoints;
     return scoredPoints;
 }
 
 void Board::updateScore(int points){
-	cerr<<"updating score"<<endl;
     board_->curScore_ += points;
     highScore = max(highScore, board_->curScore_);
 }

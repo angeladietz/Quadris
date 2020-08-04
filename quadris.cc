@@ -78,7 +78,7 @@ void Quadris::restartGame(){
         quadris_->board_->unsubscribe(view);
         delete view;
     }
-	quadris_->views_.clear();
+	  quadris_->views_.clear();
     delete quadris_->controller_;
     delete quadris_->board_;
     delete quadris_->gui_;
@@ -90,5 +90,8 @@ void Quadris::restartGame(){
 void Quadris::resetQuadrisParams(){
     quadris_->textOnly_ = false;
     quadris_->level_ = 0;
-    quadris_->scriptFile_ = "sequence.txt";
+    // TODO: Do we really need to reset our input to sequence.txt?
+    // As in, at reset, do we want to use the default sequence file
+    // Or continue using the scriptfile that was passed in?
+    /* quadris_->scriptFile_ = "sequence.txt"; */
 }
