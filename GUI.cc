@@ -34,6 +34,9 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	_builder->get_widget("nextGrid", nextGrid);
 	_builder->get_widget("controlSeparator", controlSeparator);
 
+	levelLabel->set_text("Level: 0");
+    scoreLabel->set_text("Score: 0");
+    hiScoreLabel->set_text("Hi Score: " + to_string(highScore));
 	//build drawBlocks vector
 	CDrawingArea *temp;
 	int num1 = 0;
@@ -131,6 +134,11 @@ GUI::~GUI(){
 
 //draw blocks
 void GUI::update(){
+
+	levelLabel->set_text("Level: " + to_string(board_->getLevel()));
+    scoreLabel->set_text("Score: " + to_string(board_->getScore()));
+    hiScoreLabel->set_text("Hi Score: " + to_string(highScore));
+
 	char tile;
 	//iterate over text display board
 	for (int row = 0; row < BOARD_HEIGHT; row++){
@@ -167,7 +175,71 @@ void GUI::update(){
 			}
         }
     }
+	//clear next display
+	//MAKE THIS A HELPER FUNCTION - code duplication it's used above as well
+	for (int i = 0; i < PREVIEW_SIZE; i++) {
+		for (int j = 0; j < PREVIEW_SIZE; j++) {
+			nextBlock[i][j]->SetBlock(CDrawingArea::EMPTYBLOCK);
+		}
+	}
+
+	//display next block on GUI
+	BlockType next = board_->getNextBlockType();
+
+	switch (next) {
+		case 0: //IBlock
+			for(int j = 0; j < PREVIEW_SIZE; j++){ 
+				nextBlock[1][j]->SetBlock(CDrawingArea::IBLOCK);
+			}
+			break;
+		case 5: //OBlock
+			for(int i = 1; i < PREVIEW_SIZE-1; i++){
+				for(int j = 0; j < PREVIEW_SIZE-2; j++){ 
+					nextBlock[i][j]->SetBlock(CDrawingArea::OBLOCK);
+				}
+			}
+			break;
+		case 4: //ZBlock
+			for(int j = 0; j < PREVIEW_SIZE-2; j++){ 
+				nextBlock[1][j]->SetBlock(CDrawingArea::ZBLOCK);
+			}
+			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::ZBLOCK);
+			}
+			break;
+		case 3: //SBlock
+			for(int j = 2; j < PREVIEW_SIZE; j++){ 
+				nextBlock[1][j]->SetBlock(CDrawingArea::SBLOCK);
+			}
+			for(int j = 1; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::SBLOCK);
+			}
+			break;
+		case 1: //JBlock
+			nextBlock[1][0]->SetBlock(CDrawingArea::JBLOCK);
+			for(int j = 0; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::JBLOCK);
+			}
+			break;
+		case 2: //LBlock
+			nextBlock[1][3]->SetBlock(CDrawingArea::LBLOCK);
+			for(int j = 1; j < PREVIEW_SIZE; j++){ 
+				nextBlock[2][j]->SetBlock(CDrawingArea::LBLOCK);
+			}
+			break;
+		case 6: //TBlock
+			for(int j = 0; j < PREVIEW_SIZE-1; j++){ 
+				nextBlock[1][j]->SetBlock(CDrawingArea::TBLOCK);
+			}
+			nextBlock[2][1]->SetBlock(CDrawingArea::TBLOCK);
+			break;
+		default:
+			break;
+	}
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
 }
+    
 
 //quit
 void GUI::OnQuit(){

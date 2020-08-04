@@ -36,7 +36,7 @@ void TextDisplay::poll() {
 ostream &operator<<(ostream &out, const TextDisplay &td) {
   out << "Level:	    " << td.level_ << endl;
   out << "Score:	    " << td.currScore_ << endl;
-  out << "High Score: " << td.highScore_ << endl;
+  out << "High Score:   " << td.highScore_ << endl;
   out << td.board_;
   return out;
 }

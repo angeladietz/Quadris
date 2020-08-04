@@ -49,7 +49,7 @@ public:
 					cr->fill_preserve(); 
 					break;  
 				case LBLOCK: 
-					cr->rectangle(0, 0, 40, 40);  
+					cr->rectangle(0, 0, 40, 40);   
 					cr->set_source_rgb(0, 0, 0.8); //dark blue
 					cr->fill_preserve(); 
 					break; 
@@ -69,17 +69,17 @@ public:
 					cr->fill_preserve(); 
 					break; 
 				case TBLOCK: 
-					cr->rectangle(0, 0, 40, 40);  
+					cr->rectangle(0, 0, 40, 40); 
 					cr->set_source_rgb(0.8, 0.8, 0.8); // grey
 					cr->fill_preserve(); 
 					break;  	
 				case HINTBLOCK: 
-					cr->rectangle(0, 0, 40, 40);  
+					cr->rectangle(0, 0, 40, 40);   
 					cr->set_source_rgb(0.3, 0, 0); // brown
 					cr->fill_preserve(); 
 					break; 
 				case STARBLOCK: 
-					cr->rectangle(0, 0, 40, 40); 
+					cr->rectangle(0, 0, 40, 40);  
 					cr->set_source_rgb(0.4, 0.8, 0.2); // black
 					cr->fill_preserve(); 
 					break;  

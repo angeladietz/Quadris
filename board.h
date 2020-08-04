@@ -37,7 +37,7 @@ struct PImpl_B{
 
 class Board: public Subject {
 	public:
-		    Board(Quadris*, int, std::string);
+		Board(Quadris*, int, std::string);
         ~Board();
 		
         Tile* getTileAt(int, int);
@@ -59,7 +59,7 @@ class Board: public Subject {
         void moveDownHeavyBlock();
 
         int getScore();
-        int getHighScore();
+        //int getHighScore();
         BlockType getNextBlockType();
         int getLevel();
 
