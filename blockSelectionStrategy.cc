@@ -97,7 +97,7 @@ void BlockSelectionStrategy::readSequenceFile(){
     try {
         blockFile.open(level_->sequenceFile_);
     } catch (const ifstream::failure& e){
-        std::cerr << "Exception occurred file handling file";
+        std::cerr << "Exception occurred handling file" << level_->sequenceFile_;
     }
 
     if (blockFile.is_open()){

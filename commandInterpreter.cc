@@ -105,9 +105,9 @@ vector<Action> CommandInterpreter::getCommands(string command){
     if (actions.size() > 0){
         for (int i = 0; i < multiplier; i++){
             for (int j = 0; j < actions.size(); j++){
-				if (canBeMultiplied(actions[j])){
-					multipliedActions.push_back(actions[j]);
-				}
+                if (multiplier == 1 || canBeMultiplied(actions[j])){
+                  multipliedActions.push_back(actions[j]);
+                }
             }
         }
         return multipliedActions;

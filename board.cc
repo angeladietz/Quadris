@@ -96,6 +96,10 @@ void Board::deleteGrid(){
         for (int i = 0; i < BOARD_HEIGHT; i++){
             for (int j = 0; j < BOARD_WIDTH; j++){
                 if (board_->grid_[i][j]!= nullptr){
+                    // TODO: Delete block while deleting board
+                    /* if (board_->grid_[i][j]->getBlock() != nullptr) { */
+                    /*     delete board_->grid_[i][j]; */
+                    /* } */
                     delete board_->grid_[i][j];
                 }
             }
