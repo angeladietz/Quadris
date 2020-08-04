@@ -23,9 +23,9 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->blockFactory_ = new BlockFactory(this);
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
+    board_->isRandom_ = true;
     initBlockSelector();
     initBlocks();
-    board_->isRandom_ = true;
     board_->blockCount_ = 0;
 }
 
