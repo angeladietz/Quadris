@@ -130,6 +130,7 @@ private:
 
 	//OnClick handler for start button
 	void startButtonClicked();
+	void clearNextBlock();
 };
 
 #endif

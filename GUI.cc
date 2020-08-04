@@ -67,11 +67,7 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	}
 	
 	//clear next block
-	for (int i = 0; i < PREVIEW_SIZE; i++) {
-		for (int j = 0; j < PREVIEW_SIZE; j++) {
-			nextBlock[i][j]->SetBlock(CDrawingArea::EMPTYBLOCK);
-		}
-	}
+	clearNextBlock();
 
 	// Associate button "clicked" events with local onButtonClicked() method defined below.
 	startButton->signal_clicked().connect( sigc::mem_fun( *this, &GUI::startButtonClicked ) );
@@ -176,12 +172,7 @@ void GUI::update(){
         }
     }
 	//clear next display
-	//MAKE THIS A HELPER FUNCTION - code duplication it's used above as well
-	for (int i = 0; i < PREVIEW_SIZE; i++) {
-		for (int j = 0; j < PREVIEW_SIZE; j++) {
-			nextBlock[i][j]->SetBlock(CDrawingArea::EMPTYBLOCK);
-		}
-	}
+	clearNextBlock();
 
 	//display next block on GUI
 	BlockType next = board_->getNextBlockType();
@@ -239,7 +230,6 @@ void GUI::update(){
 
 	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
 }
-    
 
 //quit
 void GUI::OnQuit(){
@@ -253,4 +243,13 @@ void GUI::startButtonClicked(){
 	quadris_->start();
     //quadris_->playGame(1, quadris);
 	//this->hide();
+}
+
+//Helper function to clear next block
+void GUI::clearNextBlock(){
+	for (int i = 0; i < PREVIEW_SIZE; i++) {
+		for (int j = 0; j < PREVIEW_SIZE; j++) {
+			nextBlock[i][j]->SetBlock(CDrawingArea::EMPTYBLOCK);
+		}
+	}
 }
