@@ -9,7 +9,6 @@ OBlock::OBlock(Board *board, bool isHeavy) {
     isHeavy_ = isHeavy;
     levelGen_ = board->getLevel();
     createBlock({{0,3}, {1,3}, {0,4}, {1,4}}, board);
-
 }
 
 OBlock::~OBlock() {}

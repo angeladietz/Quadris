@@ -81,9 +81,6 @@ Board::~Board(){
             if (board_->curBlock_ != nullptr){
                 delete board_->curBlock_;
             }
-            //if (board_->nextBlock_ != nullptr){
-            //    delete board_->nextBlock_;
-            //}
         }
 		deleteGrid();
     delete board_;
@@ -91,15 +88,10 @@ Board::~Board(){
 
 // Helper function for destructor to delete the grid
 void Board::deleteGrid(){
-    //TODO: DEPENDING ON IMPLEMENTATION, MAY NEED TO DELETE OTHER BLOCKS AS WELL
     if (board_ != nullptr){
         for (int i = 0; i < BOARD_HEIGHT; i++){
             for (int j = 0; j < BOARD_WIDTH; j++){
                 if (board_->grid_[i][j]!= nullptr){
-                    // TODO: Delete block while deleting board
-                    /* if (board_->grid_[i][j]->getBlock() != nullptr) { */
-                    /*     delete board_->grid_[i][j]; */
-                    /* } */
                     delete board_->grid_[i][j];
                 }
             }
@@ -280,6 +272,12 @@ void Board::moveDownHeavyBlock(){
 
 void Board::restart(){
     board_->quadris_->restartGame();
+}
+
+void Board::endGame(Block* block){
+    delete block;
+    notifyObservers();
+    board_->quadris_->endGame();
 }
 
 std::ostream& operator<< (ostream &out, Board &board) {

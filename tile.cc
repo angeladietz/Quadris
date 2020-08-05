@@ -10,8 +10,12 @@ Tile::Tile(int x, int y, char tile) : location_(x, y) {
 }
 
 Tile::~Tile(){
-    if (block_ != nullptr && isLastTileFromBlock()){
-        delete block_;
+    if (block_ != nullptr){
+        if (isLastTileFromBlock()) {
+            delete block_;
+        } else {
+           deleteFromBlock(); 
+        }
     }
 }
 

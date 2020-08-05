@@ -50,12 +50,10 @@ bool Controller::DoesRequireFile(Action action){
 }
 
 void Controller::handleCommand(string command){
-    cerr << "Checking cmd : " << command << " in controller" << endl;
     vector<string> cmds = ParseCommand(command);
     vector<Action> actions;
     for (size_t i = 0; i < cmds.size(); i++){
-        cerr<<"get actions for: "<<cmds[i] << endl;
-	      actions = controller_->commandInterpreter_->getCommands(ConvertToLowercase(cmds[i]));
+	    actions = controller_->commandInterpreter_->getCommands(ConvertToLowercase(cmds[i]));
 
         for (size_t j = 0; j < actions.size(); j++){
             if (DoesRequireFile(actions[j])){
@@ -84,7 +82,6 @@ void Controller::HandleCommandSequenceFromFile(string filename){
 
             command += nextCmd + " ";
         }
-	cerr<<"command: " << command<<endl;
         seqFile.close();
 
         handleCommand(command);

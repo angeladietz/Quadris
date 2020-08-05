@@ -83,6 +83,18 @@ void Quadris::restartGame(){
     playGame(1, quadris);
 }
 
+void Quadris::endGame(){
+    cout << "Game over"<<endl;
+    for (auto view: quadris_->views_){
+        quadris_->board_->unsubscribe(view);
+        delete view;
+    }
+	quadris_->views_.clear();
+    delete quadris_->controller_;
+    delete quadris_->board_;
+    exit(0);
+}
+
 void Quadris::resetQuadrisParams(){
     quadris_->textOnly_ = false;
     quadris_->level_ = 0;

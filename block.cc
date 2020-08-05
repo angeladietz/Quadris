@@ -7,26 +7,7 @@
 
 using namespace std;
 
-// TODO:
-// getGenLevel
-// heavy blocks
-
 Block::Block() {}
-
-void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
-
-    for (auto location: locations) {
-        Tile* blockTile = board->getTileAt(location[0], location[1]);
-        blockTile->setTileValue(type);
-		blockTile->setBlock(this);
-        tiles_.push_back(blockTile);
-    }
-
-    /* for (auto tile: tiles_) { */
-    /*     tile->setTileValue(type); */
-    /* } */
-
-}
 
 Block::~Block() {
     for (auto tile: tiles_){
@@ -34,9 +15,30 @@ Block::~Block() {
     }
 }
 
-// Private methods to check if block can move left
+void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
+    if (!canCreateBlock(locations, board)){
+        board->endGame(this);
+    }
 
-// TODO: The xy mapping to ij is wrong
+    for (auto location: locations) {
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
+        blockTile->setTileValue(type);
+		blockTile->setBlock(this);
+        tiles_.push_back(blockTile);
+    }
+}
+
+bool Block::canCreateBlock(vector<vector<int>> locations, Board* board){
+    for (auto location: locations) {
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
+        if (blockTile->isFilled()){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Private methods to check if block can move left
 
 BlockType Block::getBlockType() const{
     return blocktype;
@@ -44,12 +46,8 @@ BlockType Block::getBlockType() const{
 
 bool Block::canMove(Board* board, std::vector<int> dir) {
 
-    //std::cout << "Checking if can move!" << std::endl;
     std::vector<Tile*> tempTiles_;
     for (auto tile: tiles_) {
-        /* std::cout << "Directions " << dir[0] << " " << dir[1] << std::endl; */
-        //std::cout << "Old coordinates " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
-        //std::cout << "New Coordinates " << tile->getXCoordinate() + dir[0] << tile->getYCoordinate() + dir[1] << std::endl;
         int newX = tile->getXCoordinate() + dir[0];
         int newY = tile->getYCoordinate() + dir[1];
         if (newX < 0 || newX > 10 || newY < 0 || newY > 17) {
@@ -76,12 +74,10 @@ bool Block::canMove(Board* board, std::vector<int> dir) {
 }
 
 bool Block::canMoveLeft(Board* board) {
-    std::cout << "Moving left " << std::endl;
     return canMove(board, {-1, 0});
 }
 
 bool Block::canMoveRight(Board* board) {
-    std::cout << "HERE!! " << std::endl;
     return canMove(board, {1, 0});
 }
 
@@ -182,15 +178,12 @@ void Block::rotateClockwise(Board* board) {
     if (!canRotateClockwise(board)) { return; }
 
     std::vector<int> endPoints = getEndCoordinates();
-    std::cout << "Endpoints " << endPoints[0] << " " << endPoints[1] << " " << endPoints[2] << " " << endPoints[3] << std::endl;
     std::vector<Tile*> tempTiles_;
 
     // Find the new tiles
     for (auto tile:tiles_) {
-        std::cout << "Current " << tile->getXCoordinate() << tile->getYCoordinate() << std::endl;
        int newX = tile->getXCoordinate() - (tile->getXCoordinate() - endPoints[0]) + (endPoints[3] - tile->getYCoordinate());
        int newY = tile->getYCoordinate() + (tile->getXCoordinate() - endPoints[1]) + (endPoints[3] - tile->getYCoordinate());
-       std::cout << "New " << newX << newY << std::endl;
        tempTiles_.push_back(board->getTileAt(newX, newY));
     }
 
@@ -264,7 +257,6 @@ bool Block::canRotateClockwise(Board* board) {
                } 
             }
             if (!filledByCurrentTile) {
-                std::cerr<<"second check"<<std::endl;
                 return false;
             }
         }
@@ -297,7 +289,6 @@ bool Block::canRotateCounterClockwise(Board* board) {
                } 
             }
             if (!filledByCurrentTile) {
-                std::cerr<<"second check"<<std::endl;
                 return false;
             }
         }
