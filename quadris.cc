@@ -74,7 +74,7 @@ void Quadris::restartGame(){
         quadris_->board_->unsubscribe(view);
         delete view;
     }
-	  quadris_->views_.clear();
+	quadris_->views_.clear();
     delete quadris_->controller_;
     delete quadris_->board_;
     delete quadris_->gui_;
