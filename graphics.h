@@ -118,8 +118,6 @@ public:
   };
 
 private:
-  Board *board_;
-  Controller *controller_;
   Quadris *quadris_;
 
   // Gtk objects
