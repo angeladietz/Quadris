@@ -21,13 +21,14 @@ void TextDisplay::update() {
   currScore_ = board_->getScore();
   highScore_ = highScore;
   level_ = board_->getLevel();
+  isGameOver_ = board_->getIsGameOver();
   print();
 }
 
 void TextDisplay::poll() {
    string command;
    cout << endl<<">";
-   while (getline(cin,command)){
+   while (!isGameOver_ && getline(cin,command)){
 	   controller_->handleCommand(command);
 	   cout<<endl<<">";
    }

@@ -34,6 +34,7 @@ struct PImpl_B {
   int blockCount_;
   Quadris* quadris_;
   BlockFactory* blockFactory_;
+  bool isGameOver_;
 };
 
 class Board : public Subject {
@@ -56,13 +57,14 @@ class Board : public Subject {
   void showHint();
   Tile operator[](int);
   void restart();
-  void endGame(Block*);
+  void endGame();
   void updateTileAt(int, int);
   void moveDownHeavyBlock();
 
   int getScore();
   BlockType getNextBlockType();
   int getLevel();
+  bool getIsGameOver();
 
   friend std::ostream& operator<<(std::ostream&, Board&);
 

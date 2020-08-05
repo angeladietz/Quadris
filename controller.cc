@@ -56,6 +56,9 @@ void Controller::handleCommand(string command){
 	    actions = controller_->commandInterpreter_->getCommands(ConvertToLowercase(cmds[i]));
 
         for (size_t j = 0; j < actions.size(); j++){
+			if (controller_->board_->getIsGameOver()){
+				return;
+			}
             if (DoesRequireFile(actions[j])){
                 if (i < cmds.size()-1){
                     executeCommand(actions[j], cmds[++i]);
@@ -65,7 +68,9 @@ void Controller::handleCommand(string command){
                 executeCommand(actions[j]);
             }
         }
-        finishCommandExecution();
+		if (!controller_->board_->getIsGameOver()){
+			finishCommandExecution();
+		}
     }
 }
 

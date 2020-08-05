@@ -26,6 +26,7 @@ class TextDisplay : public Observer {
     int currScore_;
     int highScore_;
     int level_;
+	bool isGameOver_;
 };
 
 #endif

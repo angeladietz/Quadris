@@ -27,6 +27,7 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     initBlockSelector();
     initBlocks();
     board_->blockCount_ = 0;
+	board_->isGameOver_ = false;
 }
 
 void Board::initGrid(){
@@ -71,10 +72,10 @@ void Board::initBlocks(){
 
 //Destructor
 Board::~Board(){
-        if (board_->blockSelectionStrategy_ != nullptr){
+		if (board_->blockSelectionStrategy_ != nullptr){
             delete board_->blockSelectionStrategy_;
         }
-        if (board_->blockFactory_ != nullptr){
+       if (board_->blockFactory_ != nullptr){
             delete board_->blockFactory_;
         }
         if (nullptr != board_){
@@ -82,7 +83,7 @@ Board::~Board(){
                 delete board_->curBlock_;
             }
         }
-		deleteGrid();
+	deleteGrid();
     delete board_;
 }
 
@@ -109,6 +110,10 @@ int Board::getScore(){
 
 int Board::getLevel() {
     return board_->curLevel_;
+}
+
+bool Board::getIsGameOver(){
+	return board_->isGameOver_;
 }
 
 BlockType Board::getNextBlockType(){
@@ -221,7 +226,9 @@ void Board::dropTileBlock(){
 
 void Board::setupNextBlocks(){
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
+    if (!board_->isGameOver_){
+		board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
+	}
 }
 
 // Increases the level of the game by one
@@ -274,10 +281,10 @@ void Board::restart(){
     board_->quadris_->restartGame();
 }
 
-void Board::endGame(Block* block){
-    delete block;
+void Board::endGame(){
+	board_->isGameOver_ = true;
     notifyObservers();
-    board_->quadris_->endGame();
+	cout << "GAME OVER"<<endl;
 }
 
 std::ostream& operator<< (ostream &out, Board &board) {

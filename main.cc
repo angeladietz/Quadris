@@ -83,7 +83,8 @@ int main(int argc, char* argv[]) {
 
     Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
     quadris->playGame();
-    delete quadris;
+    cout << "delete quadris"<<endl;
+	delete quadris;
 
     return 0;
 }

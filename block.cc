@@ -17,7 +17,8 @@ Block::~Block() {
 
 void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
     if (!canCreateBlock(locations, board)){
-        board->endGame(this);
+        board->endGame();
+		return;
     }
 
     for (auto location: locations) {
