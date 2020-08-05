@@ -13,9 +13,9 @@ void printUsage() {
   cout << endl
        << "CS 247 Project - Quadris \n"
           "Help: ./quadris [args]\n\n"
-
-          // TODO: Add the text only mode when GUI is complete
+    
           "Possible Arguments:\n"
+          "  -text                    Run in text-only mode"
           "  -seed [seed]             Set the random number generator's seed\n"
           "  -scriptfile [file]       Use [file] instead of the default "
           "sequence.txt (only applies to level 0)\n"
@@ -32,7 +32,7 @@ void printUsage() {
           "move to the next block\n"
           "  levelup                  Move up a level\n"
           "  leveldown                Move down a level\n"
-          "  norandom [file]          Use [file] as a sequene of blocks\n"
+          "  norandom [file]          Use [file] as a sequence of blocks\n"
           "  random                   Make levels 3 and 4 random (true by "
           "default)\n"
           "  sequence [file]          Change sequence file\n"
