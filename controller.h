@@ -18,7 +18,6 @@ public:
   void handleCommand(std::string);
 
 private:
-  std::vector<std::string> ParseCommand(std::string);
   std::string ConvertToLowercase(std::string);
   std::vector<std::string> SplitCommand(std::string);
   void executeCommand(Action, std::string = "");

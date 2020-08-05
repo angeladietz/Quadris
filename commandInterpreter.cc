@@ -90,7 +90,9 @@ vector<Action> CommandInterpreter::getCommands(string command) {
   } else {
     // check if a minimal string is a prefix of command
     for (auto const &it : commandInterpreter_->cmdStrings_) {
-      if (it.first == cmdText.substr(0, it.first.length())) {
+      if (it.first == cmdText.substr(0, it.first.length()) &&
+		  it.second.length() >= cmdText.length() &&
+		  cmdText == it.second.substr(0,cmdText.length())) {
         actions = commandInterpreter_->cmdActions_[it.second];
       }
     }

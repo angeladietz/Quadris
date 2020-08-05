@@ -27,10 +27,6 @@ Controller::~Controller() {
   }
 }
 
-vector<string> Controller::ParseCommand(string command) {
-  return SplitCommand(command);
-}
-
 vector<string> Controller::SplitCommand(string command) {
   istringstream iss(command);
   vector<string> cmds{istream_iterator<string>{iss},
@@ -51,7 +47,7 @@ bool Controller::DoesRequireFile(Action action) {
 }
 
 void Controller::handleCommand(string command) {
-  vector<string> cmds = ParseCommand(command);
+  vector<string> cmds = SplitCommand(command);
   vector<Action> actions;
   for (size_t i = 0; i < cmds.size(); i++) {
     actions = controller_->commandInterpreter_->getCommands(
