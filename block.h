@@ -28,8 +28,8 @@ class Block {
         void moveDown(Board*);
         void dropBlock(Board*);
 
+        std::vector<std::vector<int>> getBlockHint(Board*);
         BlockType getBlockType() const;
-        bool getTilePositions() const;
         bool isHeavy();
         int getGenLevel();
         int getNumTiles();
@@ -50,6 +50,8 @@ class Block {
         bool canRotateClockwise(Board*);
         bool canRotateCounterClockwise(Board*);
 
+        void resetToLocations(Board*, std::vector<std::vector<int>>, bool=false);
+        std::vector<std::vector<int>> getCurrentCoordinates();
         std::vector<int> getEndCoordinates();
         bool canCreateBlock(std::vector<std::vector<int>>, Board*);
         void createBlock(std::vector<std::vector<int>>, Board*);

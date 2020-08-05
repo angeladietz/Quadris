@@ -36,7 +36,7 @@ BlockFactory::~BlockFactory(){
 
 Block* BlockFactory::createBlock(BlockType bType, bool isHeavy){
     if (factories_.count(bType) > 0){
-        return factories_[bType]->create(board_, isHeavy);
+		return factories_[bType]->create(board_, isHeavy);
     }
     return nullptr;
 }

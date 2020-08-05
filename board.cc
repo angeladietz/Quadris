@@ -24,9 +24,11 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
     board_->isRandom_ = true;
+    board_->isHintSet_ = false;
     initBlockSelector();
     initBlocks();
     board_->blockCount_ = 0;
+	board_->isGameOver_ = false;
 }
 
 void Board::initGrid(){
@@ -71,10 +73,10 @@ void Board::initBlocks(){
 
 //Destructor
 Board::~Board(){
-        if (board_->blockSelectionStrategy_ != nullptr){
+		if (board_->blockSelectionStrategy_ != nullptr){
             delete board_->blockSelectionStrategy_;
         }
-        if (board_->blockFactory_ != nullptr){
+       if (board_->blockFactory_ != nullptr){
             delete board_->blockFactory_;
         }
         if (nullptr != board_){
@@ -82,7 +84,7 @@ Board::~Board(){
                 delete board_->curBlock_;
             }
         }
-		deleteGrid();
+	deleteGrid();
     delete board_;
 }
 
@@ -109,6 +111,10 @@ int Board::getScore(){
 
 int Board::getLevel() {
     return board_->curLevel_;
+}
+
+bool Board::getIsGameOver(){
+	return board_->isGameOver_;
 }
 
 BlockType Board::getNextBlockType(){
@@ -221,7 +227,9 @@ void Board::dropTileBlock(){
 
 void Board::setupNextBlocks(){
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
-    board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
+    if (!board_->isGameOver_){
+		board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
+	}
 }
 
 // Increases the level of the game by one
@@ -274,10 +282,37 @@ void Board::restart(){
     board_->quadris_->restartGame();
 }
 
-void Board::endGame(Block* block){
-    delete block;
+void Board::endGame(){
+	board_->isGameOver_ = true;
     notifyObservers();
+    // TODO: Should this be restart instead of end?
     board_->quadris_->endGame();
+}
+
+bool Board::isHintSet() {
+    return board_->isHintSet_;
+}
+
+void Board::drawHint() {
+    for (auto loc: board_->hintLocations_) {
+        Tile* currTile = getTileAt(loc[0], loc[1]);
+        currTile->setTileValue('?');
+    }
+    board_->isHintSet_ = true;
+}
+
+void Board::clearHint() {
+    for (auto loc: board_->hintLocations_) {
+        Tile* currTile = getTileAt(loc[0], loc[1]);
+        currTile->reset();
+    }
+    board_->isHintSet_ = false;
+    board_->hintLocations_.clear();
+}
+
+void Board::showHint() {
+    board_->hintLocations_ = board_->curBlock_->getBlockHint(this);
+    drawHint();
 }
 
 std::ostream& operator<< (ostream &out, Board &board) {

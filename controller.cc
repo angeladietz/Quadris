@@ -56,6 +56,9 @@ void Controller::handleCommand(string command){
 	    actions = controller_->commandInterpreter_->getCommands(ConvertToLowercase(cmds[i]));
 
         for (size_t j = 0; j < actions.size(); j++){
+			if (controller_->board_->getIsGameOver()){
+				return;
+			}
             if (DoesRequireFile(actions[j])){
                 if (i < cmds.size()-1){
                     executeCommand(actions[j], cmds[++i]);
@@ -65,7 +68,9 @@ void Controller::handleCommand(string command){
                 executeCommand(actions[j]);
             }
         }
-        finishCommandExecution();
+		if (!controller_->board_->getIsGameOver()){
+			finishCommandExecution();
+		}
     }
 }
 
@@ -89,6 +94,11 @@ void Controller::HandleCommandSequenceFromFile(string filename){
 }
 
 void Controller::executeCommand(Action action, string filename){
+
+    if (controller_->board_->isHintSet()) {
+        controller_->board_->clearHint();
+    }
+
     switch(action){
         case LEFT:
             controller_->board_->moveCurBlockLeft();
@@ -148,6 +158,7 @@ void Controller::executeCommand(Action action, string filename){
             controller_->board_->restart();
             break;
         case HINT:
+            controller_->board_->showHint();
             break;
     }
 }

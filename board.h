@@ -31,9 +31,12 @@ struct PImpl_B {
   int curScore_;
   int highScore_;
   bool isRandom_;
+  bool isHintSet_;
+  std::vector<std::vector<int>> hintLocations_;
   int blockCount_;
   Quadris* quadris_;
   BlockFactory* blockFactory_;
+  bool isGameOver_;
 };
 
 class Board : public Subject {
@@ -54,15 +57,18 @@ class Board : public Subject {
   void setRand();
   void setCurBlock(BlockType);
   void showHint();
+  void clearHint();
   Tile operator[](int);
   void restart();
-  void endGame(Block*);
+  void endGame();
   void updateTileAt(int, int);
   void moveDownHeavyBlock();
 
+  bool isHintSet();
   int getScore();
   BlockType getNextBlockType();
   int getLevel();
+  bool getIsGameOver();
 
   friend std::ostream& operator<<(std::ostream&, Board&);
 
@@ -80,6 +86,7 @@ class Board : public Subject {
   bool doesLevelDropTiles();
   void dropTileBlock();
   void setupNextBlocks();
+  void drawHint();
   PImpl_B* board_;
 };
 
