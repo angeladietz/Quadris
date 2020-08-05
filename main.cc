@@ -1,3 +1,4 @@
+#include "controller.h"
 #include "graphics.h"
 #include "quadris.h"
 #include <cstdlib>

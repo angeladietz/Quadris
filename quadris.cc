@@ -93,4 +93,5 @@ void Quadris::restartGame() {
 void Quadris::resetQuadrisParams() {
   quadris_->textOnly_ = false;
   quadris_->level_ = 0;
+  quadris_->scriptFile_ = "sequence.txt";
 }
