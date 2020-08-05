@@ -81,11 +81,8 @@ int main(int argc, char* argv[]) {
         std::srand(time(NULL));
     }
 
-    cerr << "Initializing quadris" << endl;
-    
     Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
     quadris->playGame();
-    cerr << "Finished game"<<endl;
     delete quadris;
 
     return 0;
