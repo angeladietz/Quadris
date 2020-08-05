@@ -4,7 +4,7 @@ Quadris is a game of Tetris but with a twist - unlike Tetris, Quadris is not rea
 
 This project uses many OOP principles and design patterns as taught by Prof. Scott in CS 247 (Spring 2020).
 
-## Building the game
+## Building the game:
 Build the game by typing `make` and run it with `./quadris` followed by command line options as seen below.
 
 ## Command line options:
