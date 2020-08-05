@@ -31,7 +31,6 @@ class Block {
         BlockType getBlockType() const;
         bool getTilePositions() const;
         bool isHeavy();
-        char getType();
         int getGenLevel();
         int getNumTiles();
         void removeTile(Tile*);
