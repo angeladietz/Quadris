@@ -7,7 +7,6 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
-#include "GUI.h"
 #include "observer.h"
 #include "textDisplay.h"
 #include <vector>
@@ -19,7 +18,7 @@ using namespace std;
 Quadris::Quadris(bool textOnly, int startLevel, string scriptFile){
     quadris_ = new PImpl_Q;
     quadris_->textOnly_ = textOnly;
-    quadris_->gui_ = nullptr;
+    quadris_->graphics_ = nullptr;
     quadris_->level_ = startLevel <= 4 && startLevel >= 0 ? startLevel : 0;
     quadris_->scriptFile_ = scriptFile;
     highScore = 0;
@@ -36,8 +35,8 @@ Quadris::~Quadris(){
         if (quadris_->board_ != nullptr){
             delete quadris_->board_;
         }
-        if (quadris_->gui_ != nullptr){
-            delete quadris_->gui_;
+        if (quadris_->graphics_ != nullptr){
+            delete quadris_->graphics_;
         }
         delete quadris_;
     }
@@ -58,9 +57,9 @@ void Quadris::playGame(int argc, char* argv[]){
     if(!quadris_->textOnly_){
         Gtk::Main app(argc, argv);
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("GUI.glade");
-        builder->get_widget_derived("mainWindow", quadris_->gui_, quadris_->controller_, quadris_->board_, this);
-        Gtk::Main::run(*quadris_->gui_);
-        delete quadris_->gui_;
+        builder->get_widget_derived("mainWindow", quadris_->graphics_, quadris_->controller_, quadris_->board_, this);
+        Gtk::Main::run(*quadris_->graphics_);
+        delete quadris_->graphics_;
     }
     else{
         quadris_->board_->subscribe(quadris_->views_[0]);
@@ -71,7 +70,7 @@ void Quadris::playGame(int argc, char* argv[]){
 
 void Quadris::start(){
     quadris_->board_->subscribe(quadris_->views_[0]);
-    quadris_->board_->subscribe(quadris_->gui_);
+    quadris_->board_->subscribe(quadris_->graphics_);
     quadris_->board_->notifyObservers();
     quadris_->views_[0]->poll();
 }
@@ -84,7 +83,7 @@ void Quadris::restartGame(){
 	quadris_->views_.clear();
     delete quadris_->controller_;
     delete quadris_->board_;
-    delete quadris_->gui_;
+    delete quadris_->graphics_;
     resetQuadrisParams();
     char* quadris[0];
     playGame(1, quadris);

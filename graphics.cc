@@ -10,13 +10,13 @@
 #include "block.h"
 #include "controller.h"
 #include "observer.h"
-#include "GUI.h"
+#include "graphics.h"
 #include "quadris.h"
 
 using namespace std;
 
 //constructor
-GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board, Quadris* quadris): Gtk::Window(cobject), _builder(builder) {
+Graphics::Graphics(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Controller* controller, Board* board, Quadris* quadris): Gtk::Window(cobject), _builder(builder) {
 
 	controller_ = controller;
 	board_ = board;
@@ -71,12 +71,12 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	clearNextBlock();
 
 	// Associate button "clicked" events with local onButtonClicked() method defined below.
-	startButton->signal_clicked().connect( sigc::mem_fun( *this, &GUI::startButtonClicked ) );
+	startButton->signal_clicked().connect( sigc::mem_fun( *this, &Graphics::startButtonClicked ) );
 	
 }
 
 //Destructor
-GUI::~GUI(){
+Graphics::~Graphics(){
     if (objectContainer != nullptr){
         delete objectContainer;
     }
@@ -129,15 +129,15 @@ GUI::~GUI(){
     }
 }
 
-//draw blocks on the GUI
-void GUI::update(){
+//draw blocks on the gui
+void Graphics::update(){
 
 	levelLabel->set_text("Level: " + to_string(board_->getLevel()));
     scoreLabel->set_text("Score: " + to_string(board_->getScore()));
     hiScoreLabel->set_text("Hi Score: " + to_string(highScore));
 
 	char tile;
-	//iterate over text display board to update GUI
+	//iterate over text display board to update gui
 	for (int row = 0; row < BOARD_HEIGHT; row++){
         for (int col = 0; col < BOARD_WIDTH; col++) {
 			tile = board_->getTileAt(col,row)->getTileValue();
@@ -178,10 +178,10 @@ void GUI::update(){
 	//clear next display
 	clearNextBlock();
 
-	//display next block on GUI
+	//display next block on gui
 	BlockType next = board_->getNextBlockType();
 
-	//print next set of blocks in GUI
+	//print next set of blocks in gui
 	switch (next) {
 		case 0: //IBlock
 			for(int j = 0; j < PREVIEW_SIZE; j++){ 
@@ -237,19 +237,19 @@ void GUI::update(){
 }
 
 //quit
-void GUI::OnQuit(){
+void Graphics::OnQuit(){
 	hide(); 
 }
 
 //OnClick handler for start button
-void GUI::startButtonClicked(){
+void Graphics::startButtonClicked(){
 	this->startButton->hide();
 	char* quadris[0];
 	quadris_->start();
 }
 
 //Helper function to clear next block
-void GUI::clearNextBlock(){
+void Graphics::clearNextBlock(){
 	for (int i = 0; i < PREVIEW_SIZE; i++) {
 		for (int j = 0; j < PREVIEW_SIZE; j++) {
 			nextBlock[i][j]->SetBlock(CDrawingArea::EMPTYBLOCK);

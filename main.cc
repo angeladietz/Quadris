@@ -1,5 +1,5 @@
 #include "quadris.h"
-#include "GUI.h"
+#include "graphics.h"
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -17,7 +17,6 @@ void printUsage() {
        << "CS 247 Project - Quadris \n"
           "Help: ./quadris [args]\n\n"
 
-          // TODO: Add the text only mode when GUI is complete
           "Possible Arguments:\n"
           "  -seed [seed]             Set the random number generator's seed\n"
           "  -scriptfile [file]       Use [file] instead of the default "
