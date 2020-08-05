@@ -12,7 +12,7 @@ Build the game by typing `make` and run it with `./quadris` followed by command 
 - -seed [seed]: sets the random number generator's seed
 - -scriptfile [file]: generates block based on file instead of default sequence.txt (only applies to level 0)
 - -startlevel [n]: starts game on level n
-- -h  or  --help           Display a help message with these CLI options and commands
+- -h  or  --help : display a help message with these CLI options and in-game commands
 
 Example: `./quadris -text`
 
