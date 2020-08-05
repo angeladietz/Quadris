@@ -1,76 +1,59 @@
 #include "tile.h"
-#include "location.h"
 #include "block.h"
+#include "location.h"
 
 using namespace std;
 
 Tile::Tile(int x, int y, char tile) : location_(x, y) {
-   tileValue_ = tile;
-   block_ = nullptr;
+  tileValue_ = tile;
+  block_ = nullptr;
 }
 
-Tile::~Tile(){
-    if (block_ != nullptr){
-        if (isLastTileFromBlock()) {
-            delete block_;
-        } else {
-           deleteFromBlock(); 
-        }
+Tile::~Tile() {
+  if (block_ != nullptr) {
+    if (isLastTileFromBlock()) {
+      delete block_;
+    } else {
+      deleteFromBlock();
     }
+  }
 }
 
-bool Tile::isFilled() const {
-    return tileValue_ != ' ';
+bool Tile::isFilled() const { return tileValue_ != ' '; }
+
+char Tile::getTileValue() const { return tileValue_; }
+
+void Tile::setTileValue(const char tile) { tileValue_ = tile; }
+
+Block *Tile::getBlock() { return block_; }
+
+int Tile::getXCoordinate() { return location_.getX(); }
+
+int Tile::getYCoordinate() { return location_.getY(); }
+
+void Tile::setBlock(Block *block) { block_ = block; }
+
+bool Tile::isLastTileFromBlock() {
+  if (block_ != nullptr && block_->getNumTiles() == 1) {
+    return true;
+  }
+  return false;
 }
 
-char Tile::getTileValue() const {
-    return tileValue_;
+void Tile::deleteFromBlock() {
+  block_->removeTile(this);
+  reset();
 }
 
-void Tile::setTileValue(const char tile) {
-    tileValue_ = tile;
+void Tile::moveDownOneRow(Board *board) { block_->moveTileDown(this, board); }
+
+void Tile::reset() {
+  setTileValue(' ');
+  block_ = nullptr;
 }
 
-Block* Tile::getBlock(){
-    return block_;
-}
+std::ostream &operator<<(std::ostream &out, Tile &tile) {
 
-int Tile::getXCoordinate(){
-    return location_.getX();
-}
-
-int Tile::getYCoordinate(){
-    return location_.getY();
-}
-
-void Tile::setBlock(Block* block){
-    block_ = block;
-}
-
-bool Tile::isLastTileFromBlock(){
-	if (block_ != nullptr && block_->getNumTiles() == 1){
-        return true;
-    }
-    return false;
-}
-
-void Tile::deleteFromBlock(){
-    block_->removeTile(this);
-    reset();
-}
-
-void Tile::moveDownOneRow(Board* board){
-    block_->moveTileDown(this, board);
-}
-
-void Tile::reset(){
-    setTileValue(' ');
-    block_ = nullptr;
-}
-
-std::ostream& operator<< (std::ostream& out, Tile& tile) {
-
-		out << tile.getTileValue();
-    return out;
-
+  out << tile.getTileValue();
+  return out;
 }

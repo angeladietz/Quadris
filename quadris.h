@@ -9,7 +9,7 @@
 
 extern int highScore;
 
-//Forward declaration of Board class
+// Forward declaration of Board class
 class Board;
 
 struct PImpl_Q{
@@ -33,10 +33,10 @@ class Quadris {
 		void start();
 		void endGame();
 
-	private:
-		void resetQuadrisParams();
-		PImpl_Q* quadris_;
-		TextDisplay* td;
+private:
+  void resetQuadrisParams();
+  PImpl_Q *quadris_;
+  TextDisplay *td;
 };
 
 #endif

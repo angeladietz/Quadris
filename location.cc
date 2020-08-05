@@ -1,6 +1,6 @@
 #include "location.h"
 
-Location::Location(int x, int y): x_(x), y_(y) {}
+Location::Location(int x, int y) : x_(x), y_(y) {}
 
 int Location::getX() { return x_; }
 

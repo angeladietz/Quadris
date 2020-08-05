@@ -1,14 +1,15 @@
 #include "quadris.h"
-#include "controller.h"
 #include "blockSelectionStrategy.h"
+#include "controller.h"
+#include "graphics.h"
 #include "level0.h"
 #include "level1.h"
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
-#include "textDisplay.h"
 #include "GUI.h"
 #include "observer.h"
+#include "textDisplay.h"
 #include <vector>
 #include <gtkmm.h> 
 #include <cairomm/cairomm.h> 
@@ -40,14 +41,19 @@ Quadris::~Quadris(){
         }
         delete quadris_;
     }
+    if (quadris_->board_ != nullptr) {
+      delete quadris_->board_;
+    }
+    delete quadris_;
 }
 
 void Quadris::playGame(int argc, char* argv[]){
     quadris_->board_ = new Board(this, quadris_->level_, quadris_->scriptFile_);
 
-    quadris_->controller_ = new Controller(quadris_->board_);
+  quadris_->controller_ = new Controller(quadris_->board_);
 
-    quadris_->views_.push_back(new TextDisplay(quadris_->board_, quadris_->controller_));
+  quadris_->views_.push_back(
+      new TextDisplay(quadris_->board_, quadris_->controller_));
 
     if(!quadris_->textOnly_){
         Gtk::Main app(argc, argv);
@@ -84,11 +90,11 @@ void Quadris::restartGame(){
     playGame(1, quadris);
 }
 
-void Quadris::resetQuadrisParams(){
-    quadris_->textOnly_ = false;
-    quadris_->level_ = 0;
-    // TODO: Do we really need to reset our input to sequence.txt?
-    // As in, at reset, do we want to use the default sequence file
-    // Or continue using the scriptfile that was passed in?
-    /* quadris_->scriptFile_ = "sequence.txt"; */
+void Quadris::resetQuadrisParams() {
+  quadris_->textOnly_ = false;
+  quadris_->level_ = 0;
+  // TODO: Do we really need to reset our input to sequence.txt?
+  // As in, at reset, do we want to use the default sequence file
+  // Or continue using the scriptfile that was passed in?
+  /* quadris_->scriptFile_ = "sequence.txt"; */
 }
