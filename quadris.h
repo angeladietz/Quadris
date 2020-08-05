@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "observer.h"
 #include "textDisplay.h"
+#include "graphics.h"
 #include <string>
 
 extern int highScore;
@@ -11,24 +12,26 @@ extern int highScore;
 // Forward declaration of Board class
 class Board;
 
-struct PImpl_Q {
-  Board *board_;
-  Controller *controller_;
-  std::vector<Observer *> views_;
-  bool textOnly_;
-  int level_;
-  std::string scriptFile_;
+struct PImpl_Q{
+	Board* board_;
+	Controller* controller_;
+	Graphics* graphics_;
+	std::vector<Observer*> views_;
+	bool textOnly_;
+	int level_;
+	std::string scriptFile_;
 };
 
 class Quadris {
-public:
-  Quadris(bool, int, std::string);
-  ~Quadris();
-  void playGame();
-  int getScore() const;
-  void updateScore(int);
-  void restartGame();
-  void endGame();
+	public:
+		Quadris(bool textOnly, int startLevel, std::string scriptFile);
+		~Quadris();
+		void playGame(int argc, char* argv[]);
+		int getScore() const;
+		void updateScore(int);
+		void restartGame();
+		void start();
+		void endGame();
 
 private:
   void resetQuadrisParams();

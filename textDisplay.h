@@ -21,8 +21,6 @@ public:
 private:
   void print();
   void printBlock(BlockType);
-  Controller *controller_;
-  Board *board_;
   BlockType nextBlock_;
   int currScore_;
   int highScore_;

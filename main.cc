@@ -1,3 +1,5 @@
+#include "controller.h"
+#include "graphics.h"
 #include "quadris.h"
 #include <cstdlib>
 #include <cstring>
@@ -13,7 +15,7 @@ void printUsage() {
   cout << endl
        << "CS 247 Project - Quadris \n"
           "Help: ./quadris [args]\n\n"
-    
+
           "Possible Arguments:\n"
           "  -text                    Run in text-only mode"
           "  -seed [seed]             Set the random number generator's seed\n"
@@ -82,7 +84,7 @@ int main(int argc, char *argv[]) {
   }
 
   Quadris *quadris = new Quadris(textOnly, startLevel, scriptFile);
-  quadris->playGame();
+  quadris->playGame(argc, argv);
   cout << "delete quadris" << endl;
   delete quadris;
 
