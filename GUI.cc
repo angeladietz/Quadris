@@ -21,7 +21,6 @@ GUI::GUI(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder, Con
 	controller_ = controller;
 	board_ = board;
 	quadris_ = quadris;
-	board_->subscribe(this);
 
 	_builder->get_widget("objectContainer", objectContainer);
 	_builder->get_widget("scoreBoard", scoreBoard);
