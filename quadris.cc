@@ -44,16 +44,7 @@ void Quadris::playGame() {
   quadris_->views_.push_back(
       new TextDisplay(quadris_->board_, quadris_->controller_));
 
-  /* if (!quadris_->textOnly_){ */
-  /*     quadris_->views_.push_back(new Graphics()); */
-  /* } */
-
   quadris_->board_->subscribe(quadris_->views_[0]);
-  // quadris_->board_->subscribe(quadris_->views_[1]);
-
-  // cerr<<"end of game"<<endl;
-  // TODO: FINISH THIS
-
   quadris_->board_->notifyObservers();
   quadris_->views_[0]->poll();
 }
@@ -73,8 +64,4 @@ void Quadris::restartGame() {
 void Quadris::resetQuadrisParams() {
   quadris_->textOnly_ = false;
   quadris_->level_ = 0;
-  // TODO: Do we really need to reset our input to sequence.txt?
-  // As in, at reset, do we want to use the default sequence file
-  // Or continue using the scriptfile that was passed in?
-  /* quadris_->scriptFile_ = "sequence.txt"; */
 }
