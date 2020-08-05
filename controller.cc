@@ -78,7 +78,6 @@ void Controller::handleCommand(string command) {
 void Controller::HandleCommandSequenceFromFile(string filename) {
   ifstream seqFile;
 
-  // TODO: ADD EXCEPTION HANDLING!
   seqFile.open(filename);
 
   if (seqFile.is_open()) {

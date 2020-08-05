@@ -22,7 +22,6 @@ void CommandInterpreter::initCmdActions() {
 
   commandInterpreter_->cmdActions_.clear();
 
-  // TODO: REFACTOR THIS
   commandInterpreter_->cmdActions_["left"] = {LEFT};
   commandInterpreter_->cmdActions_["right"] = {RIGHT};
   commandInterpreter_->cmdActions_["down"] = {DOWN};
@@ -52,7 +51,6 @@ void CommandInterpreter::initCmdStrings() {
 
   commandInterpreter_->cmdStrings_.clear();
 
-  // TODO: Refactor
   commandInterpreter_->cmdStrings_["lef"] = "left";
   commandInterpreter_->cmdStrings_["ri"] = "right";
   commandInterpreter_->cmdStrings_["do"] = "down";

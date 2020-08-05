@@ -41,7 +41,6 @@ bool Block::canCreateBlock(vector<vector<int>> locations, Board *board) {
 }
 
 // Private methods to check if block can move left
-
 BlockType Block::getBlockType() const { return blocktype; }
 
 bool Block::canMove(Board *board, std::vector<int> dir) {

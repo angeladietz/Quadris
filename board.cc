@@ -269,7 +269,6 @@ void Board::moveDownHeavyBlock() {
 void Board::restart() { board_->quadris_->restartGame(); }
 
 void Board::endGame() {
-  // TODO: Should this be restart instead of end?
   board_->isGameOver_ = true;
   notifyObservers();
 }

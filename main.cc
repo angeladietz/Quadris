@@ -1,7 +1,5 @@
-#include "quadris.h"
 #include "graphics.h"
-#include <iostream>
-#include <cstring>
+#include "quadris.h"
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
@@ -18,6 +16,7 @@ void printUsage() {
           "Help: ./quadris [args]\n\n"
 
           "Possible Arguments:\n"
+          "  -text                    Run in text-only mode"
           "  -seed [seed]             Set the random number generator's seed\n"
           "  -scriptfile [file]       Use [file] instead of the default "
           "sequence.txt (only applies to level 0)\n"
@@ -34,7 +33,7 @@ void printUsage() {
           "move to the next block\n"
           "  levelup                  Move up a level\n"
           "  leveldown                Move down a level\n"
-          "  norandom [file]          Use [file] as a sequene of blocks\n"
+          "  norandom [file]          Use [file] as a sequence of blocks\n"
           "  random                   Make levels 3 and 4 random (true by "
           "default)\n"
           "  sequence [file]          Change sequence file\n"
@@ -83,10 +82,10 @@ int main(int argc, char *argv[]) {
     std::srand(time(NULL));
   }
 
-    Quadris* quadris = new Quadris(textOnly, startLevel, scriptFile);
-    quadris->playGame(argc, argv);
-    cout << "delete quadris"<<endl;
-    delete quadris;
+  Quadris *quadris = new Quadris(textOnly, startLevel, scriptFile);
+  quadris->playGame(argc, argv);
+  cout << "delete quadris" << endl;
+  delete quadris;
 
   return 0;
 }
