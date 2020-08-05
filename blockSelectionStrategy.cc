@@ -103,7 +103,6 @@ void BlockSelectionStrategy::readSequenceFile(){
     if (blockFile.is_open()){
         char nextBlock;
         while(blockFile>>nextBlock){
-            cerr<<nextBlock<<endl;
             BlockType bType = getBlockType(nextBlock);
             if (bType != INVALID_BLOCK){
                 level_->blockList_.push_back(bType);

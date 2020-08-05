@@ -82,7 +82,6 @@ void Controller::HandleCommandSequenceFromFile(string filename){
 
             command += nextCmd + " ";
         }
-	cerr<<"command: " << command<<endl;
         seqFile.close();
 
         handleCommand(command);
