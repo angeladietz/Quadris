@@ -56,7 +56,7 @@ class Board : public Subject {
   void showHint();
   Tile operator[](int);
   void restart();
-  void endGame();
+  void endGame(Block*);
   void updateTileAt(int, int);
   void moveDownHeavyBlock();
 

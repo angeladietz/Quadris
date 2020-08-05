@@ -274,7 +274,8 @@ void Board::restart(){
     board_->quadris_->restartGame();
 }
 
-void Board::endGame(){
+void Board::endGame(Block* block){
+    delete block;
     notifyObservers();
     board_->quadris_->endGame();
 }
