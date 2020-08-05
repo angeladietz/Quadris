@@ -79,6 +79,11 @@ void Controller::HandleCommandSequenceFromFile(string filename) {
   ifstream seqFile;
 
   seqFile.open(filename);
+  /* try { */
+  /*   seqFile.open(filename); */
+  /* } catch (const ifstream::failure &e) { */
+  /*   std::cerr << "Exception occurred handling file " << filename; */
+  /* } */
 
   if (seqFile.is_open()) {
     string command = "";
