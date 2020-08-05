@@ -35,3 +35,4 @@ Example: `./quadris -text`
 ## Bonus features:
 - Commands can be shortened (eg. lef -> left)
 - Commands can be executed multiple times (eg. 3ri -> moves to the right by three cells)
+- CLI help can be invoked with the -h or --help command line options to review CLI options and in-game commands
