@@ -51,6 +51,7 @@ class Block {
         bool canRotateCounterClockwise(Board*);
 
         std::vector<int> getEndCoordinates();
+        bool canCreateBlock(std::vector<std::vector<int>>, Board*);
         void createBlock(std::vector<std::vector<int>>, Board*);
 
         // Member variables

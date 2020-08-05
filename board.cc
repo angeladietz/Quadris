@@ -274,6 +274,11 @@ void Board::restart(){
     board_->quadris_->restartGame();
 }
 
+void Board::endGame(){
+    notifyObservers();
+    board_->quadris_->endGame();
+}
+
 std::ostream& operator<< (ostream &out, Board &board) {
 
     for (int row = 0; row < BOARD_HEIGHT; row++){

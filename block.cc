@@ -7,26 +7,7 @@
 
 using namespace std;
 
-// TODO:
-// getGenLevel
-// heavy blocks
-
 Block::Block() {}
-
-void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
-
-    for (auto location: locations) {
-        Tile* blockTile = board->getTileAt(location[0], location[1]);
-        blockTile->setTileValue(type);
-		blockTile->setBlock(this);
-        tiles_.push_back(blockTile);
-    }
-
-    /* for (auto tile: tiles_) { */
-    /*     tile->setTileValue(type); */
-    /* } */
-
-}
 
 Block::~Block() {
     for (auto tile: tiles_){
@@ -34,9 +15,30 @@ Block::~Block() {
     }
 }
 
-// Private methods to check if block can move left
+void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
+    if (!canCreateBlock(locations, board)){
+        board->endGame();
+    }
 
-// TODO: The xy mapping to ij is wrong
+    for (auto location: locations) {
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
+        blockTile->setTileValue(type);
+		blockTile->setBlock(this);
+        tiles_.push_back(blockTile);
+    }
+}
+
+bool Block::canCreateBlock(vector<vector<int>> locations, Board* board){
+    for (auto location: locations) {
+        Tile* blockTile = board->getTileAt(location[0], location[1]);
+        if (blockTile->isFilled()){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Private methods to check if block can move left
 
 BlockType Block::getBlockType() const{
     return blocktype;
