@@ -1,5 +1,5 @@
-#ifndef GRAPHICAL_DISPLAY
-#define GRAPHICAL_DISPLAY
+#ifndef _GRAPHICS_
+#define _GRAPHICS_
 
 #include <gtkmm.h> 
 #include <cairomm/cairomm.h> 
