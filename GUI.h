@@ -73,7 +73,7 @@ public:
 					break;  	
 				case HINTBLOCK: 
 					cr->rectangle(0, 0, 40, 40);   
-					cr->set_source_rgb(0.4, 0.8, 0.2); // black
+					cr->set_source_rgb(0, 0, 0); // black
 					cr->fill_preserve(); 
 					break; 
 				case STARBLOCK: 
@@ -83,7 +83,7 @@ public:
 					break;  
 				case EMPTYBLOCK: 
 					cr->rectangle(0, 0, 40, 40); 
-					cr->set_source_rgb(0, 0, 0); // white
+					cr->set_source_rgb(1, 1, 1); // white
 					cr->fill_preserve(); 
 					break;  																			
 				} 

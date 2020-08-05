@@ -166,6 +166,9 @@ void GUI::update(){
 				case '*':
 					drawBlocks[row][col]->SetBlock(CDrawingArea::STARBLOCK);
 					break;
+				case '?':
+					drawBlocks[row][col]->SetBlock(CDrawingArea::HINTBLOCK);
+					break;
 				case ' ':
 					drawBlocks[row][col]->SetBlock(CDrawingArea::EMPTYBLOCK);
 					break;
