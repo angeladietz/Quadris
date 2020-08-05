@@ -24,6 +24,7 @@ Board::Board(Quadris* quadris, int startLevel, string l0ScriptFile){
     board_->curLevel_ = startLevel;
     board_->L0SeqFile_ = l0ScriptFile;
     board_->isRandom_ = true;
+    board_->isHintSet_ = false;
     initBlockSelector();
     initBlocks();
     board_->blockCount_ = 0;
@@ -284,7 +285,34 @@ void Board::restart(){
 void Board::endGame(){
 	board_->isGameOver_ = true;
     notifyObservers();
-	cout << "GAME OVER"<<endl;
+    // TODO: Should this be restart instead of end?
+    board_->quadris_->endGame();
+}
+
+bool Board::isHintSet() {
+    return board_->isHintSet_;
+}
+
+void Board::drawHint() {
+    for (auto loc: board_->hintLocations_) {
+        Tile* currTile = getTileAt(loc[0], loc[1]);
+        currTile->setTileValue('?');
+    }
+    board_->isHintSet_ = true;
+}
+
+void Board::clearHint() {
+    for (auto loc: board_->hintLocations_) {
+        Tile* currTile = getTileAt(loc[0], loc[1]);
+        currTile->reset();
+    }
+    board_->isHintSet_ = false;
+    board_->hintLocations_.clear();
+}
+
+void Board::showHint() {
+    board_->hintLocations_ = board_->curBlock_->getBlockHint(this);
+    drawHint();
 }
 
 std::ostream& operator<< (ostream &out, Board &board) {

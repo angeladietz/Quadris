@@ -1,6 +1,7 @@
 #include "block.h"
 #include "board.h"
 #include "tile.h"
+#include <exception>
 #include <utility>
 #include <vector>
 #include <algorithm>
@@ -24,7 +25,7 @@ void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
     for (auto location: locations) {
         Tile* blockTile = board->getTileAt(location[0], location[1]);
         blockTile->setTileValue(type);
-		blockTile->setBlock(this);
+		    blockTile->setBlock(this);
         tiles_.push_back(blockTile);
     }
 }
@@ -124,7 +125,7 @@ void Block::moveRight(Board* board) {
     // Populate new locations for the block with the block type
     for (auto tile: tempTiles_) {
         tile->setTileValue(type);
-		tile->setBlock(this);
+		    tile->setBlock(this);
     }
 
     tiles_.clear();
@@ -322,7 +323,7 @@ void Block::moveTileDown(Tile* oldTile, Board* board){
     //get the tile one row below and set its value to be that of the block
     Tile* tileBelow = board->getTileAt(oldTile->getXCoordinate(), oldTile->getYCoordinate() +1);
     tileBelow->setTileValue(type);
-	tileBelow->setBlock(oldTile->getBlock());
+	  tileBelow->setBlock(oldTile->getBlock());
 
     //clear the old tile value and remove it from the block
     oldTile->reset();
@@ -330,4 +331,73 @@ void Block::moveTileDown(Tile* oldTile, Board* board){
 
     //Add the new tile to the block
     tiles_.push_back(tileBelow);
+}
+
+vector<vector<int>> Block::getCurrentCoordinates() {
+    vector<vector<int>> locations;
+    for (auto tile: tiles_) {
+        locations.push_back({tile->getXCoordinate(), tile->getYCoordinate()});
+    }
+    return locations;
+}
+
+void Block::resetToLocations(Board* board, std::vector<std::vector<int>> locations, bool finalReset) {
+    
+    std::vector<Tile*> tempTiles_;
+    int index = 0;
+
+    // Clear current location of block
+    for(auto tile: tiles_) {
+        tile->reset();
+        tempTiles_.push_back(board->getTileAt(locations[index][0], locations[index][1]));
+        index++;
+    }
+
+    if (finalReset) {
+    // Populate new locations for the block with the block type
+        for (auto tile: tempTiles_) {
+            tile->setTileValue(type);
+            tile->setBlock(this);
+        }
+    }
+
+    tiles_.clear();
+    tiles_ = tempTiles_;
+}
+
+vector<vector<int>> Block::getBlockHint(Board* board) {
+    int lowestY = 0;
+    vector<vector<int>> original_locations, current_locations, hint_location;
+    // Store current tile locations
+    original_locations = getCurrentCoordinates();
+    // Check all locations on the right that block can be dropped at
+    while (canMoveRight(board)) {
+        current_locations = getCurrentCoordinates();
+        while (canMoveDown(board)) {
+            moveDown(board);
+        }
+        vector<int> endPoints = getEndCoordinates();
+        if (endPoints[3] > lowestY) {
+            lowestY = endPoints[3];
+            hint_location = getCurrentCoordinates();
+        }
+        resetToLocations(board, current_locations);
+        current_locations = getCurrentCoordinates();
+        moveRight(board);
+    }
+    while (canMoveLeft(board)) {
+        current_locations = getCurrentCoordinates();
+        while (canMoveDown(board)) {
+            moveDown(board);
+        }
+        vector<int> endPoints = getEndCoordinates();
+        if (endPoints[3] > lowestY) {
+            lowestY = endPoints[3];
+            hint_location = getCurrentCoordinates();
+        }
+        resetToLocations(board, current_locations);
+        moveLeft(board);
+    }
+    resetToLocations(board, original_locations, true);
+    return hint_location;
 }
