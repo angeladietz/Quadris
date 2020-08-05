@@ -7,24 +7,25 @@
 
 using namespace std;
 
-// TODO:
-// getGenLevel
-// heavy blocks
-
 Block::Block() {}
 
-void Block::createBlock(std::vector<std::vector<int>> locations, Board* board) {
+bool Block::canBlockBeCreated(vector<vector<int>> locations, Board* board) {
+    for (auto location: locations) {
+        if (board->getTileAt(location[0], location[1])->isFilled()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Block::createBlock(vector<vector<int>> locations, Board* board) {
 
     for (auto location: locations) {
         Tile* blockTile = board->getTileAt(location[0], location[1]);
         blockTile->setTileValue(type);
-		blockTile->setBlock(this);
+		    blockTile->setBlock(this);
         tiles_.push_back(blockTile);
     }
-
-    /* for (auto tile: tiles_) { */
-    /*     tile->setTileValue(type); */
-    /* } */
 
 }
 

@@ -82,7 +82,7 @@ Board::~Board(){
                 delete board_->curBlock_;
             }
             //if (board_->nextBlock_ != nullptr){
-            //    delete board_->nextBlock_;
+            //    delete board_->estd::vector<std::vector<int> >extBlock_;
             //}
         }
 		deleteGrid();
@@ -228,6 +228,7 @@ void Board::dropTileBlock(){
 }
 
 void Board::setupNextBlocks(){
+    if (board_->blockSelectionStrategy_->
     board_->curBlock_ = board_->blockSelectionStrategy_->getNextBlock();
     board_->nextBlockType_ = board_->blockSelectionStrategy_->getNextBlockType();
 }
@@ -280,6 +281,10 @@ void Board::moveDownHeavyBlock(){
 
 void Board::restart(){
     board_->quadris_->restartGame();
+}
+
+bool Board::canCreateNextBlock() {
+   return board_->curBlock_->canBlockBeCreated(, Board *)
 }
 
 std::ostream& operator<< (ostream &out, Board &board) {

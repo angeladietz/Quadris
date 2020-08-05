@@ -7,6 +7,7 @@ using namespace std;
 // Destructor
 BlockSelectionStrategy::~BlockSelectionStrategy(){}
 
+
 Block* BlockSelectionStrategy::getNextBlock(){
     Block* b = level_->blockFactory_->createBlock(level_->nextBlockType_, level_->areBlocksHeavy_);
     setNextBlockType();

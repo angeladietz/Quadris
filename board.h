@@ -66,6 +66,7 @@ class Board: public Subject {
         friend std::ostream& operator<<(std::ostream&, Board&);
 
     private:
+        bool canCreateNextBlock();
         void initGrid();
         void initBlockSelector();
         void initBlocks();

@@ -1,5 +1,6 @@
 #include "blockFactory.h"
 #include "block.h"
+#include "board.h"
 #include "iBlock.h"
 #include "jBlock.h"
 #include "lBlock.h"
@@ -34,6 +35,15 @@ BlockFactory::~BlockFactory(){
     }
 }
 
+Board* BlockFactory::getBoard() { return board_; }
+
+bool BlockFactory::canCreateBlock(BlockType bType, Board* board) {
+    if (factories_.count(bType) > 0){
+        return factories_[bType]->canCreate(board_);
+    }
+    return true;
+}
+
 Block* BlockFactory::createBlock(BlockType bType, bool isHeavy){
     if (factories_.count(bType) > 0){
         return factories_[bType]->create(board_, isHeavy);
@@ -41,4 +51,4 @@ Block* BlockFactory::createBlock(BlockType bType, bool isHeavy){
     return nullptr;
 }
 
-Block* BlockFactory::create(Board*,bool){}
+Block* BlockFactory::create(Board*,bool) {}

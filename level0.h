@@ -9,7 +9,7 @@
 
 class Level0: public BlockSelectionStrategy{
     public:
-        Level0(BlockFactory*, std::string="sequence.txt");
+        Level0(BlockFactory*, Board*, std::string="sequence.txt");
         ~Level0();
 
     private:

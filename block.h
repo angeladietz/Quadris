@@ -28,6 +28,7 @@ class Block {
         void moveDown(Board*);
         void dropBlock(Board*);
 
+        bool canBlockBeCreated(std::vector<std::vector<int>>, Board*);
         BlockType getBlockType() const;
         bool getTilePositions() const;
         bool isHeavy();

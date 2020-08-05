@@ -6,11 +6,13 @@
 #include <queue>
 #include "block.h"
 #include "blockFactory.h"
+#include "tile.h"
 
 struct PImpl_bs{
   std::map<BlockType, int> blockProbabilities_;
 	std::vector<BlockType> blockList_;
 	int blockIndex_;
+  Board* board_;
 	BlockFactory* blockFactory_;
 	bool areBlocksHeavy_;
 	bool isRandom_;
@@ -24,6 +26,7 @@ class BlockSelectionStrategy {
         virtual ~BlockSelectionStrategy();
 
 		Block* getNextBlock();
+    bool canGetNextBlock();
 		BlockType getNextBlockType();
 		Block* getBlockOfType(BlockType);
 
