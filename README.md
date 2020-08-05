@@ -7,7 +7,7 @@ This project uses many OOP principles and design patterns as taught by Prof. Sco
 ## Building the game
 Build the game by typing `make` and run it with `./quadris` followed by command line options as seen below.
 
-## Command Line Options:
+## Command line options:
 - -text: run the game in text-mode only
 - -seed [seed]: sets the random number generator's seed
 - -scriptfile [file]: generates block based on file instead of default sequence.txt (only applies to level 0)
