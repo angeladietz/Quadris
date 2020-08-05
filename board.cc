@@ -283,10 +283,9 @@ void Board::restart(){
 }
 
 void Board::endGame(){
-	board_->isGameOver_ = true;
-    notifyObservers();
     // TODO: Should this be restart instead of end?
-    board_->quadris_->endGame();
+	  board_->isGameOver_ = true;
+    notifyObservers();
 }
 
 bool Board::isHintSet() {
