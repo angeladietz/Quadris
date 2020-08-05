@@ -67,12 +67,8 @@ Graphics::Graphics(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& bu
 		}
 	}
 	
-	//clear next block
 	clearNextBlock();
-
-	// Associate button "clicked" events with local onButtonClicked() method defined below.
 	startButton->signal_clicked().connect( sigc::mem_fun( *this, &Graphics::startButtonClicked ) );
-	
 }
 
 //Destructor
@@ -175,13 +171,11 @@ void Graphics::update(){
 			}
         }
     }
-	//clear next display
-	clearNextBlock();
 
-	//display next block on gui
+	clearNextBlock();
 	BlockType next = board_->getNextBlockType();
 
-	//print next set of blocks in gui
+	//add next block to gui
 	switch (next) {
 		case 0: //IBlock
 			for(int j = 0; j < PREVIEW_SIZE; j++){ 
@@ -241,14 +235,14 @@ void Graphics::OnQuit(){
 	hide(); 
 }
 
-//OnClick handler for start button
+//Hide start button and start game when start button is clicked
 void Graphics::startButtonClicked(){
 	this->startButton->hide();
 	char* quadris[0];
 	quadris_->start();
 }
 
-//Helper function to clear next block
+//Clear next block
 void Graphics::clearNextBlock(){
 	for (int i = 0; i < PREVIEW_SIZE; i++) {
 		for (int j = 0; j < PREVIEW_SIZE; j++) {
