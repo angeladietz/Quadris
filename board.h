@@ -20,12 +20,12 @@
 class Quadris;
 
 struct PImpl_B {
-  Block* curBlock_;
-  Block* nextBlock_;
+  Block *curBlock_;
+  Block *nextBlock_;
   BlockType nextBlockType_;
-  std::vector<std::vector<Tile*> > grid_;
+  std::vector<std::vector<Tile *>> grid_;
   int curLevel_;
-  BlockSelectionStrategy* blockSelectionStrategy_;
+  BlockSelectionStrategy *blockSelectionStrategy_;
   std::string L0SeqFile_;
   std::string noRandFile_;
   int curScore_;
@@ -34,17 +34,17 @@ struct PImpl_B {
   bool isHintSet_;
   std::vector<std::vector<int>> hintLocations_;
   int blockCount_;
-  Quadris* quadris_;
-  BlockFactory* blockFactory_;
+  Quadris *quadris_;
+  BlockFactory *blockFactory_;
   bool isGameOver_;
 };
 
 class Board : public Subject {
- public:
-  Board(Quadris*, int, std::string);
+public:
+  Board(Quadris *, int, std::string);
   ~Board();
 
-  Tile* getTileAt(int, int);
+  Tile *getTileAt(int, int);
   void moveCurBlockLeft();
   void moveCurBlockRight();
   void moveCurBlockDown();
@@ -70,9 +70,9 @@ class Board : public Subject {
   int getLevel();
   bool getIsGameOver();
 
-  friend std::ostream& operator<<(std::ostream&, Board&);
+  friend std::ostream &operator<<(std::ostream &, Board &);
 
- private:
+private:
   void initGrid();
   void initBlockSelector();
   void initBlocks();
@@ -81,13 +81,13 @@ class Board : public Subject {
   void clearRow(int);
   void moveRowsDownOneRow(int);
   int getPointsFromClearedRows(int);
-  int getPointsFromClearedBlock(Block*);
+  int getPointsFromClearedBlock(Block *);
   void updateScore(int);
   bool doesLevelDropTiles();
   void dropTileBlock();
   void setupNextBlocks();
   void drawHint();
-  PImpl_B* board_;
+  PImpl_B *board_;
 };
 
 #endif

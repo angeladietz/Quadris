@@ -1,19 +1,19 @@
 #ifndef _LEVEL0_
 #define _LEVEL0_
 
-#include <iostream>
-#include <queue>
-#include "blockSelectionStrategy.h"
 #include "block.h"
 #include "blockFactory.h"
+#include "blockSelectionStrategy.h"
+#include <iostream>
+#include <queue>
 
-class Level0: public BlockSelectionStrategy{
-    public:
-        Level0(BlockFactory*, std::string="sequence.txt");
-        ~Level0();
+class Level0 : public BlockSelectionStrategy {
+public:
+  Level0(BlockFactory *, std::string = "sequence.txt");
+  ~Level0();
 
-    private:
-        void setNextBlockType();
+private:
+  void setNextBlockType();
 };
 
 #endif

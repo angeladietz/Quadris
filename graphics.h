@@ -3,11 +3,11 @@
 
 #include "observer.h"
 
-class Graphics: public Observer {
-    public:
-        Graphics();
-        ~Graphics();
-        void update();
+class Graphics : public Observer {
+public:
+  Graphics();
+  ~Graphics();
+  void update();
 };
 
 #endif
