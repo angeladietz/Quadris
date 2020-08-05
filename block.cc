@@ -40,9 +40,13 @@ bool Block::canCreateBlock(vector<vector<int>> locations, Board *board) {
   return true;
 }
 
-// Private methods to check if block can move left
-BlockType Block::getBlockType() const { return blocktype; }
+BlockType Block::getBlockType() const {
+  return blocktype;
+}
 
+// Checks to see if the block can move in the specified direction
+// dir[0] indicates number of movements right
+// dir[1] indicates number of movements left
 bool Block::canMove(Board *board, std::vector<int> dir) {
 
   std::vector<Tile *> tempTiles_;
@@ -162,6 +166,7 @@ void Block::dropBlock(Board *board) {
   }
 }
 
+// Helper function to get end coordinates of the block
 std::vector<int> Block::getEndCoordinates() {
 
   std::vector<int> x_coordinates, y_coordinates;

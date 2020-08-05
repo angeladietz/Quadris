@@ -19,9 +19,9 @@
 // Forward declaration of Quadris class
 class Quadris;
 
+// Private implementation for board class
 struct PImpl_B {
   Block *curBlock_;
-  Block *nextBlock_;
   BlockType nextBlockType_;
   std::vector<std::vector<Tile *>> grid_;
   int curLevel_;
@@ -58,7 +58,6 @@ public:
   void setCurBlock(BlockType);
   void showHint();
   void clearHint();
-  Tile operator[](int);
   void restart();
   void endGame();
   void updateTileAt(int, int);
